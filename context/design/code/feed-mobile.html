@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Wink - Home</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "primary": "#000000",
+          "on-primary": "#ffffff",
+          "background": "#ffffff",
+          "surface": "#ffffff",
+          "surface-container": "#f9fafb",
+          "surface-container-low": "#f3f4f6",
+          "surface-container-high": "#e5e7eb",
+          "on-background": "#111827",
+          "on-surface": "#111827",
+          "on-surface-variant": "#4b5563",
+          "outline": "#6b7280",
+          "outline-variant": "#e5e7eb",
+          "error": "#dc2626"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "md": "0.375rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "2xl": "1rem"
+        },
+        "spacing": {
+          "margin": "1rem",
+          "space-md": "1rem",
+          "space-sm": "0.5rem",
+          "space-lg": "1.5rem",
+          "space-xs": "0.25rem",
+          "space-xl": "2.5rem"
+        },
+        "fontFamily": {
+          "sans": ["Inter", "sans-serif"]
+        }
+      },
+    },
+  }
+</script>
+<style>
+    body {
+      background-color: #ffffff;
+      color: #111827;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      min-height: max(884px, 100dvh);
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .pb-safe {
+      padding-bottom: env(safe-area-inset-bottom, 16px);
+    }
+    .pt-safe {
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+</style>
+</head>
+<body class="bg-white text-gray-900 min-h-screen flex flex-col items-center">
+<!-- Outer Responsive Wrapper constrained for mobile-first feel -->
+<div class="w-full max-w-md min-h-screen flex flex-col bg-white relative selection:bg-black selection:text-white pb-24 border-x border-gray-100">
+<!-- TOP APP BAR -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-none transition-colors">
+<div class="flex items-center justify-between w-full px-4 py-2.5 pt-safe">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-black flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[17px] fill-icon">visibility</span>
+</div>
+<span class="text-xl font-bold text-black tracking-tight">Wink</span>
+</div>
+<!-- Trailing Actions (notifications, chat_bubble) -->
+<div class="flex items-center gap-1">
+<!-- Notification Bell with Alert Dot -->
+<button aria-label="Notifications" class="relative p-2 text-gray-700 hover:bg-gray-100 rounded-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[23px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+</button>
+<!-- Direct Messages with Unread Badge '2' -->
+<button aria-label="Messages" class="relative p-2 text-gray-700 hover:bg-gray-100 rounded-lg active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[23px]">send</span>
+<span class="absolute -top-0.5 -right-0.5 px-1.5 py-0.2 bg-black text-white text-[10px] font-bold rounded-md shadow-sm">2</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 flex flex-col w-full">
+<!-- STORIES CAROUSEL -->
+<section class="py-3 px-4 border-b border-gray-200 bg-white">
+<div class="flex items-center gap-3.5 overflow-x-auto no-scrollbar py-1">
+<!-- Current User Create Story -->
+<div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group">
+<div class="relative">
+<div class="w-14 h-14 rounded-full p-[2px] bg-gray-100 ring-1 ring-gray-300 overflow-hidden">
+<img class="w-full h-full rounded-full object-cover" data-alt="Close up modern self-portrait of a thoughtful young creative director" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNbS8vrwSFmPhiHd7mS4E33yTNnwbShH0b6_LWiPGCRl-sk1ui60VfN4gaH2rJKLiprU6hCUQloh8SAook2Ifbwglyre1ireaH5-sZHOt3CHAhMaSsGpLLkKcrfvI2hgZVz4z6CQZuB6zU0DoQ3oVY6swBUVuCdJnU0xEY0Sy0D8IPOWjS6MNTePc8MZGMNTO3rettoEExUZDo2siVvHlEltHHUTbRboSWIGKoo8R72sO5rOt8tbIQA"/>
+</div>
+<div class="absolute bottom-0 right-0 w-4 h-4 bg-black text-white rounded-full flex items-center justify-center ring-2 ring-white">
+<span class="material-symbols-outlined text-[12px] font-bold">add</span>
+</div>
+</div>
+<span class="text-[11px] font-medium text-gray-500 truncate w-14 text-center">Your Story</span>
+</div>
+<!-- Story 1: active story ring -->
+<div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer">
+<div class="p-[2px] rounded-full ring-2 ring-black hover:scale-105 transition-transform">
+<div class="w-13 h-13 p-[2px] bg-white rounded-full">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of an urban graphic artist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP-8mdtEKYK-y-1swHtYljPuJyeCz0c5e2CTY5p9J3YvzzwPrEPaNuevU-JXm0C4nls2ZGm-JKUP06XUySJmyyJjkEHZD4uI0pRaEIGyzx8wNx-lmsiQnz_h3Zgjn2BE3KBnQWpP8aF4l5cQ0Ue0Q7hr-FWyhSaTLh8GYYQwyGs_jLVBLPwt3SNpMo392lv7V8hQV8Hcuivrt12MwhV9OAqa8XmaBPBfNmmAfBJHLOTwNtwbDN_-Mn1g"/>
+</div>
+</div>
+<span class="text-[11px] font-medium text-black truncate w-14 text-center">sarah_creates</span>
+</div>
+<!-- Story 2: active story ring -->
+<div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer">
+<div class="p-[2px] rounded-full ring-2 ring-black hover:scale-105 transition-transform">
+<div class="w-13 h-13 p-[2px] bg-white rounded-full">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="Cinematic profile shot of an indie software engineer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTrzLsUG1HfyaU5g-XO_TXx8NXvQNoSTLxBv3MifRUDym_RPTcK28aphSI9O7xsDkeYsY5hVcRUZUn3oyWUlUseM7owDVeAJY3RXiiqrqM5CHheYRZTRd21fg2d8YvNz_ZnyFIkSJMvjKqB_Xr8cwMMOfX03G8MtuNmYwWGC9a1dFHJezt5sXFReylTZhr8ULST-aFlTpnhgF1N8idvlKmdRVDh0PnV_68rk7-r1kcAolmtzPWNI77uA"/>
+</div>
+</div>
+<span class="text-[11px] font-medium text-black truncate w-14 text-center">dev_alex</span>
+</div>
+<!-- Story 3: viewed story ring -->
+<div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer">
+<div class="p-[2px] rounded-full ring-1 ring-gray-300 hover:scale-105 transition-transform">
+<div class="w-13 h-13 p-[2px] bg-white rounded-full">
+<img class="w-12 h-12 rounded-full object-cover opacity-85" data-alt="Creative 3D animator and designer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUHNGuMX1bJqSvFzycieBIolBxW_Gbw80KF5n_yf9sx9et-TkwdI38qPsc1gWMwBxhI-s67CE43M-QNQsC7LwkWYwBb1oZnL56egNOuAg5jVlTV4-MiETe65V8d3NkejiC0Dm37PZaG7G9U1c-OHu99xaVKgO2oLZjzZ_lRsX5hs0DC7uB78Q_cT0SR5P6Oxk1txS-_9B_zC3uIIe8a_2iU7UQJhmqqNm7zj1aXo2lnLrFp9KywTY0pQ"/>
+</div>
+</div>
+<span class="text-[11px] font-medium text-gray-500 truncate w-14 text-center">neo_craft</span>
+</div>
+<!-- Story 4: viewed story ring -->
+<div class="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer">
+<div class="p-[2px] rounded-full ring-1 ring-gray-300 hover:scale-105 transition-transform">
+<div class="w-13 h-13 p-[2px] bg-white rounded-full">
+<img class="w-12 h-12 rounded-full object-cover opacity-85" data-alt="Portrait of an architectural photographer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4NtFm5oIRUi73fR4kqut9KrmCAj_iXS7tQZtp5zF2tmB2f_e3_Dcp6BKsxK7tEUlWUWDUNn-nKjAaeldsfRA5gN8dJj6G71yQa0Zd8zH0e1xEx6mRtAtzJfVSXVYJnqKrb3NxFsxjLuSUG_shl5gJUNfXmAZoMzkjegNx4nQdwDvNeVE7kxClLA0qZVZKRN3Y-fb0KfxvRdELSICLYyJ6ioKbtz0TkzqK__AtEHBq15pPDKathxjclg"/>
+</div>
+</div>
+<span class="text-[11px] font-medium text-gray-500 truncate w-14 text-center">elena_arch</span>
+</div>
+</div>
+</section>
+<!-- ONBOARDING PROGRESS BANNER -->
+<section class="px-4 pt-4">
+<div class="relative overflow-hidden rounded-lg bg-[#f9fafb] border border-[#e5e7eb] p-4 shadow-sm">
+<div class="relative z-10 flex items-start justify-between">
+<div class="flex items-center gap-3">
+<!-- Circular Progress Gauge (75%) -->
+<div class="relative w-12 h-12 shrink-0 flex items-center justify-center">
+<svg class="w-12 h-12 -rotate-90" viewbox="0 0 48 48">
+<circle class="stroke-gray-200" cx="24" cy="24" fill="none" r="20" stroke-width="4"></circle>
+<circle class="stroke-black" cx="24" cy="24" fill="none" r="20" stroke-dasharray="125.6" stroke-dashoffset="31.4" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center text-xs text-black font-bold">
+  75%
+</div>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="text-[11px] font-bold text-gray-700 tracking-wider uppercase">Level 1 Pioneer</span>
+<span class="material-symbols-outlined text-[14px] text-black fill-icon">local_fire_department</span>
+</div>
+<h2 class="text-base font-bold text-gray-900 leading-tight">Your journey is 75% complete</h2>
+<p class="text-xs text-gray-500 mt-0.5">Finish 1 last step to unlock the Creator badge</p>
+</div>
+</div>
+<button aria-label="Dismiss banner" class="p-1 text-gray-400 hover:text-black rounded-md transition-colors">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<!-- Gamified Micro Checklist -->
+<div class="grid grid-cols-2 gap-2 mt-3.5 pt-3 border-t border-gray-200">
+<!-- Completed Task 1 -->
+<div class="flex items-center gap-2 p-2 rounded-lg bg-white border border-gray-200 shadow-sm">
+<div class="w-4 h-4 rounded-md bg-emerald-100 flex items-center justify-center text-emerald-700">
+<span class="material-symbols-outlined text-[12px] font-bold">check</span>
+</div>
+<span class="text-[11px] text-gray-400 line-through">Profile setup</span>
+</div>
+<!-- Completed Task 2 -->
+<div class="flex items-center gap-2 p-2 rounded-lg bg-white border border-gray-200 shadow-sm">
+<div class="w-4 h-4 rounded-md bg-emerald-100 flex items-center justify-center text-emerald-700">
+<span class="material-symbols-outlined text-[12px] font-bold">check</span>
+</div>
+<span class="text-[11px] text-gray-400 line-through">Follow 3 creators</span>
+</div>
+<!-- Completed Task 3 -->
+<div class="flex items-center gap-2 p-2 rounded-lg bg-white border border-gray-200 shadow-sm">
+<div class="w-4 h-4 rounded-md bg-emerald-100 flex items-center justify-center text-emerald-700">
+<span class="material-symbols-outlined text-[12px] font-bold">check</span>
+</div>
+<span class="text-[11px] text-gray-400 line-through">Publish 1st post</span>
+</div>
+<!-- Pending Task 4 (Active CTA) -->
+<div class="flex items-center gap-2 p-2 rounded-lg bg-black text-white group cursor-pointer hover:bg-gray-800 transition-colors shadow-sm">
+<div class="w-4 h-4 rounded-md border border-white/60 flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-sm bg-white animate-pulse"></div>
+</div>
+<span class="text-[11px] font-bold text-white">Send 1st DM (+50 XP)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- POST STREAM FEED -->
+<div class="flex flex-col gap-4 p-4">
+<!-- POST 1: Creator @sarah_creates Photo Post -->
+<article class="rounded-lg bg-[#f9fafb] border border-[#e5e7eb] overflow-hidden shadow-sm">
+<!-- Card Header -->
+<div class="flex items-center justify-between p-3.5 pb-2.5">
+<div class="flex items-center gap-2.5">
+<div class="relative">
+<div class="p-[1.5px] rounded-full ring-1 ring-gray-300">
+<img class="w-9 h-9 rounded-full object-cover" data-alt="Portrait of digital creator Sarah wearing minimal architectural glasses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzCcLOe8uafwlMCfzYX9eDS9rTReZ7lpXSHn8g8i2uqeMszZwk5546j1VUPMzXipvVgnl-40Yd9vpXQooQA_R7561cdhdl_841RH0AW0frEM86RdN8rWGykpMPrAI6JCE5ZNlft3Ht69RLtduH1g1F5Hd0_An4G-JL7keMtoq4SV1ap2iEfWTY8l63WMc-jBMNDJ1y8f2L_DPq6S0koMANYnD3gEMiiMkRPGnOAD_3WLqdR5DzFqsqQg"/>
+</div>
+<div class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-black rounded-full flex items-center justify-center ring-2 ring-white">
+<span class="material-symbols-outlined text-[8px] text-white">bolt</span>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-1">
+<h3 class="text-sm font-bold text-gray-900 leading-none">sarah_creates</h3>
+<span class="material-symbols-outlined text-[15px] text-black fill-icon">verified</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="text-[11px] text-gray-500 font-medium">Design Systems</span>
+<span class="text-[11px] text-gray-400">â€¢</span>
+<span class="text-[11px] text-gray-500">2h ago</span>
+</div>
+</div>
+</div>
+<!-- More Options -->
+<button aria-label="Post options" class="text-gray-500 hover:text-black p-1 rounded-md">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+<!-- Post Caption Text -->
+<p class="px-3.5 pb-3 text-sm text-gray-900 leading-relaxed font-normal">
+  Exploring the intersection of dark minimalism and ambient kinetic UI. The tactile micro-glow on this tactile interface sheet feels almost organic âœ¨
+</p>
+<!-- Post Media Container -->
+<div class="relative w-full aspect-[4/3] bg-gray-100 overflow-hidden cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A striking minimalist 3D rendering of sleek dark metallic prisms interacting with glowing light ribbons" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA35zTG4Z_kDEKq9e02RznQr0TeTcl7JQfhjztD8zugSiDMO9240DnHe43sQKzSLiPBxPx-yPhoXHcNTFFoD0y1DXWffs2rMjiOFWzYhNquV6ZVyWuHx20WaqCaj2t-hhYhCrj-piL7vzLprf1sqrAEAvzsCWuM_8VeTxVu7xrEfiIHT1ZU_7P3zSfQ4SEd52cgdcqes3IccqUIPK1xyZ5Zrr10qH_l2GlfCKC8Hyeu0OXZILFq0EkaZA"/>
+<!-- Tag Indicator Badge -->
+<div class="absolute bottom-3 left-3 px-2.5 py-1 rounded-md bg-white/90 backdrop-blur-md border border-gray-200 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[13px] text-black">palette</span>
+<span class="text-[11px] font-semibold text-gray-900">3D Glassmorphism</span>
+</div>
+</div>
+<!-- Card Action Bar -->
+<div class="p-3.5 pt-3">
+<div class="flex items-center justify-between">
+<!-- Left Action Cluster -->
+<div class="flex items-center gap-3">
+<!-- Like Button -->
+<button class="flex items-center gap-1.5 text-gray-600 hover:text-black group active:scale-110 transition-transform" id="like-btn" onclick="toggleLike(this)">
+<span class="material-symbols-outlined text-[22px] group-hover:text-black transition-colors">favorite</span>
+<span class="text-xs tabular-nums font-semibold" id="like-counter">1,429</span>
+</button>
+<!-- Comment Action -->
+<button class="flex items-center gap-1.5 text-gray-600 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[22px]">mode_comment</span>
+<span class="text-xs tabular-nums font-semibold">184</span>
+</button>
+<!-- Repost / Share -->
+<button class="flex items-center gap-1.5 text-gray-600 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[22px]">cached</span>
+<span class="text-xs tabular-nums font-semibold">42</span>
+</button>
+</div>
+<!-- Right Bookmark -->
+<button aria-label="Bookmark post" class="text-gray-600 hover:text-black active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[22px]">bookmark</span>
+</button>
+</div>
+<!-- Comment Drawer Peek -->
+<div class="mt-3 pt-2.5 border-t border-gray-200 flex items-center justify-between text-xs">
+<div class="flex items-center gap-1.5 truncate">
+<span class="font-bold text-gray-900">neo_craft</span>
+<span class="text-gray-600 truncate">That hairline rim border is surgical perfection í ½í±Œ</span>
+</div>
+<button class="text-[11px] text-black font-semibold shrink-0 pl-2 hover:underline">View all</button>
+</div>
+</div>
+</article>
+<!-- POST 2: Thought Post with Interactive Poll -->
+<article class="rounded-lg bg-[#f9fafb] border border-[#e5e7eb] p-4 shadow-sm">
+<!-- Card Header -->
+<div class="flex items-center justify-between pb-3">
+<div class="flex items-center gap-2.5">
+<div class="p-[1.5px] rounded-full ring-1 ring-gray-300">
+<img class="w-9 h-9 rounded-full object-cover" data-alt="Headshot of a product design architect" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCvhU-N7aoEv0wUH0DiwBGs82zoL_Q5dAxc4GxzZPboKsoad2rghvrU44iJjv_YyHLbt9ZUsg223Q68xYrNvFbo9RMlV6x_6uiKK5xZIN5Q8t-QVLuyXXIxKW9aVPRPliXg-hJ0T-BhjFJgaKuwQ5Mg-l19zdkC0qQ3jiN3kZ0T61zFyM7kdonor3v2hxWSnH9FQ4MAkcrB4D1gjS4grAAXoXIYowAsQQdlUsZm-wpvBAXJHhtYAP1ng"/>
+</div>
+<div>
+<div class="flex items-center gap-1">
+<h3 class="text-sm font-bold text-gray-900 leading-none">marcus_ui</h3>
+<span class="material-symbols-outlined text-[15px] text-gray-500">verified</span>
+</div>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="text-[11px] text-gray-500 font-medium">Product Architecture</span>
+<span class="text-[11px] text-gray-400">â€¢</span>
+<span class="text-[11px] text-gray-500">4h ago</span>
+</div>
+</div>
+</div>
+<button aria-label="Post options" class="text-gray-500 hover:text-black p-1 rounded-md">
+<span class="material-symbols-outlined text-[20px]">more_horiz</span>
+</button>
+</div>
+<!-- Discussion Question -->
+<p class="text-sm text-gray-900 leading-relaxed mb-3 font-normal">
+  When designing micro-community feeds in 2025, which aesthetic approach yields the strongest day-30 user retention?
+</p>
+<!-- Interactive Poll Component -->
+<div class="space-y-2 mb-3.5" id="poll-container">
+<!-- Poll Option 1 (Selected/Leading) -->
+<button class="poll-opt relative w-full overflow-hidden text-left p-3 rounded-lg border border-black bg-white shadow-sm transition-all" onclick="selectPoll(this, 68)">
+<div class="poll-bar absolute inset-y-0 left-0 bg-gray-100 transition-all duration-500 w-[68%]"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-black text-[18px] fill-icon">check_circle</span>
+<span class="text-xs font-bold text-gray-900">Ambient Dark + Focused Glows</span>
+</div>
+<span class="text-xs font-bold text-black tabular-nums">68%</span>
+</div>
+</button>
+<!-- Poll Option 2 -->
+<button class="poll-opt relative w-full overflow-hidden text-left p-3 rounded-lg border border-gray-200 bg-white hover:border-gray-400 transition-all" onclick="selectPoll(this, 22)">
+<div class="poll-bar absolute inset-y-0 left-0 bg-gray-100 transition-all duration-500 w-[22%]"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-md border border-gray-400 flex items-center justify-center"></span>
+<span class="text-xs text-gray-800 font-medium">High-contrast Brutalism</span>
+</div>
+<span class="text-xs text-gray-500 tabular-nums">22%</span>
+</div>
+</button>
+<!-- Poll Option 3 -->
+<button class="poll-opt relative w-full overflow-hidden text-left p-3 rounded-lg border border-gray-200 bg-white hover:border-gray-400 transition-all" onclick="selectPoll(this, 10)">
+<div class="poll-bar absolute inset-y-0 left-0 bg-gray-100 transition-all duration-500 w-[10%]"></div>
+<div class="relative z-10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-md border border-gray-400 flex items-center justify-center"></span>
+<span class="text-xs text-gray-800 font-medium">Soft Skeuomorphic Glass</span>
+</div>
+<span class="text-xs text-gray-500 tabular-nums">10%</span>
+</div>
+</button>
+<div class="flex items-center justify-between px-1 text-[11px] text-gray-500 font-medium">
+<span>842 votes cast</span>
+<span>18 hours left</span>
+</div>
+</div>
+<!-- Interaction Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-gray-200">
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-1.5 text-gray-600 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[22px]">favorite</span>
+<span class="text-xs tabular-nums font-semibold">512</span>
+</button>
+<button class="flex items-center gap-1.5 text-gray-600 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[22px]">mode_comment</span>
+<span class="text-xs tabular-nums font-semibold">96</span>
+</button>
+<button class="flex items-center gap-1.5 text-gray-600 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[22px]">cached</span>
+<span class="text-xs tabular-nums font-semibold">31</span>
+</button>
+</div>
+<button aria-label="Bookmark post" class="text-gray-600 hover:text-black active:scale-95">
+<span class="material-symbols-outlined text-[22px]">bookmark</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- FIXED BOTTOM NAVIGATION BAR -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-white/95 backdrop-blur-md border-t border-[#e5e7eb] shadow-sm">
+<!-- Home (ACTIVE navigation) -->
+<a aria-label="Home" class="flex flex-col items-center justify-center text-black active:scale-90 transition-all" href="#home">
+<span class="material-symbols-outlined text-[24px] fill-icon">home</span>
+<span class="text-[11px] font-bold mt-0.5">Home</span>
+</a>
+<!-- Explore -->
+<a aria-label="Explore" class="flex flex-col items-center justify-center text-gray-500 hover:text-black active:scale-90 transition-transform" href="#explore">
+<span class="material-symbols-outlined text-[24px]">explore</span>
+<span class="text-[11px] font-medium mt-0.5">Explore</span>
+</a>
+<!-- Create Post (Center button styled with subtle rounded corners) -->
+<button aria-label="Create Post" class="relative -top-1 w-10 h-10 rounded-lg bg-black text-white flex items-center justify-center shadow-md hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[24px]">add</span>
+</button>
+<!-- Inbox (Direct Messages) -->
+<a aria-label="Inbox" class="relative flex flex-col items-center justify-center text-gray-500 hover:text-black active:scale-90 transition-transform" href="#inbox">
+<span class="material-symbols-outlined text-[24px]">mail</span>
+<span class="absolute top-0 right-1 w-2 h-2 rounded-full bg-red-500 ring-1 ring-white"></span>
+<span class="text-[11px] font-medium mt-0.5">Inbox</span>
+</a>
+<!-- Profile -->
+<a aria-label="Profile" class="flex flex-col items-center justify-center text-gray-500 hover:text-black active:scale-90 transition-transform" href="#profile">
+<div class="relative w-6 h-6 rounded-md p-[1px] ring-1 ring-gray-300">
+<img class="w-full h-full rounded-md object-cover" data-alt="Micro avatar portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBy_31duwTSP4-MdAZS7IE8RlKjARXKN18TtB3Ok6EKLd33oWsbHjEijJ8pN_2IymZjcp-rMv2A6P1ZdILjkBf5e-PoJEVGjdi-zIh5enweB-5-hLG1wYMgkkiaWWNgtCm73ZDjk4UrbuVT3b4AQoC0pREtBSUAt5yDyxkKgON-FYg3WSLobLdwOqVMaNNF4at8o1UpkHKuFmb7YX78ihryTB01ZJXWUx8951tVnJmJQLgmG9_n-OMxFw"/>
+<span class="absolute -bottom-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-white"></span>
+</div>
+<span class="text-[11px] font-medium mt-0.5">Profile</span>
+</a>
+</nav>
+</div>
+<!-- Interactive Scripts -->
+<script>
+    function toggleLike(btn) {
+      const icon = btn.querySelector('.material-symbols-outlined');
+      const counter = btn.querySelector('#like-counter');
+      let count = parseInt(counter.innerText.replace(/,/g, ''));
+      
+      if (icon.classList.contains('fill-icon')) {
+        icon.classList.remove('fill-icon', 'text-red-500');
+        counter.classList.remove('text-red-500');
+        counter.innerText = (count - 1).toLocaleString();
+      } else {
+        icon.classList.add('fill-icon', 'text-red-500');
+        counter.classList.add('text-red-500');
+        counter.innerText = (count + 1).toLocaleString();
+      }
+    }
+
+    function selectPoll(selectedBtn, pct) {
+      const container = document.getElementById('poll-container');
+      const buttons = container.querySelectorAll('.poll-opt');
+      
+      buttons.forEach(btn => {
+        btn.classList.remove('border-black');
+        btn.classList.add('border-gray-200');
+      });
+
+      selectedBtn.classList.remove('border-gray-200');
+      selectedBtn.classList.add('border-black');
+    }
+</script>
+</body></html>

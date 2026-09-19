@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Aria Vance (@aria_vance) • Wink Profile</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 antialiased min-h-screen flex flex-col justify-between selection:bg-black selection:text-white pb-28">
+<!-- Desktop SideNav (Hidden on mobile) -->
+<aside class="hidden lg:flex flex-col justify-between h-full p-4 w-64 shrink-0 z-40 fixed top-0 left-0 border-r border-gray-200 bg-white">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-2 px-1">
+<div class="w-8 h-8 rounded-lg bg-black flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]" data-icon="blur_on">blur_on</span>
+</div>
+<div>
+<span class="text-xl font-bold text-gray-900 tracking-tight block">Wink</span>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-sm font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="explore">explore</span>
+<span class="text-sm font-medium">Explore</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-sm font-medium">Search</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-sm font-medium">Messages</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+</a>
+</nav>
+<button class="w-full py-2.5 bg-black text-white text-sm font-semibold rounded-lg flex items-center justify-center gap-1 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+<span>Create Post</span>
+</button>
+</div>
+<div class="flex flex-col gap-1 pt-4 border-t border-gray-200">
+<a class="flex items-center gap-3 px-3 py-2 text-black font-semibold bg-gray-100 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="text-sm">Profile</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Mobile Top Bar with Dropdown and Quick Actions -->
+<header class="docked full-width top-0 sticky z-40 bg-white/90 backdrop-blur-md px-4 py-2.5 flex items-center justify-between border-b border-gray-200">
+<div class="flex items-center gap-2">
+<button aria-label="Back" class="w-9 h-9 flex items-center justify-center text-gray-900 hover:bg-gray-100 rounded-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<button class="flex items-center gap-1.5 px-2 py-1 rounded-lg hover:bg-gray-100 active:scale-95 transition-all">
+<span class="text-lg font-bold text-gray-950 tracking-tight">@aria_vance</span>
+<span class="material-symbols-outlined text-gray-500 text-[18px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Share" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="share">share</span>
+</button>
+<button aria-label="More options" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</header>
+<!-- Main Scrollable Canvas -->
+<main class="w-full max-w-xl mx-auto flex-1 px-4 pt-4 space-y-5">
+<!-- Profile Header Section -->
+<section class="space-y-4">
+<div class="flex items-start justify-between">
+<!-- Avatar with clean minimal ring & edit pencil badge -->
+<div class="relative inline-block">
+<div class="p-[2.5px] rounded-full border-2 border-black/80 bg-white">
+<div class="bg-white rounded-full p-[1px]">
+<img class="w-20 h-20 rounded-full object-cover" data-alt="Photorealistic portrait of a young female digital interface designer in dark minimalist studio attire, with soft atmospheric violet neon edge lighting, dark monochrome background with crisp specular highlights, conveying focused modern creative calm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgWJgpc-YsDb3lSdf4VpPfB9vfvytVVxqwY-1ZcT83jqw7foX1iVI1HMEHDrJGFeLfBFptQPwPtSBObSihSllVvQSl_X-YojFUI4X3_HMHYZep1ejYiOShV4YJP9dXL8DLLaGixeK6lRt2EAvrlcrLk6AINl5Wp2KIlBE8e7agm7MaoK_9jb-dDlaonH1lTRhiCcgFIskRsuQxVlMBqZaS0mM0g-iKQuz6YKN4OCD1YeEAOgpl8qrnzg"/>
+</div>
+</div>
+<!-- Edit Pencil Badge -->
+<button aria-label="Edit Avatar" class="absolute bottom-0 right-0 w-6 h-6 bg-black text-white border-2 border-white rounded-full flex items-center justify-center shadow-sm hover:bg-gray-800 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[13px]" data-icon="edit">edit</span>
+</button>
+</div>
+<!-- Metric Stat Strip in Clean 3-Part Bar -->
+<div class="flex-1 ml-5 bg-[#f9fafb] border border-gray-200 rounded-xl py-2.5 px-3 flex items-center justify-around">
+<div class="text-center">
+<span class="text-lg font-bold text-black tracking-tight block">24</span>
+<span class="text-xs font-medium text-gray-500 block">Posts</span>
+</div>
+<div class="w-[1px] h-7 bg-gray-200"></div>
+<div class="text-center">
+<span class="text-lg font-bold text-black tracking-tight block">1,840</span>
+<span class="text-xs font-medium text-gray-500 block">Followers</span>
+</div>
+<div class="w-[1px] h-7 bg-gray-200"></div>
+<div class="text-center">
+<span class="text-lg font-bold text-black tracking-tight block">412</span>
+<span class="text-xs font-medium text-gray-500 block">Following</span>
+</div>
+</div>
+</div>
+<!-- Identity Lockup -->
+<div class="space-y-1.5">
+<div class="flex items-center gap-1.5">
+<h1 class="text-2xl font-bold text-black tracking-tight">Aria Vance</h1>
+<span class="material-symbols-outlined text-black text-[18px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="text-xs font-medium text-gray-500 ml-1">she/her</span>
+</div>
+<p class="text-sm font-normal text-gray-700 leading-relaxed">
+          Product Designer &amp; Creative Technologist. Exploring tactile interactions, spatial micro-delights &amp; generative typography.
+        </p>
+<div class="flex items-center gap-1.5 pt-0.5">
+<span class="material-symbols-outlined text-black text-[16px]" data-icon="link">link</span>
+<a class="text-sm font-semibold text-black hover:underline tracking-tight" href="#">ariavance.design</a>
+<span class="text-gray-400 text-xs">• Joined Oct 2023</span>
+</div>
+</div>
+<!-- Gamified Status Banner (Profile 85% Complete) -->
+<div class="relative overflow-hidden bg-[#f9fafb] rounded-xl p-3.5 border border-gray-200 flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<!-- Circular Progress Ring (85%) -->
+<div class="relative w-11 h-11 flex items-center justify-center shrink-0">
+<svg class="w-11 h-11 -rotate-90" viewbox="0 0 48 48">
+<circle class="stroke-gray-200" cx="24" cy="24" fill="none" r="20" stroke-width="3.5"></circle>
+<circle cx="24" cy="24" fill="none" r="20" stroke="#000000" stroke-dasharray="125.6" stroke-dashoffset="18.84" stroke-linecap="round" stroke-width="3.5"></circle>
+</svg>
+<span class="absolute text-[11px] font-bold text-black">85%</span>
+</div>
+<div>
+<div class="flex items-center gap-1">
+<span class="text-sm text-black font-bold">Profile 85% complete</span>
+<span class="material-symbols-outlined text-black text-[14px]" data-icon="bolt">bolt</span>
+</div>
+<p class="text-xs text-gray-500">Level 3 Creator • 120 XP to Next Tier</p>
+</div>
+</div>
+<button class="shrink-0 px-3 py-1.5 bg-black hover:bg-gray-800 text-white text-xs font-semibold rounded-lg active:scale-95 transition-transform flex items-center gap-1 shadow-sm">
+<span>Add bio link (+15%)</span>
+<span class="material-symbols-outlined text-[13px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Action Buttons -->
+<div class="grid grid-cols-2 gap-2.5 pt-0.5">
+<button class="py-2.5 px-4 bg-white border border-gray-300 hover:border-black hover:bg-gray-50 text-gray-900 text-sm font-semibold rounded-lg flex items-center justify-center gap-2 active:scale-98 transition-all">
+<span class="material-symbols-outlined text-gray-600 text-[18px]" data-icon="tune">tune</span>
+<span>Edit Profile</span>
+</button>
+<button class="py-2.5 px-4 bg-white border border-gray-300 hover:border-black hover:bg-gray-50 text-gray-900 text-sm font-semibold rounded-lg flex items-center justify-center gap-2 active:scale-98 transition-all">
+<span class="material-symbols-outlined text-gray-600 text-[18px]" data-icon="ios_share">ios_share</span>
+<span>Share Profile</span>
+</button>
+</div>
+</section>
+<!-- Navigation Filter Tabs -->
+<section class="border-b border-gray-200 flex items-center justify-between text-sm -mx-4 px-4 font-semibold">
+<button class="flex-1 py-3 text-black border-b-2 border-black flex justify-center items-center gap-1.5">
+<span>Posts</span>
+<span class="text-xs px-1.5 py-0.5 rounded-md bg-gray-100 text-black font-semibold">24</span>
+</button>
+<button class="flex-1 py-3 text-gray-500 hover:text-black flex justify-center items-center transition-colors">
+<span>Replies</span>
+</button>
+<button class="flex-1 py-3 text-gray-500 hover:text-black flex justify-center items-center transition-colors">
+<span>Media</span>
+</button>
+<button class="flex-1 py-3 text-gray-500 hover:text-black flex justify-center items-center transition-colors">
+<span>Likes</span>
+</button>
+</section>
+<!-- Feed Content Stream: Asymmetric Bento & Post Cards -->
+<section class="space-y-4 pb-6">
+<!-- Pinned Bento Spotlight Post -->
+<article class="bg-[#f9fafb] border border-gray-200 rounded-xl p-4 space-y-3 transition-all hover:border-gray-300">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-black text-[16px]" data-icon="push_pin">push_pin</span>
+<span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Pinned Showcase</span>
+</div>
+<span class="text-xs text-gray-400">2d ago</span>
+</div>
+<p class="text-sm text-gray-900 leading-relaxed font-normal">
+          Just shipped the new tactile spatial dial concept for Wink. Pure geometric constraints, silky 120hz spring physics, and hairline reactive halos.
+        </p>
+<!-- Media Bento Grid Inside Post -->
+<div class="grid grid-cols-2 gap-2 rounded-lg overflow-hidden pt-0.5">
+<div class="relative h-44 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
+<img class="w-full h-full object-cover" data-alt="A sleek dark mode UI concept screen featuring luminous violet and indigo holographic knobs, fine-line circular dial meters, dark graphite brushed textures, high-contrast crisp numbers, futuristic tactile mobile interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl6eOxKHoe1XSvPWDX9jMNyw6aTPf63pqyfccCLyxW_Xft-D7aOahpEe178lFrD59CujiBXkZzHILCJqS9Y4QfjgN-013hRqT_K4HRG-jMlxowCOafmEFie7CI7yUut6mieBPCau34e1mlcxetnjlOmc59A6uU7qG7Xegwxj0giSwiUS6mdNs0CTQA1SBMHjA_KoYN1hQZQC5zWkH-Y6IhVhyUNm5KihrvR-K3DO_pPQL1Q1T-sgpxMA"/>
+</div>
+<div class="relative h-44 rounded-md overflow-hidden bg-gray-100 border border-gray-200">
+<img class="w-full h-full object-cover" data-alt="Close up architectural detail of polished obsidian glass interface elements floating with soft volumetric magenta backlighting, hairline borders, ultra-clean modern typography in an ambient deep zinc minimal setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJryr2bOvsEkRW_I1V6yaT8ESCAMtFume_yarf9NT7i6D_g-CxLr2ChKZukqXYfyW4ChLZuYqIDY5Nd3uvjgSQs4kAPZZCAVGZMIqimfjzIJK6OAzatCA9kAb4E-ZIwvM50T4Cfumk-IEoe6-8b5ERD_Aw2M-PsCKS1rG8gsP74iQK6stVgbA_hEtqc5M13UZ1j90we25GNounuwRIB8fVcugvERr5M8xaQbFhbI338jvBhSnsYNb4OA"/>
+</div>
+</div>
+<!-- Card Micro-Interactions -->
+<div class="flex items-center justify-between pt-2 border-t border-gray-200/80 text-gray-600">
+<button class="flex items-center gap-1.5 text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px] text-black" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span>142</span>
+</button>
+<button class="flex items-center gap-1.5 text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble_outline">chat_bubble_outline</span>
+<span>28</span>
+</button>
+<button class="flex items-center gap-1.5 text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="repeat">repeat</span>
+<span>14</span>
+</button>
+<button class="flex items-center text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</article>
+<!-- Thought Stream Post (Text Micro-Post) -->
+<article class="bg-[#f9fafb] border border-gray-200 rounded-xl p-4 space-y-3 transition-all hover:border-gray-300">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-md bg-gray-100 border border-gray-200 flex items-center justify-center">
+<span class="material-symbols-outlined text-[13px] text-black" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<span class="text-sm font-semibold text-gray-900">Design Log #44</span>
+</div>
+<span class="text-xs text-gray-400">5h ago</span>
+</div>
+<p class="text-sm text-gray-800 leading-relaxed font-normal">
+          Good design in social apps shouldn't shout for dopamine. It should feel like high-grade stationery: quiet, dependable, subtly delightful when light hits the surface.
+        </p>
+<div class="flex items-center justify-between pt-2 border-t border-gray-200/80 text-gray-600">
+<button class="flex items-center gap-1.5 text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite_border">favorite_border</span>
+<span>89</span>
+</button>
+<button class="flex items-center gap-1.5 text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble_outline">chat_bubble_outline</span>
+<span>12</span>
+</button>
+<button class="flex items-center gap-1.5 text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="repeat">repeat</span>
+<span>6</span>
+</button>
+<button class="flex items-center text-xs font-medium hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</article>
+</section>
+</main>
+<!-- Mobile Bottom Dock Navigation Bar matching Home screen with Profile Tab ACTIVE -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2.5 pb-safe bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-sm">
+<!-- Home Tab -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home">home</span>
+<span class="text-[11px] font-medium mt-0.5">Home</span>
+</a>
+<!-- Explore Tab -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="explore">explore</span>
+<span class="text-[11px] font-medium mt-0.5">Explore</span>
+</a>
+<!-- Create Action Tab -->
+<a class="flex flex-col items-center justify-center -mt-3 active:scale-90 transition-transform" href="#">
+<div class="w-11 h-11 rounded-lg bg-black flex items-center justify-center text-white shadow-md">
+<span class="material-symbols-outlined text-[24px]" data-icon="add">add</span>
+</div>
+<span class="text-[11px] text-black mt-1 font-semibold">Create</span>
+</a>
+<!-- Inbox Tab -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="mail">mail</span>
+<span class="text-[11px] font-medium mt-0.5">Inbox</span>
+</a>
+<!-- Profile Tab (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-black scale-105 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[11px] mt-0.5 font-bold">Profile</span>
+</a>
+</nav>
+<!-- Interactive micro-feedback script -->
+<script>
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        if (!this.classList.contains('active-heart') && this.querySelector('[data-icon="favorite_border"]')) {
+          const icon = this.querySelector('[data-icon="favorite_border"]');
+          icon.textContent = 'favorite';
+          icon.setAttribute('data-icon', 'favorite');
+          icon.style.fontVariationSettings = "'FILL' 1";
+          this.classList.add('text-black', 'active-heart');
+          const countSpan = this.querySelector('span:not(.material-symbols-outlined)');
+          if (countSpan) {
+            countSpan.textContent = parseInt(countSpan.textContent) + 1;
+          }
+        }
+      });
+    });
+  </script>
+</body></html>

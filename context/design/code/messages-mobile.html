@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>Wink - Chat with Sarah Chen</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "surface": "#ffffff",
+            "surface-container": "#f3f4f6",
+            "surface-container-low": "#f9fafb",
+            "surface-container-high": "#e5e7eb",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#111827",
+            "on-surface-variant": "#4b5563",
+            "outline": "#6b7280",
+            "outline-variant": "#e5e7eb",
+            "border-hairline": "#e5e7eb"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "md": "0.375rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "0.75rem"
+          },
+          "spacing": {
+            "margin": "1rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2.5rem"
+          },
+          "fontFamily": {
+            "sans": ["Inter", "sans-serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "headline-md": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "label-lg": ["Inter", "sans-serif"],
+            "label-xs": ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-[#111827] font-sans antialiased min-h-screen flex justify-center selection:bg-black selection:text-white">
+<!-- Mobile Viewport Container Constrained for Web Previews and Native Mobile Scaling -->
+<div class="w-full max-w-md bg-white min-h-screen flex flex-col relative shadow-[0_0_40px_rgba(0,0,0,0.06)] border-x border-gray-200 overflow-hidden">
+<!-- Top App Bar (Task-Focused Header with Back Navigation) -->
+<header class="sticky top-0 z-30 w-full bg-white/95 backdrop-blur-md px-4 py-2.5 flex items-center justify-between border-b border-[#e5e7eb]">
+<!-- Back Chevron & User Identity Cluster -->
+<div class="flex items-center gap-2">
+<a aria-label="Back to Inbox" class="w-9 h-9 -ml-1 rounded-lg flex items-center justify-center text-[#111827] hover:bg-[#f3f4f6] transition-colors active:scale-95 border border-transparent hover:border-[#e5e7eb]" href="#inbox">
+<span class="material-symbols-outlined text-[24px]">chevron_left</span>
+</a>
+<!-- Avatar with clean border -->
+<div class="relative flex-shrink-0">
+<div class="w-10 h-10 rounded-full p-[1.5px] bg-[#111827]">
+<img class="w-full h-full object-cover rounded-full bg-gray-100" data-alt="Modern close-up portrait of Sarah Chen with short dark styled hair against a moody slate studio backdrop with subtle purple rim lighting, high aesthetic modern tech creative professional style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA88MCWhjD8mXHroOJquutybm7sjlFhOsAN9mKPwsv6Cbti3hrZW-4LeBiBt6JxjUxGE3ogvG7ciT1cWEfBuHC7w-J3lI1aVF0aDUDy1OUFmPELz0N-DYqggso9OYTp8uCDmHD9qrNlq1Sc7CIy3cp_IfGyTdqCRxBlDeU0ckB_7_E2CuKWiRrD6L1awl-94E0XG5Cr4N5YwFeXIyUYojznwbpsNDM9_lxEJiqiJFedb88G8GQUIT2Vhg"/>
+</div>
+<!-- Online status dot -->
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-white" title="Active now"></span>
+</div>
+<!-- Name & Status -->
+<div class="flex flex-col ml-1">
+<div class="flex items-center gap-1">
+<span class="text-[16px] leading-tight font-bold text-[#000000]">Sarah Chen</span>
+<span class="material-symbols-outlined text-[16px] text-black" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="text-[#6b7280] text-[11px] font-medium leading-none mt-0.5">Active 12m ago</span>
+</div>
+</div>
+<!-- Action Buttons (Call & Info) -->
+<div class="flex items-center gap-1">
+<button aria-label="Voice Call" class="w-9 h-9 rounded-lg flex items-center justify-center text-[#4b5563] hover:text-[#000000] hover:bg-[#f3f4f6] transition-colors active:scale-95 border border-[#e5e7eb]" type="button">
+<span class="material-symbols-outlined text-[19px]">call</span>
+</button>
+<button aria-label="Conversation Info" class="w-9 h-9 rounded-lg flex items-center justify-center text-[#4b5563] hover:text-[#000000] hover:bg-[#f3f4f6] transition-colors active:scale-95 border border-[#e5e7eb]" type="button">
+<span class="material-symbols-outlined text-[19px]">info</span>
+</button>
+</div>
+</header>
+<!-- Main Chat Message Stream -->
+<main class="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4 pb-28 bg-white">
+<!-- Encrypted / Mutual Follows Safety Pill Banner -->
+<div class="my-1 flex flex-col items-center">
+<div class="bg-[#f9fafb] border border-[#e5e7eb] rounded-lg px-4 py-3 max-w-[92%] text-center shadow-sm">
+<div class="flex items-center justify-center gap-1.5 text-black mb-1">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">lock</span>
+<span class="font-semibold tracking-wider uppercase text-[10px] text-[#000000]">End-to-End Encrypted</span>
+</div>
+<p class="text-[#4b5563] text-[12px] leading-relaxed">
+            You and Sarah Chen follow each other. Messages and calls are secured with mutual cryptography.
+          </p>
+</div>
+<span class="text-[#6b7280] font-medium mt-3 text-[11px]">Today</span>
+</div>
+<!-- Message Group 1: Sarah Chen -->
+<div class="flex items-end gap-2 max-w-[85%] self-start">
+<img class="w-7 h-7 rounded-full object-cover flex-shrink-0 mb-1 border border-[#e5e7eb]" data-alt="Small thumbnail avatar of Sarah Chen featuring artistic ambient studio lighting with deep charcoal and gentle violet tones in modern editorial quality" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdRSgwEbfA2d3PTRdBME7_LAmtWBvDHy9DeHRWGDKlWBo_yA1ty2CHcTCn_btrU_ZdMZL1tDM4kVhS9DfenItVf4SDOnypk2YU8f9TdDKx5cQw3Iywkpt1FPcvnvILJ4TtBdC56aXU0sNWDJRHn21RMXUjOw19_3S1dK2rDHNsTR698oJTENhzZei4q2HcUfxnY0KWfQZrLew_Ct4waSuVPBuh3Oajl4Jbxssr0bDmuUG2jvMrAAiGzw"/>
+<div class="flex flex-col gap-1.5">
+<!-- Bubble 1 -->
+<div class="bg-[#f3f4f6] border border-[#e5e7eb] text-[#111827] px-4 py-2.5 rounded-lg shadow-sm">
+<p class="text-[14px] leading-relaxed">
+              Hey Aria! Loved your latest post on tactile spatial interfaces ✨
+            </p>
+</div>
+<!-- Bubble 2 -->
+<div class="bg-[#f3f4f6] border border-[#e5e7eb] text-[#111827] px-4 py-2.5 rounded-lg shadow-sm">
+<p class="text-[14px] leading-relaxed">
+              Are you planning to open-source the token parser code?
+            </p>
+<span class="block text-right text-[#6b7280] text-[10px] font-medium mt-1">2:12 PM</span>
+</div>
+</div>
+</div>
+<!-- Message Group 2: Aria (You) -->
+<div class="flex flex-col items-end gap-1 max-w-[85%] self-end">
+<div class="bg-[#000000] text-white px-4 py-2.5 rounded-lg shadow-sm border border-black relative">
+<p class="text-[14px] leading-relaxed text-white font-normal">
+            Thanks Sarah! Yes, polishing the documentation right now, aiming for tomorrow.
+          </p>
+</div>
+<!-- Status indicator & Timestamp -->
+<div class="flex items-center gap-1 pr-1">
+<span class="text-[#6b7280] text-[11px] font-medium">Delivered • 2:14 PM</span>
+<span class="material-symbols-outlined text-[14px] text-black" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+<!-- Message Group 3: Sarah Chen with Interactive Media Preview & Voice Waveform Bubble -->
+<div class="flex items-end gap-2 max-w-[88%] self-start mt-1">
+<img class="w-7 h-7 rounded-full object-cover flex-shrink-0 mb-1 border border-[#e5e7eb]" data-alt="Close up portrait thumbnail of Sarah Chen with moody cinematic dark atmosphere and violet rim accents" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdyTNP6fVA7Bxl7215ead9LXnZIufaZ6vtCyBiEsM2SRqjhqxhmjRPzM04KJzAC7U0BBp24Az0pcD_s0qhzPBdgWlflCpQw_1POhUzhT6eMpiz3YtEFPP3cQKhjH0QZJMl0d7n0yHhgXNF5xZUNcdB9eDYFkcQ1YH0qdYzOM8oxAznQJKbd892QWxm3YUpQu2678vr3Qs2YQ_gNl7YzQsQm45ccFhO03PKlJ_RZhQ3-VMYRv8RqXraHg"/>
+<div class="flex flex-col gap-2 w-full">
+<!-- Shared Media Preview Bento Card -->
+<div class="bg-[#f9fafb] border border-[#e5e7eb] rounded-lg overflow-hidden p-2 shadow-sm">
+<div class="relative w-full h-36 rounded-md overflow-hidden group border border-[#e5e7eb]">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="Digital interface blueprint showing geometric wireframes and dark violet nodes on a pitch-black canvas with luminous glowing vector paths and glassmorphism cards" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcufIgzNIV5UtRTG7nyX6IM0YskOTsoapQQflN_nns9zS7aeNZLCYdgjuYK9YNdvR6OR4iMGqG74ZwfK0FFWNK-vxRjEqOxgT5cP-Es78LG6px6FE4y6iUg749m5zYu8uu5s529N73m_4fuom77nlC3aqWhgTm-HUnJbNoxdXksKxAfpV2zyFn3SJd3O_vlc5zaK5zU5kxME2Fi84P_i75GLGCFT1TrlKurTQuaBfRaWct52ydkbkG2A')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+<div class="absolute bottom-2 left-2 right-2 flex items-center justify-between">
+<span class="font-medium bg-black/75 text-white backdrop-blur-md px-2 py-0.5 rounded text-[11px] border border-white/20">
+                  parser-spec-v2.fig
+                </span>
+<span class="material-symbols-outlined text-white text-[16px] bg-black/60 p-1 rounded backdrop-blur-sm">
+                  open_in_new
+                </span>
+</div>
+</div>
+<p class="text-[13px] text-[#111827] px-1 pt-2 pb-0.5 font-normal">
+              Drafted a compatible token schema for your review!
+            </p>
+</div>
+<!-- Voice Message Waveform Bubble -->
+<div class="bg-[#f3f4f6] border border-[#e5e7eb] text-[#111827] p-3 rounded-lg flex items-center gap-3 shadow-sm">
+<!-- Play/Pause Toggle -->
+<button aria-label="Play Voice Note" class="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center flex-shrink-0 hover:bg-neutral-800 active:scale-95 transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<!-- Audio Waveform Graphic Mockup -->
+<div class="flex-1 flex flex-col gap-1">
+<div class="flex items-center gap-[3px] h-6 py-1">
+<span class="w-[3px] h-2 bg-black rounded-sm"></span>
+<span class="w-[3px] h-4 bg-black rounded-sm"></span>
+<span class="w-[3px] h-3 bg-black rounded-sm"></span>
+<span class="w-[3px] h-5 bg-black rounded-sm"></span>
+<span class="w-[3px] h-6 bg-black rounded-sm"></span>
+<span class="w-[3px] h-4 bg-black rounded-sm"></span>
+<span class="w-[3px] h-2 bg-black rounded-sm"></span>
+<span class="w-[3px] h-3 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-5 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-6 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-4 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-2 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-3 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-5 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-3 bg-gray-300 rounded-sm"></span>
+<span class="w-[3px] h-1.5 bg-gray-300 rounded-sm"></span>
+</div>
+<div class="flex justify-between items-center text-[10px] font-medium text-[#6b7280] leading-none">
+<span>0:08</span>
+<span>0:28</span>
+</div>
+</div>
+<!-- Reaction Micro-Pill Trigger -->
+<button aria-label="Quick React" class="text-[#6b7280] hover:text-black transition-colors active:scale-90 p-1" type="button">
+<span class="material-symbols-outlined text-[18px]">favorite</span>
+</button>
+</div>
+<span class="text-[#6b7280] text-[10px] font-medium pl-1">2:16 PM</span>
+</div>
+</div>
+</main>
+<!-- Bottom Input Bar (Docked Above Keyboard Safe-Area) -->
+<footer class="fixed bottom-0 max-w-md w-full z-40 bg-white/95 backdrop-blur-xl border-t border-[#e5e7eb] px-4 py-2.5 pb-6">
+<!-- Contextual Typing / Quick Suggestions Pill Row -->
+<div class="flex items-center gap-2 mb-2 overflow-x-auto no-scrollbar py-0.5">
+<button class="bg-[#f9fafb] hover:bg-[#f3f4f6] border border-[#e5e7eb] text-[#4b5563] hover:text-[#000000] text-[12px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all active:scale-95 shadow-sm">
+          Sounds good! 🙌
+        </button>
+<button class="bg-[#f9fafb] hover:bg-[#f3f4f6] border border-[#e5e7eb] text-[#4b5563] hover:text-[#000000] text-[12px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all active:scale-95 shadow-sm">
+          Will check it now
+        </button>
+<button class="bg-[#f9fafb] hover:bg-[#f3f4f6] border border-[#e5e7eb] text-[#4b5563] hover:text-[#000000] text-[12px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap transition-all active:scale-95 shadow-sm">
+          Can we hop on audio?
+        </button>
+</div>
+<!-- Active Composer Row -->
+<div class="flex items-center gap-2">
+<!-- Media & Camera Quick Launch Buttons -->
+<div class="flex items-center gap-0.5">
+<button aria-label="Add attachment" class="w-9 h-9 rounded-lg flex items-center justify-center text-[#4b5563] hover:text-black hover:bg-[#f3f4f6] transition-colors active:scale-95 border border-[#e5e7eb]" type="button">
+<span class="material-symbols-outlined text-[19px]">add_circle</span>
+</button>
+<button aria-label="Open Camera" class="w-9 h-9 rounded-lg flex items-center justify-center text-[#4b5563] hover:text-black hover:bg-[#f3f4f6] transition-colors active:scale-95 border border-[#e5e7eb]" type="button">
+<span class="material-symbols-outlined text-[19px]">photo_camera</span>
+</button>
+</div>
+<!-- Expandable Rectangular Input Container with Subtle Rounded Corners -->
+<div class="flex-1 bg-[#f9fafb] border border-[#e5e7eb] rounded-lg flex items-center px-3 py-1.5 focus-within:border-black focus-within:bg-white focus-within:ring-1 focus-within:ring-black transition-all">
+<input class="w-full bg-transparent text-[#111827] placeholder:text-[#6b7280] text-[14px] focus:outline-none border-none p-0" placeholder="Message Sarah..." type="text"/>
+<button aria-label="Insert Emoji" class="text-[#6b7280] hover:text-black transition-colors ml-1 active:scale-90" type="button">
+<span class="material-symbols-outlined text-[18px]">sentiment_satisfied</span>
+</button>
+</div>
+<!-- Voice Note / Send Paper Plane Action Button -->
+<button aria-label="Send Message" class="w-9 h-9 rounded-lg bg-black text-white font-bold flex items-center justify-center shadow-sm hover:bg-neutral-800 active:scale-90 transition-all flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</footer>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const sendBtn = document.querySelector('button[aria-label="Send Message"]');
+      const input = document.querySelector('input[type="text"]');
+      
+      // Auto toggle between mic and send icon depending on typing
+      if (input && sendBtn) {
+        input.addEventListener('input', (e) => {
+          const icon = sendBtn.querySelector('.material-symbols-outlined');
+          if (e.target.value.trim().length > 0) {
+            icon.textContent = 'send';
+            sendBtn.classList.remove('bg-[#f3f4f6]', 'text-[#4b5563]', 'border', 'border-[#e5e7eb]');
+            sendBtn.classList.add('bg-black', 'text-white');
+          } else {
+            icon.textContent = 'mic';
+            sendBtn.classList.remove('bg-black', 'text-white');
+            sendBtn.classList.add('bg-[#f3f4f6]', 'text-[#4b5563]', 'border', 'border-[#e5e7eb]');
+          }
+        });
+      }
+    });
+  </script>
+</body></html>

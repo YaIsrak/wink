@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wink - Direct Messages</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Subtle scrollbar for light theme */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e5e7eb;
+      border-radius: 6px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d1d5db;
+    }
+  </style>
+</head>
+<body class="bg-white text-black font-sans antialiased h-screen overflow-hidden flex flex-col lg:flex-row selection:bg-black selection:text-white">
+<!-- ========================================================================= -->
+<!-- MOBILE TOP BAR                                                            -->
+<!-- ========================================================================= -->
+<header class="lg:hidden flex items-center justify-between w-full px-4 py-3 bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-gray-200">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold shadow-sm">
+<span class="material-symbols-outlined text-[19px]">visibility</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-black">Wink</span>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Notifications" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:text-black hover:bg-gray-100 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button aria-label="Chat messages" class="w-9 h-9 flex items-center justify-center text-black font-bold hover:bg-gray-100 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500"></span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-gray-200">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx_7l7hCTY6exxry_8F1msmTErEo2LxfLDV_y2WL1rlCG3ScHLhssucIeY3HGBXdlyCaJQXyOCoCrizizf-TTQF7Llm-DgHxkLGIXNcwxgYUeJ2JiXPkeFzswehCaNSvwAOkfEHG5FAnxua9TJRb-ZfGP9n8ymrGgwKFHvlEZa5AoGCMjtk382uKVEwa_5ygfw8d_Vn-N614YaPMd4H_G5dwSmHZsneghjbZlXMolzATqBvxDXRIzySg"/>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- DESKTOP LEFT NAVIGATION DRAWER                                            -->
+<!-- ========================================================================= -->
+<aside class="hidden lg:flex flex-col justify-between h-full p-4 w-64 shrink-0 z-40 bg-neutral-50 fixed top-0 left-0 border-r border-gray-200">
+<!-- Top Area: Brand & Primary Links -->
+<div class="flex flex-col gap-6">
+<!-- Brand Anchor -->
+<div class="flex items-center gap-2.5 px-2 py-1.5">
+<div class="w-9 h-9 rounded-lg bg-black flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[22px]">visibility</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-black">Wink</span>
+</div>
+<!-- Main Navigation Items -->
+<nav class="flex flex-col gap-1">
+<!-- 1. Home -->
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span>Home</span>
+</a>
+<!-- 2. Explore -->
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span>Explore</span>
+</a>
+<!-- 3. Search -->
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">search</span>
+<span>Search</span>
+</a>
+<!-- 4. Messages (ACTIVE NAVIGATION) -->
+<a class="flex items-center justify-between px-3 py-2 text-black font-semibold bg-gray-200/70 rounded-lg hover:bg-gray-200 transition-colors text-sm" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span>Messages</span>
+</div>
+<span class="px-1.5 py-0.5 rounded-md bg-black text-white font-semibold text-xs">2</span>
+</a>
+<!-- 5. Notifications -->
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+<span>Notifications</span>
+</a>
+</nav>
+<!-- Post Creation CTA -->
+<button class="w-full py-2.5 px-4 rounded-lg bg-black text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-neutral-800 active:scale-[0.98] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Create Post</span>
+</button>
+</div>
+<!-- Bottom Drawer Items: Profile & Settings -->
+<div class="flex flex-col gap-1 pt-4 border-t border-gray-200">
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+<span>Profile</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Settings</span>
+</a>
+<!-- Compact Current User Badge -->
+<div class="mt-2 p-2.5 rounded-lg bg-white flex items-center gap-3 border border-gray-200 shadow-sm">
+<div class="relative w-8 h-8 rounded-full overflow-hidden shrink-0 border border-gray-200">
+<img alt="Alex Rivera" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdCVXoGaouA4vumPz4Ik86dUtfqVC7mSlkVlaPy9vqyxay6QaXHrxWnTM-4T1JqNAURTkS2sWl8vkUHlRJREv0T_cz-JGlNlTt-wPnSk8FgGdN-NniePZ4ylvveZCd5IyoVt6voBwUCXeywgaGtnpENZcqoZLb-MzA5-EqAPMEv8ax0dLZ4zHCsYis-fzCW5EHDuFMM6tiSJW-lvN_ls0-Sv9ozfd2cpULIlFOPdCpaVkBLBjSS9gwIQ"/>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="text-xs text-black font-semibold truncate">Alex Rivera</span>
+<span class="text-[11px] text-gray-500 truncate">@arivera_ui</span>
+</div>
+<span class="material-symbols-outlined text-gray-400 text-[18px]">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- Spacer for fixed Desktop SideNav -->
+<div class="hidden lg:block w-64 shrink-0 h-full"></div>
+<!-- ========================================================================= -->
+<!-- MAIN LAYOUT: MIDDLE CONVERSATION LIST + RIGHT CHAT CANVAS                 -->
+<!-- ========================================================================= -->
+<main class="flex-1 flex flex-col md:flex-row h-[calc(100vh-57px)] lg:h-screen overflow-hidden bg-white">
+<!-- ======================================================================= -->
+<!-- COLUMN 2: DIRECT MESSAGES CONVERSATION LIST (w-80 or w-96)              -->
+<!-- ======================================================================= -->
+<section class="w-full md:w-80 lg:w-96 shrink-0 h-full flex flex-col border-r border-gray-200 bg-neutral-50/60 z-20">
+<!-- List Header & Action -->
+<div class="p-4 border-b border-gray-200 flex flex-col gap-3 bg-white">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h1 class="text-xl font-bold tracking-tight text-black">Messages</h1>
+<span class="text-[11px] font-semibold px-2 py-0.5 rounded-md bg-gray-100 text-gray-800 border border-gray-200">Active</span>
+</div>
+<button class="w-8 h-8 rounded-lg bg-neutral-100 flex items-center justify-center text-gray-700 hover:text-black hover:bg-neutral-200 border border-gray-200 transition-all active:scale-95" title="New Chat">
+<span class="material-symbols-outlined text-[17px]">edit_square</span>
+</button>
+</div>
+<!-- Search Input -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[17px] text-gray-400">search</span>
+<input class="w-full bg-neutral-50 text-black text-sm pl-9 pr-9 py-1.5 rounded-lg border border-gray-200 focus:outline-none focus:border-black focus:ring-1 focus:ring-black placeholder:text-gray-400 transition-all" placeholder="Search conversations..." type="text"/>
+<div class="absolute right-2 top-1/2 -translate-y-1/2 px-1.5 py-0.5 rounded text-[10px] font-medium text-gray-400 bg-gray-100 border border-gray-200">
+            ⌘K
+          </div>
+</div>
+<!-- Mutual-follows Filter Pills (Subtle Rounded) -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-0.5">
+<button class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-black text-white transition-all shrink-0">
+            All (6)
+          </button>
+<button class="px-2.5 py-1 rounded-lg text-xs font-medium bg-neutral-100 text-gray-600 hover:text-black hover:bg-neutral-200 border border-gray-200 transition-all shrink-0 flex items-center gap-1.5">
+<span>Unread (2)</span>
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+</button>
+<button class="px-2.5 py-1 rounded-lg text-xs font-medium bg-neutral-100 text-gray-600 hover:text-black hover:bg-neutral-200 border border-gray-200 transition-all shrink-0 flex items-center gap-1.5">
+<span>Online (4)</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+</button>
+</div>
+</div>
+<!-- Chat Threads Scrollable List -->
+<div class="flex-1 overflow-y-auto divide-y divide-gray-100 bg-white">
+<!-- THREAD 1: Sarah Chen (ACTIVE CHAT) -->
+<div class="p-3.5 flex items-start gap-3 bg-neutral-100 border-l-2 border-black cursor-pointer transition-colors relative">
+<div class="relative shrink-0">
+<div class="w-11 h-11 rounded-full p-[2px] bg-black">
+<div class="w-full h-full rounded-full overflow-hidden bg-white">
+<img alt="Sarah Chen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmbdkysAbhu8UFDJVWQVU2A2VKlFpMKLJ97BvIjw7zaOhFzuZYo4DRT2QnpIxPeeKg-5ZLI22crNmac8Iz1pvBbxFJWo8DuDZnuLIyquEzCV4MvljaIG9BKo19S0S29c0pVgxJGpKbxlkOPyRfYcphWIbvMQ38FBKUuMlz2krlYBEPT2EewSdTuV2LuB8YUC8FHqkTauPVNICw1a32qCyiiXXb3akJCOJQ17FiGmFatABMMYx5LMyx_Q"/>
+</div>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" title="Online"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="text-sm font-semibold text-black truncate">Sarah Chen</span>
+<span class="material-symbols-outlined text-[13px] text-black" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<span class="text-xs text-black font-semibold shrink-0">12m</span>
+</div>
+<p class="text-xs text-neutral-800 font-medium truncate mb-1">
+              The dark minimalism layout looks incredible!
+            </p>
+<div class="flex items-center justify-between">
+<span class="text-[11px] text-gray-500">@sarah_creates</span>
+<span class="w-2 h-2 rounded-full bg-black"></span>
+</div>
+</div>
+</div>
+<!-- THREAD 2: Marcus Thorne -->
+<div class="p-3.5 flex items-start gap-3 hover:bg-neutral-50 cursor-pointer transition-colors">
+<div class="relative shrink-0">
+<div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 bg-neutral-50">
+<img alt="Marcus Thorne" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhqveB9i_zJBcBdfATZGlAekxer1HamJB8eJg7MVVN3Ab9b6yVBf8Qrcjh13hMa7hgQQH9m5SXAbp8v7L72O_QX-I9hQyz-Kke_h4bUCL36tjAD72uayR36XiolzctPT72SndB6xNz2zIIpCI_eoBl0B16tLs5n4TLFCk3wu4CUWvbJg7IDVthvVHlJPyt1TXhm819zG_aZoGeqZS-nLG5Vwb7FwVbyr4tSLcDivJL3SYnGk4fehVktA"/>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" title="Online"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="text-sm font-medium text-black truncate">Marcus Thorne</span>
+</div>
+<span class="text-xs text-gray-400 shrink-0">1h</span>
+</div>
+<p class="text-xs text-gray-600 truncate mb-1">
+              Did you check the PR for the kinetic animation?
+            </p>
+<div class="flex items-center justify-between">
+<span class="text-[11px] text-gray-500">@marcus_dev</span>
+<span class="text-[10px] font-medium px-1.5 py-0.5 rounded-md bg-neutral-100 text-gray-600 border border-gray-200">Code</span>
+</div>
+</div>
+</div>
+<!-- THREAD 3: Elena Rostova -->
+<div class="p-3.5 flex items-start gap-3 hover:bg-neutral-50 cursor-pointer transition-colors">
+<div class="relative shrink-0">
+<div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 bg-neutral-50">
+<img alt="Elena Rostova" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzJBgjaNWgCwUs-rBNBR3UZHEUtRktLJH5Q0jkZcNn8n_QdcLDrfmkNC8AZIw4K8yw6f80VNyWIIJS4yPlZZe3wCm0PvbadRGc_lMKRJtIIwFtk4hdhIFcGh8qfdIbsIaWOtpiiZxrDGfGpl2bvJexpjjBGx1NefFF7hwTKWNiU0C_P_Z_A9ETnn9w7YJhtFKLIZHTgOtkrsnUcCSGtc6rYEkIv9WfSmQZJc88ktqFxK7iihkYUwvhRg"/>
+</div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="text-sm font-medium text-black truncate">Elena Rostova</span>
+</div>
+<span class="text-xs text-gray-400 shrink-0">Yesterday</span>
+</div>
+<p class="text-xs text-gray-600 truncate mb-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-gray-400">attachment</span>
+              Shared a post: Minimalist hardware...
+            </p>
+<div class="flex items-center justify-between">
+<span class="text-[11px] text-gray-500">@elena_design</span>
+</div>
+</div>
+</div>
+<!-- THREAD 4: Kaelen Voss -->
+<div class="p-3.5 flex items-start gap-3 hover:bg-neutral-50 cursor-pointer transition-colors">
+<div class="relative shrink-0">
+<div class="w-11 h-11 rounded-full overflow-hidden border border-gray-200 bg-neutral-50">
+<img alt="Kaelen Voss" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2JrM95iVigtvJQcX9xEqc-8Q8YQQytAgCa1TokZ-K8IfAJW4Nxw_xjHxKLVImbeBF1BwEplb_o5QwDjT3bY2O3vdEssDeqL79csw7EBsRj-ZuAMj6RE20DoHfc2ExaXT8fs2X7i9LQ5LbMAlLcqg8GeU7rEB50HWUKVFN-Dr0LbkB_LTr0ZnEvLTNknmhN7h9erC7tXqzBZuHYfj-1FRtR0I5hWH0nfopxSy-zTTrA2_wi_cwvpRQ-w"/>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white" title="Online"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="text-sm font-medium text-black truncate">Kaelen Voss</span>
+</div>
+<span class="text-xs text-gray-400 shrink-0">3d</span>
+</div>
+<p class="text-xs text-gray-600 truncate mb-1">
+              Thanks for the feedback!
+            </p>
+<div class="flex items-center justify-between">
+<span class="text-[11px] text-gray-500">@kaelen_v</span>
+<span class="material-symbols-outlined text-[15px] text-gray-400">done_all</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================================= -->
+<!-- COLUMN 3: MAIN ACTIVE CHAT VIEW (flex-1)                                -->
+<!-- ======================================================================= -->
+<section class="flex-1 flex flex-col h-full bg-white relative">
+<!-- 1. Active Chat Header -->
+<div class="h-16 px-6 border-b border-gray-200 bg-white/90 backdrop-blur-md flex items-center justify-between z-10 shrink-0">
+<div class="flex items-center gap-3.5 min-w-0">
+<!-- Avatar + Status -->
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+<img alt="Sarah Chen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfD4jF0Y17Nh9LnKalf55ktik5RSGj3tdCVx0ulhSXj2jZ9dwO1ihHNBGi02vT81yhf6IVPbD53g1jTds96_cr1jDZ5jtnu4iW7t9vMxpdtGeP9jojCL78Eq9RvZLlvtgGAq5Tip7iL38P3kJJEDPqngezNFsJxUvd1vLCX74e7HiYAvZjyrgxwbbBcc344shCuwzuyyz5-dVGWo939r7gz5Yx-Q-PRHBUudJpNdxEp86fn4iFzENI5w"/>
+</div>
+<span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-white"></span>
+</div>
+<!-- Name, Handle & Mutual tag -->
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="text-sm font-bold text-black truncate">Sarah Chen</span>
+<span class="text-xs text-gray-500 hidden sm:inline">@sarah_creates</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-neutral-100 text-gray-800 border border-gray-200 text-[11px] font-medium">
+<span class="material-symbols-outlined text-[12px]">swap_horiz</span>
+                Mutual Follow since Oct 2024
+              </span>
+</div>
+<span class="text-xs text-emerald-600 font-medium flex items-center gap-1">
+              Active now
+            </span>
+</div>
+</div>
+<!-- Trailing Action Icons -->
+<div class="flex items-center gap-1">
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-gray-600 hover:text-black hover:bg-gray-100 transition-colors" title="Voice call">
+<span class="material-symbols-outlined text-[19px]">call</span>
+</button>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-gray-600 hover:text-black hover:bg-gray-100 transition-colors" title="Video call">
+<span class="material-symbols-outlined text-[19px]">videocam</span>
+</button>
+<div class="w-px h-4 bg-gray-200 mx-1"></div>
+<button class="w-9 h-9 flex items-center justify-center rounded-lg text-gray-600 hover:text-black hover:bg-gray-100 transition-colors" title="Chat details">
+<span class="material-symbols-outlined text-[19px]">info</span>
+</button>
+</div>
+</div>
+<!-- 2. Scrollable Chat Canvas Stream -->
+<div class="flex-1 overflow-y-auto px-4 lg:px-8 py-6 flex flex-col gap-6 bg-white">
+<!-- Mutual Follow Established Banner -->
+<div class="self-center flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-neutral-50 border border-gray-200 text-xs text-gray-500">
+<span class="material-symbols-outlined text-[14px] text-gray-700">lock</span>
+<span>End-to-end encrypted direct connection between mutual follows</span>
+</div>
+<!-- Date Divider -->
+<div class="relative flex py-1 items-center justify-center">
+<div class="flex-grow border-t border-gray-200"></div>
+<span class="flex-shrink mx-4 text-[11px] font-semibold text-gray-400 uppercase tracking-wider px-2 py-0.5 rounded-md bg-neutral-50 border border-gray-200">Today</span>
+<div class="flex-grow border-t border-gray-200"></div>
+</div>
+<!-- Incoming Message 1 (Sarah) -->
+<div class="flex items-start gap-3 max-w-xl">
+<div class="w-8 h-8 rounded-full overflow-hidden shrink-0 mt-0.5 border border-gray-200">
+<img alt="Sarah Chen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4nYGn7x7lKhEC9YEu7y4wea2NY816x-Lx8s3AeFO3Gto-R6OJlsMHK4BwFsVHLEPYf9R0g0fjodeWIZpPIMzj_DdKjmp5KB6GEDBGfIWOL2OZHJTLH2r7J8hf60Gd_PmEV-vZYlEVnrJ_8PAy4Nl8lYu8azukRf19hotNdtHwDd4hfbyInvrxH3UsRICLETFd0SuZuVkv-8F3RQe6CZz0CHHSfoejOi81Zzc3nepQO5YLUkhw0YdwTA"/>
+</div>
+<div class="flex flex-col gap-1 items-start">
+<div class="bg-gray-100 text-black px-4 py-3 rounded-2xl rounded-tl-sm border border-gray-200/60 shadow-sm">
+<p class="text-sm leading-relaxed text-black">
+                Hey Alex! Just saw the updated design system rollout for Pulse v2. Have you finalized the interaction physics for the feed gestures?
+              </p>
+</div>
+<span class="text-[11px] text-gray-400 px-1">10:14 AM</span>
+</div>
+</div>
+<!-- Outgoing Message 1 (Alex Rivera) -->
+<div class="flex flex-col gap-1 items-end self-end max-w-xl">
+<div class="bg-black text-white px-4 py-3 rounded-2xl rounded-tr-sm shadow-sm border border-black">
+<p class="text-sm leading-relaxed text-white">
+              Hey Sarah! Yes, just pushed the 120Hz spring physics models. Fluid deceleration with snappy touch feedback.
+            </p>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-gray-400 px-1">
+<span>10:16 AM</span>
+<span class="material-symbols-outlined text-[13px] text-emerald-600" title="Delivered">done_all</span>
+</div>
+</div>
+<!-- Outgoing Message 2 with Shared Post Embed -->
+<div class="flex flex-col gap-1 items-end self-end max-w-lg w-full">
+<div class="bg-black text-white p-4 rounded-2xl rounded-tr-sm shadow-sm border border-black w-full">
+<p class="text-sm leading-relaxed text-white mb-3">
+              Here's the visual study I posted in the Engineering Circle earlier:
+            </p>
+<!-- Rich Embedded Feed Post Card -->
+<div class="rounded-xl overflow-hidden bg-white text-black border border-gray-200 p-3 flex flex-col gap-2.5 shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full overflow-hidden border border-gray-200">
+<img alt="Alex Rivera" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYtTmmwZyr3Vk8T1IpARQvIoqyomDP9j8-8S13KrWmkgCIfIvYcNR03Z-1uJZvL1SgUUAjAukD5NWU31eDsmUVOyDHFmfnc64olnfjXxk1wtrusAzFYoC7JUTIzZXzwsGAvnuXtFP9H4PfiKJYO5ohpge1aYMC0jG0G6HzLf2TYivQpmJNg7-W_y8RLeGYO0ffQ3F8rMpL7W2f-IxXNIDUM3V54ng8TrlSjKaQitO9m7mCylkOoKCnpA"/>
+</div>
+<span class="text-xs text-black font-semibold">Alex Rivera</span>
+<span class="text-[11px] text-gray-500">@arivera_ui</span>
+</div>
+<span class="text-[11px] font-medium text-black bg-neutral-100 border border-gray-200 px-2 py-0.5 rounded-md">Feed Post</span>
+</div>
+<!-- Media Preview inside Post -->
+<div class="w-full h-36 rounded-lg overflow-hidden relative group border border-gray-100">
+<img alt="UI Study" class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6e7LCuMoYCKEQZ46WMrBi20fjD1d75glW26JUv2AdlJLTT44H1MSbQ8HApPdSSrdsBnG5EXF5J33v8pxStSw5HO4Xzv_F9mbciTWmlpTH5NRxwjW2dh-GIhXZKdqws-dsG-Wi6hxoPcxNJFn3VQoMrI38kNetrebtqfrBXFJ9ebE5qJ4IFElGGG4DuMekD_hNJ0I9iswfO4UNykPwLlo16MIhkEg2DkeOtTezDMk0jjH0OsKDUpwagg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-2.5">
+<span class="text-xs text-white font-medium truncate">Kinetic Spring Curve &amp; Elastic Snapping v2.4</span>
+</div>
+</div>
+<p class="text-xs text-gray-700 line-clamp-2">
+                Experimenting with non-linear spring damping for micro-cards. 140ms response floor feel frictionless.
+              </p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-gray-400 px-1">
+<span>10:18 AM</span>
+<span class="material-symbols-outlined text-[13px] text-emerald-600" title="Delivered">done_all</span>
+</div>
+</div>
+<!-- Incoming Message 2 (Sarah - Active response) -->
+<div class="flex items-start gap-3 max-w-xl">
+<div class="w-8 h-8 rounded-full overflow-hidden shrink-0 mt-0.5 border border-gray-200">
+<img alt="Sarah Chen" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMMxDnAkSU4KMCpAqBbfNjxcOkm0q3B_VcT7XLc--jKCpthIJNaJSUAJEp7TJ87Ete1nijvJXkmwuqewka-UxHTtXjE7h7inDgIneUPHs9rLUJnDf7JyWi4TsQkCxcbDIydM3opTcaAk2pDUJx51IdJO_k7Ue2aD2kyXqjt6gWgk3EXvx9B9o3PtWed5Hny1bfnhiQcLlnFHh9j9IXMtFlm_dEe7OHh3-DEE_Slmvuuy1YVvIER5OZlQ"/>
+</div>
+<div class="flex flex-col gap-1 items-start">
+<div class="bg-gray-100 text-black px-4 py-3 rounded-2xl rounded-tl-sm border border-gray-200/60 shadow-sm">
+<p class="text-sm leading-relaxed text-black">
+                The dark minimalism layout looks incredible! That glow accentuation really guides the eye without overwhelming the content canvas. Let’s integrate it into tomorrow’s community release.
+              </p>
+</div>
+<span class="text-[11px] text-gray-400 px-1">10:22 AM (12m ago)</span>
+</div>
+</div>
+<!-- Real-time Typing Indicator -->
+<div class="flex items-center gap-2 text-gray-400 text-xs pl-11">
+<span class="inline-flex gap-1 items-center">
+<span class="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:0.2s]"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-gray-400 animate-bounce [animation-delay:0.4s]"></span>
+</span>
+<span>Sarah is typing...</span>
+</div>
+</div>
+<!-- 3. Docked Chat Input Area -->
+<div class="p-4 border-t border-gray-200 bg-white z-10 shrink-0">
+<div class="max-w-4xl mx-auto flex flex-col gap-2">
+<!-- Input Bar Container -->
+<div class="flex items-center gap-1.5 bg-neutral-50 p-1.5 rounded-lg border border-gray-200 focus-within:border-black focus-within:ring-1 focus-within:ring-black transition-all">
+<!-- Attachment Button (+) -->
+<button class="w-9 h-9 rounded-md flex items-center justify-center text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" title="Attach file or media">
+<span class="material-symbols-outlined text-[19px]">add</span>
+</button>
+<button class="w-9 h-9 rounded-md flex items-center justify-center text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" title="Add image">
+<span class="material-symbols-outlined text-[19px]">image</span>
+</button>
+<!-- Text Input Field -->
+<input class="flex-1 bg-transparent border-0 text-black text-sm placeholder:text-gray-400 focus:ring-0 focus:outline-none py-1.5 px-2" placeholder="Write a message... (Mutual follow)" type="text"/>
+<!-- Emoji Picker -->
+<button class="w-9 h-9 rounded-md flex items-center justify-center text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" title="Add emoji">
+<span class="material-symbols-outlined text-[19px]">sentiment_satisfied</span>
+</button>
+<!-- Voice Note Icon -->
+<button class="w-9 h-9 rounded-md flex items-center justify-center text-gray-500 hover:text-black hover:bg-gray-200 transition-colors" title="Record voice note">
+<span class="material-symbols-outlined text-[19px]">mic</span>
+</button>
+<!-- Send Button (subtle rounded-lg, solid black) -->
+<button class="h-9 px-4 rounded-lg bg-black text-white hover:bg-neutral-800 active:scale-95 transition-all flex items-center gap-1.5 text-xs font-semibold shadow-sm">
+<span>Send</span>
+<span class="material-symbols-outlined text-[15px]">send</span>
+</button>
+</div>
+<!-- Micro context hint -->
+<div class="flex items-center justify-between px-2">
+<span class="text-[11px] text-gray-400">Press <kbd class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200 text-[10px]">Enter ↵</kbd> to send, <kbd class="px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 border border-gray-200 text-[10px]">Shift + Enter</kbd> for new line</span>
+<span class="text-[11px] text-gray-500 flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-black">verified_user</span>
+              Mutual Privacy Protected
+            </span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ========================================================================= -->
+<!-- MOBILE BOTTOM DOCK                                                        -->
+<!-- ========================================================================= -->
+<nav class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2.5 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-sm">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined text-[20px]">home</span>
+<span class="text-[10px] mt-0.5 font-medium">Home</span>
+</a>
+<!-- Explore -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span class="text-[10px] mt-0.5 font-medium">Explore</span>
+</a>
+<!-- Create (Central Floating Button) -->
+<a class="flex flex-col items-center justify-center -mt-3.5 text-black active:scale-90 transition-transform" href="#">
+<div class="w-10 h-10 rounded-lg bg-black text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]">add</span>
+</div>
+<span class="text-[10px] mt-0.5 font-medium text-black">Create</span>
+</a>
+<!-- Inbox (Active in Mobile View) -->
+<a class="flex flex-col items-center justify-center text-black font-semibold active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="text-[10px] mt-0.5">Inbox</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black transition-colors active:scale-90" href="#">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="text-[10px] mt-0.5 font-medium">Profile</span>
+</a>
+</nav>
+</body></html>

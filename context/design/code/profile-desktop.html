@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wink — Aria Vance Profile</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.12);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-sans antialiased min-h-screen selection:bg-black selection:text-white">
+<!-- Shared TopNavBar (Mobile Anchor) -->
+<header class="lg:hidden flex items-center justify-between w-full px-4 py-3 bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-gray-200 shadow-sm">
+<div class="flex items-center gap-2">
+<span class="text-xl font-bold tracking-tight text-black">Wink</span>
+</div>
+<div class="flex items-center gap-2">
+<button aria-label="Notifications" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:bg-gray-100 rounded-lg transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="Messages" class="w-9 h-9 flex items-center justify-center text-gray-600 hover:bg-gray-100 rounded-lg transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<div class="w-8 h-8 rounded-full ring-2 ring-black/10 overflow-hidden ml-1">
+<img class="w-full h-full object-cover" data-alt="Close up portrait photograph of Aria Vance, a young woman with a sleek haircut and modern expressive style in ambient dark studio lighting with violet and neon pink rim reflections, high aesthetic minimal editorial look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ7t49P_sMMBCGcVqA9TR1Hfwzs5sLgWVYUN2wiaIbcPZ8AZgqQPu-HETCOp4WRwgW0jj2F34jSL32EVJ7vuyeMYjYQJKaKRwT110EC0ppG4C-4rvhJaT-HoSLVX0OnDMJR2y0nW_T67v6cq6yfVib-TKuEsBShjV2WVJGSAqxWQRFKkfNKeWpNNAnKuj8oPvhdTzm4WGbcYV9_Q7LR7sMAG9Hp0kmD8CrfORENSkE8xWArp-xrS1yhQ"/>
+</div>
+</div>
+</header>
+<!-- Desktop App Shell Container -->
+<div class="flex min-h-screen justify-center w-full max-w-[1440px] mx-auto bg-white">
+<!-- LEFT PILLAR: SideNavBar -->
+<aside class="hidden lg:flex flex-col justify-between h-screen sticky top-0 p-5 w-64 shrink-0 z-40 border-r border-gray-200 bg-white">
+<div class="flex flex-col gap-6">
+<!-- Brand Header Lockup: "Wink" alone with NO subline -->
+<div class="flex items-center gap-3 px-1 pt-1">
+<div class="w-9 h-9 rounded-lg bg-black flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[22px]" data-icon="lens_blur" style="font-variation-settings: 'FILL' 1;">lens_blur</span>
+</div>
+<div>
+<h1 class="text-2xl font-bold tracking-tight text-black leading-none">Wink</h1>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav aria-label="Main Navigation" class="flex flex-col gap-1">
+<!-- Home -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="home">home</span>
+<span>Home</span>
+</a>
+<!-- Explore -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="explore">explore</span>
+<span>Explore</span>
+</a>
+<!-- Search -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="search">search</span>
+<span>Search</span>
+</a>
+<!-- Messages -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="chat_bubble">chat_bubble</span>
+<span>Messages</span>
+</a>
+<!-- Notifications -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+<span>Notifications</span>
+</a>
+<!-- CTA -->
+<div class="pt-3">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-black text-white font-semibold text-sm shadow-sm hover:bg-gray-800 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="edit_note">edit_note</span>
+<span>Create Post</span>
+</button>
+</div>
+</nav>
+</div>
+<!-- Footer navigation tabs -->
+<div class="flex flex-col gap-1 border-t border-gray-200 pt-4">
+<!-- Profile - ACTIVE STATE -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-black font-semibold bg-gray-100 rounded-lg active:scale-[0.98] transition-transform duration-100 ease-out text-sm" href="#">
+<span class="material-symbols-outlined text-[22px] text-black" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span>Profile</span>
+<span class="ml-auto w-1.5 h-1.5 rounded-full bg-black"></span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-gray-600 rounded-lg hover:bg-gray-100 hover:text-black transition-colors duration-150 font-medium text-sm" href="#">
+<span class="material-symbols-outlined text-[22px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</aside>
+<!-- CENTER CONTENT SPINE -->
+<main class="w-full max-w-[680px] min-h-screen border-r border-gray-200 flex flex-col pb-24 lg:pb-12 bg-white">
+<!-- Top Sub-Bar -->
+<div class="sticky top-0 z-30 bg-white/90 backdrop-blur-md px-6 py-3 border-b border-gray-200 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button aria-label="Go Back" class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-700 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<div>
+<h2 class="text-base font-bold text-black flex items-center gap-1.5">
+              Aria Vance
+              <span class="material-symbols-outlined text-black text-[18px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</h2>
+<p class="text-xs text-gray-500 font-normal">24 Posts · 1.8k Followers</p>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="More options" class="w-8 h-8 rounded-lg hover:bg-gray-100 flex items-center justify-center text-gray-600 transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- 1. Gamified Profile Completion Banner -->
+<div class="p-6 pb-2">
+<div class="relative overflow-hidden rounded-lg bg-gray-50 border border-gray-200 p-5">
+<div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="space-y-1.5 max-w-md">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[11px] font-semibold uppercase tracking-wider bg-black text-white">Milestone</span>
+<span class="text-sm text-black font-semibold">Profile 85% Complete</span>
+</div>
+<p class="text-xs text-gray-600 leading-relaxed">
+                Add your website to reach 100% and unlock the exclusive <span class="text-black font-semibold">Pioneer Badge</span> on your card.
+              </p>
+<!-- Progress Bar -->
+<div class="w-full bg-gray-200 h-2 rounded-full overflow-hidden mt-2 relative">
+<div class="h-full rounded-full bg-black transition-all duration-700 w-[85%]"></div>
+</div>
+</div>
+<button class="self-start sm:self-center shrink-0 px-4 py-2 rounded-lg bg-white hover:bg-gray-50 border border-gray-300 text-black text-xs font-semibold transition-all active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-black" data-icon="add_link">add_link</span>
+<span>Edit Profile</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 2. Profile Header -->
+<div class="flex flex-col">
+<!-- Banner Graphic Container -->
+<div class="relative h-48 sm:h-56 w-full bg-gray-100 overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Ultra high-definition abstract 3D spatial landscape of dark undulating kinetic planes with soft indigo and violet luminescent ribbon waves, minimal and clean aesthetic with atmospheric volumetric light, dark futuristic cyber-spatial styling." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB2ZKdgdN8RND2vNXFdyp--PNnGPlgjOYWBi-LNMdbRYFjKvDcNcZjgaVDOv38cJPwZcf5dih-PPABuSiKw7pa7-5nEkSkzXJ_ja5wgfCsIj0DsU80W2lCRo4S9NxvoMq7zINdr4GhOOdzC8sR0UUKAS5lV2G6sgf1brvee3IHUAk2FOqMv04RmcqkY_gwzb7wW3aIbk6uh22VQ8hI1Ejvvk07L3vmRK_5Jd0RG90iMYJOwU4k4qcOWBA')">
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none"></div>
+</div>
+<!-- Header Profile Identity Row & Actions -->
+<div class="px-6 relative flex flex-col">
+<div class="flex items-end justify-between -mt-16 sm:-mt-20 mb-3">
+<!-- Avatar -->
+<div class="relative group">
+<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-white ring-2 ring-gray-200 shadow-md">
+<div class="w-full h-full rounded-full overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="Studio portrait photo of Aria Vance, a 26 year old creative designer looking confident, dressed in dark minimal technical apparel with warm violet ambient studio reflections, fine art lighting, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj5pGWA3K14P2zwQepSLvSnfojwrvOrTeYZ8Fx_I7fJzR6tCVbA_S9_EFB2mvHEuPG6CRcflG6y26E99aBWdkDh0i0F2a94pafr_LQOc7vYHmOkmIVNgYBpzoZNToW9oRdI75EBcPNqxw1HBW332ejbdE3SoeYj_259Ret_lzQ57gSQtXbwCzXjwWSELWjwN76DUgJGYNW7NocnFfH_JIdFIS0l_cpSM0Lv1dEZp-WoOqiOrQG2sUbNg"/>
+</div>
+</div>
+<!-- Online status beacon -->
+<span class="absolute bottom-2 right-2 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white ring-1 ring-gray-300" title="Online now"></span>
+</div>
+<!-- Profile Action Buttons -->
+<div class="flex items-center gap-2 pb-1">
+<button class="px-4 py-2 rounded-lg bg-black text-white font-medium text-xs hover:bg-gray-800 transition-colors shadow-sm active:scale-95 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+<span>Edit Profile</span>
+</button>
+<button aria-label="Share Profile" class="px-3.5 py-2 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 text-black font-medium text-xs transition-colors active:scale-95 flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="share">share</span>
+<span class="hidden sm:inline">Share Profile</span>
+</button>
+<button aria-label="Settings" class="w-8 h-8 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 flex items-center justify-center transition-colors active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+<!-- Name & Details Lockup -->
+<div class="space-y-2">
+<div>
+<div class="flex items-center gap-1.5">
+<h2 class="text-xl font-bold text-black tracking-tight">Aria Vance</h2>
+<span class="material-symbols-outlined text-black text-[20px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="ml-2 px-2 py-0.5 rounded text-[11px] font-semibold bg-gray-100 text-gray-800 border border-gray-200">Lv. 9 Creator</span>
+</div>
+<p class="text-sm text-gray-500">@aria_vance</p>
+</div>
+<!-- Bio -->
+<p class="text-sm text-gray-700 max-w-xl leading-relaxed">
+              Product Designer &amp; Creative Technologist. Exploring spatial interfaces &amp; minimal systems ✦ San Francisco
+            </p>
+<!-- Metadata chips -->
+<div class="flex flex-wrap items-center gap-y-1 gap-x-4 text-xs text-gray-500 pt-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-gray-400" data-icon="location_on">location_on</span>
+<span>San Francisco, CA</span>
+</span>
+<a class="flex items-center gap-1 text-black font-medium hover:underline" href="#">
+<span class="material-symbols-outlined text-[16px] text-gray-400" data-icon="link">link</span>
+<span>ariavance.design</span>
+</a>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-gray-400" data-icon="calendar_month">calendar_month</span>
+<span>Joined March 2023</span>
+</span>
+</div>
+<!-- Follower / Following Stats -->
+<div class="flex items-center gap-6 pt-2 pb-2">
+<div class="flex items-baseline gap-1">
+<span class="text-base font-bold text-black">1.8k</span>
+<span class="text-xs text-gray-500">Followers</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-base font-bold text-black">412</span>
+<span class="text-xs text-gray-500">Following</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="text-base font-bold text-black">24</span>
+<span class="text-xs text-gray-500">Posts</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Tabbed Content Switcher -->
+<div class="mt-4 border-b border-gray-200 px-6 flex items-center justify-between">
+<!-- Tabs -->
+<div class="flex items-center gap-6 overflow-x-auto custom-scrollbar" role="tablist">
+<button aria-selected="true" class="relative pb-3 text-sm text-black font-semibold flex items-center gap-1.5" role="tab">
+<span>Posts</span>
+<span class="px-1.5 py-0.5 rounded text-[11px] bg-gray-100 text-black font-medium">24</span>
+<span class="absolute bottom-0 left-0 right-0 h-0.5 bg-black rounded-t-full"></span>
+</button>
+<button aria-selected="false" class="relative pb-3 text-sm text-gray-500 hover:text-black transition-colors flex items-center gap-1.5 font-medium" role="tab">
+<span>Replies</span>
+<span class="text-[11px] text-gray-400">56</span>
+</button>
+<button aria-selected="false" class="relative pb-3 text-sm text-gray-500 hover:text-black transition-colors flex items-center gap-1.5 font-medium" role="tab">
+<span>Media</span>
+<span class="text-[11px] text-gray-400">18</span>
+</button>
+<button aria-selected="false" class="relative pb-3 text-sm text-gray-500 hover:text-black transition-colors flex items-center gap-1.5 font-medium" role="tab">
+<span>Saved</span>
+</button>
+</div>
+<!-- 4. Post Grid & List toggle buttons -->
+<div class="flex items-center gap-1 pb-2">
+<button aria-label="Grid View" class="p-1.5 rounded-lg bg-gray-100 text-black border border-gray-200 hover:bg-gray-200 transition-colors" id="viewGridBtn" title="Grid View">
+<span class="material-symbols-outlined text-[18px]" data-icon="grid_view">grid_view</span>
+</button>
+<button aria-label="Feed View" class="p-1.5 rounded-lg text-gray-400 hover:text-black hover:bg-gray-100 transition-colors" id="viewListBtn" title="Feed View">
+<span class="material-symbols-outlined text-[18px]" data-icon="view_agenda">view_agenda</span>
+</button>
+</div>
+</div>
+<!-- Feed / Media Content Area -->
+<div class="p-6 flex flex-col gap-6">
+<!-- Pinned High-Performance Post Card -->
+<article class="rounded-lg bg-gray-50 border border-gray-200 p-5 shadow-sm transition-all hover:border-gray-300">
+<div class="flex items-center justify-between mb-3 text-xs text-black font-semibold">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-black" data-icon="push_pin" style="font-variation-settings: 'FILL' 1;">push_pin</span>
+<span>Pinned Reflection</span>
+</div>
+<span class="text-gray-400 font-normal">Yesterday</span>
+</div>
+<p class="text-sm text-gray-800 leading-relaxed mb-3">
+            Spatial UI isn't just about adding a Z-axis. It's about designing friction-free tactile ergonomics where the eye guides and subtle depth provides calm hierarchy. Here is the latest interactive prototype from our lab session:
+          </p>
+<!-- Embedded Media Unit -->
+<div class="relative rounded-lg overflow-hidden aspect-[16/9] bg-gray-100 border border-gray-200 mb-3 group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A clean photorealistic digital rendering of a futuristic spatial interface display floating above a matte dark desk setup. Luminous violet wireframes and minimal HUD widgets hover with refined clarity and zero clutter. Dark cinematic aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAe-sCkzcf6Oj4nPh_ZeZCT5UAaESZlwiZEfW5TvO5vS_5ZT7VM_4cLEcUMNHql0VSR5W2KwuUdL0cOBwlKAl_RK3dM4y-I9ZYaAxPzjF8x83T-3SOpBlkV3tq0OW69vYXLex7FaHERupuDHmMPM7O-BmDMVBL3B3TE-4eLagdH1tDF1IzSiubyJlgVAVsIRv5Ke-iqgvrGDU8RoBc_29wPtkbWZlo2o2wheR55Cc9CkXtXZg8H_YYl7w"/>
+<!-- Engagement Overlay on Hover -->
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-8 backdrop-blur-xs">
+<div class="flex items-center gap-1.5 text-white font-medium text-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span>284</span>
+</div>
+<div class="flex items-center gap-1.5 text-white font-medium text-xs">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble">chat_bubble</span>
+<span>39</span>
+</div>
+</div>
+</div>
+<!-- Micro-Actions Row -->
+<div class="flex items-center justify-between text-gray-500 text-xs pt-1">
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-1.5 hover:text-black transition-colors group">
+<span class="material-symbols-outlined text-[18px] group-hover:scale-110 transition-transform" data-icon="favorite">favorite</span>
+<span>284</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble">chat_bubble</span>
+<span>39</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="repeat">repeat</span>
+<span>17</span>
+</button>
+</div>
+<button aria-label="Bookmark" class="hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="bookmark">bookmark</span>
+</button>
+</div>
+</article>
+<!-- Media Bento Gallery Grid -->
+<div>
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-sm text-black font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-black" data-icon="perm_media">perm_media</span>
+<span>Visual Experiments &amp; Design System Shots</span>
+</h3>
+<span class="text-xs text-gray-500">Showing 6 of 18</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+<!-- Grid Item 1 -->
+<div class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 border border-gray-200 cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Macro 3D render of frosted glass geometric prisms refacting soft monochromatic violet and cyan rays over a jet-black background, ultra sharp focus and hyper-minimal aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfHijzbuGPpEOAHxav9juK4FlPc1Z8wXwUd6dZv9kSKin4a2eLkwFlhat5eIOuIu0Yg7hcvg_fxzIbWIYprMm0qlF6ZnYTb5hZ6CKXOHrOAuD24XpBZ4Dke4hxe3_FJwGyVKNtuQvSe7omf2oHpmcip6W_kRbIsWUt4MbjY4TSh6E-OyZmAdX4SFlbNC7ITeBpM_Bh4wvsqMAjpDML6bg-nrkUy7eR6sEkAcmIeiQdjuFQli7ApsDosA"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white text-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 142</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="chat_bubble">chat_bubble</span> 18</span>
+</div>
+</div>
+<!-- Grid Item 2 -->
+<div class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 border border-gray-200 cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="High resolution interface layout shot showing clean dark mode data visualization cards with luminous line graphs and micro telemetry pills, Swiss design typographic harmony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtCeCfpmXNaWGF6QKG9eneUN9vL-qhseXV7oFgiJIJieHhZwgxxRum1C4m8CpmGVJ1sg2so-iIGVP5I_vxRCKeJMDfBOfCSHrMb1zcuG6D--EBEM052xerEzUMxxBjm_PpoKRvufpah73_e-CcAETtNOBIB_t-ZJLRpcuq2zgf315tDJPVuSR2bFbib7NCfriHpRLapxyz9lAn6J7IOukwNWDdjrouAPnZpWtNhSOvi5mKtVV9VVmbAw"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white text-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 98</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="chat_bubble">chat_bubble</span> 12</span>
+</div>
+</div>
+<!-- Grid Item 3 -->
+<div class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 border border-gray-200 cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Abstract computational art of flowing luminous indigo vectors forming an organic topographic mesh against deep slate black background, algorithmic procedural design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhfNS4xYcU0Jda0yO93JX1Sh6yH01WcerCU2JFpVOJK87zCod9hIgMAXuuqlz400Jg72hK5GtiLXspIoseEivQbcErNDco3fuRIm6OJzfJMBlj_1FqZI7DBs8inPDXfik9-fLIXF3u3Rd3soV5SfjRTHmEKohlAmpYH7wpwdvDRcqywVef5RDBRRHJc0yB2QKKrKdvExKT1nVo4Wu3qpJEG4VXzqCNW9VAeDbj_JVwfoI_GL0u9-I6mw"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white text-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 210</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="chat_bubble">chat_bubble</span> 27</span>
+</div>
+</div>
+<!-- Grid Item 4 -->
+<div class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 border border-gray-200 cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Minimal architectural photography of a concrete pavilion at twilight with sleek ambient linear floor up-lighting and sharp diagonal shadow lines, modern moody aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa5Wp2uvoCvYwgec8KDkvdutSr9tWbBN8pDs_jVW1AAgAjVltVqfGdOgIMbcO8ilC0HDhUprogeYe9-qB3OPUKwStURyA09tlVylz1TaDkLKEhQlprZhGswEEAebIVY0M0UtV7DfFzIIP95UJtrbWBZT7fiQ8VeLfEeNLYKjxuYlQeV-xWaXcefKlRflUDtDdHXfRXj8RuFSEJOE_yG8p5kW3rTjWYiTBrKa-JmZVkn5KmxWrcZOnIjQ"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white text-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 315</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="chat_bubble">chat_bubble</span> 41</span>
+</div>
+</div>
+<!-- Grid Item 5 -->
+<div class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 border border-gray-200 cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A typography poster featuring bold sans-serif geometric glyphs embossed on matte dark paper with iridescent foil accents, clean Swiss graphic design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRM6mJrHxfMPSAzgfabiHf0qFsMdu0sVqAaUeYieQ40PNnkpUNWJZ3oDPFIzvtXx4vO4yCqgef59WhcvXPAJ9oxsdI6yMl-2CY8kqJsOVCIjd48_T-MTgc29MFww36UPFAOMvy3UztHeF21VbkL9xb70jrLM_D1ofoHajyViqKQGCeVJYS-XjmCCBXE5V2Ab2Kcy40oh6pxqo8PdVgsrZ_9w1bQkwHOociRY3Va-H3tzt4A2ZqlmkL5A"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white text-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 84</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="chat_bubble">chat_bubble</span> 9</span>
+</div>
+</div>
+<!-- Grid Item 6 -->
+<div class="group relative aspect-square rounded-lg overflow-hidden bg-gray-100 border border-gray-200 cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Close up view of hardware interaction dials milled from anodized dark aluminum with laser etched glowing indicator notches, industrial product design excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwC-VIzpLWwv_phnFPMC4BsgU6pzCjzsRI77yriewy56wQ5lQVoJ5VQY7ZdQpIvxTE_W57cFDQcMeMfUwu2_6UaPFcwovBGILtGgfeVCg6EPuwMxuWLObO3hmGcat2RGclS2ZTLRx9Dha2xciifxDH1m21ZIefH6oIvjEX_KtHwt2Zvlh5vhnToWoN2uQjPqHJPp7nrnF5c6Weobbl62Nn4F--ewYIRkz2FzOA6bAyiNH9g5-CGDS4Eg"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 text-white text-xs">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="favorite" style="font-variation-settings: 'FILL' 1;">favorite</span> 167</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="chat_bubble">chat_bubble</span> 22</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Another Text Thought Post in Feed -->
+<article class="rounded-lg bg-gray-50 border border-gray-200 p-5 shadow-sm">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+<img class="w-full h-full object-cover" data-alt="Small thumbnail avatar of Aria Vance, thoughtful expression in low key light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtD-NFxK5Lcrogf0dQMwm-mZ4fAen8MHHtEKcjugQoXlj5yqfQ0eTQczV3EpRxBFQU0zMamblcftBdZ2HCtsxte53r05A_UCejnUtkPbYwWM0itl-z1BEEht-ylTIfgJN-agROd0kcuwnGXYig1eDKkCsGF5JdttU4pMorJ1KXFiJ2lCMbpJrDGIDVD3pg9t8GX6cCQdjW1x_USDMY3Pay5xqjgi2Rhqwkys143RmxrinTaCpXJ0JJXg"/>
+</div>
+<div>
+<h4 class="text-sm font-semibold text-black flex items-center gap-1">
+                Aria Vance
+                <span class="material-symbols-outlined text-black text-[15px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</h4>
+<p class="text-xs text-gray-500">3 days ago</p>
+</div>
+</div>
+<p class="text-sm text-gray-800 leading-relaxed">
+            Shipped the new token parser for design engineers today. Code that mirrors Figma variables 1:1 without manual transcription saves hundreds of hours over a product cycle. Always automate the friction out of creation. ⚡
+          </p>
+<div class="flex items-center gap-6 text-gray-500 text-xs mt-4 pt-3 border-t border-gray-200">
+<button class="flex items-center gap-1.5 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="favorite">favorite</span>
+<span>112</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="chat_bubble">chat_bubble</span>
+<span>15</span>
+</button>
+<button class="flex items-center gap-1.5 hover:text-black transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="repeat">repeat</span>
+<span>8</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- RIGHT PILLAR: Community Badges, Gamification & Connections -->
+<aside class="hidden xl:flex flex-col gap-6 w-80 shrink-0 p-5 sticky top-0 h-screen overflow-y-auto custom-scrollbar bg-white">
+<!-- Search Input Header -->
+<div class="relative">
+<span class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-400">
+<span class="material-symbols-outlined text-[18px]" data-icon="search">search</span>
+</span>
+<input class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-9 pr-8 py-2 text-xs text-black placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-black focus:border-black transition-all" placeholder="Search Wink or @users" type="text"/>
+<span class="absolute inset-y-0 right-2.5 flex items-center pointer-events-none text-gray-400 text-[10px] border border-gray-200 px-1.5 py-0.5 rounded my-auto h-5">⌘K</span>
+</div>
+<!-- Gamified Streak & Badges Showcase Module -->
+<div class="rounded-lg bg-gray-50 border border-gray-200 p-4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-black text-[20px]" data-icon="military_tech">military_tech</span>
+<h3 class="text-sm text-black font-bold">Achievements</h3>
+</div>
+<span class="text-xs text-gray-600 font-semibold hover:text-black hover:underline cursor-pointer">View all (8)</span>
+</div>
+<!-- Badges Grid -->
+<div class="flex flex-col gap-2.5">
+<!-- Early Adopter Badge -->
+<div class="flex items-center gap-3 p-2.5 rounded-lg bg-white border border-gray-200 hover:border-gray-400 transition-colors shadow-xs">
+<div class="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center text-black shrink-0 border border-gray-200">
+<span class="material-symbols-outlined text-[18px]" data-icon="token" style="font-variation-settings: 'FILL' 1;">token</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-xs text-black font-semibold truncate">Early Adopter</span>
+<span class="text-[10px] text-gray-500 font-medium uppercase">Tier 1</span>
+</div>
+<p class="text-xs text-gray-500 truncate">Member of the first 500 alpha creators</p>
+</div>
+</div>
+<!-- Top Contributor Badge -->
+<div class="flex items-center gap-3 p-2.5 rounded-lg bg-white border border-gray-200 hover:border-gray-400 transition-colors shadow-xs">
+<div class="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center text-black shrink-0 border border-gray-200">
+<span class="material-symbols-outlined text-[18px]" data-icon="workspace_premium" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-xs text-black font-semibold truncate">Top Contributor</span>
+<span class="text-[10px] text-gray-500 font-medium uppercase">Top 2%</span>
+</div>
+<p class="text-xs text-gray-500 truncate">High engagement in #SpatialDesign</p>
+</div>
+</div>
+<!-- Streak: 14 Days -->
+<div class="flex items-center gap-3 p-2.5 rounded-lg bg-white border border-gray-200 hover:border-gray-400 transition-colors shadow-xs">
+<div class="w-9 h-9 rounded-lg bg-gray-100 flex items-center justify-center text-black shrink-0 border border-gray-200">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_fire_department" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-xs text-black font-semibold">Streak: 14 Days</span>
+<span class="text-[10px] text-emerald-600 font-bold uppercase">Active</span>
+</div>
+<p class="text-xs text-gray-500 truncate">Next milestone: 20-day Flame Pin</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Mutual Connections / Suggested Accounts Module -->
+<div class="rounded-lg bg-gray-50 border border-gray-200 p-4">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-sm text-black font-bold">Mutual Connections</h3>
+<span class="text-xs text-gray-500">12 in common</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Connection 1 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of Marcus Chen, an engineer with round modern spectacles, wearing a minimalist black crewneck sweater in diffuse natural studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEfJdge84y1uW5UtBZG6Tu_o14HMSI2iorlE61dB2EPOZCB6zxERAfu6FUlyFpIKR1yVJq7r5DncBRxjgWYPh3c1QxZkUB4iW9zYNNfiNVMp6_u1dyetrVF_76zcffA0Y49ehAd8ypd3R_aYEGRekV7d20XLhEAaMAW_O9MFEB3Sq_TpTTw1wkL_N9RmUOKr50bkBOFPxrMFXQyR4d0N_7DfZgfFCnxd_ZKTmmwDCpWNl7oQpTE0AiEw"/>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-black hover:underline cursor-pointer">Marcus Chen</h4>
+<p class="text-[11px] text-gray-500">@mchen · 4 mutuals</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-lg bg-white border border-gray-300 hover:bg-gray-100 text-black text-xs font-medium transition-colors active:scale-95 shadow-xs">
+              Follow
+            </button>
+</div>
+<!-- Connection 2 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of Elena Rostova, creative technologist with sleek hair and geometric earring in atmospheric violet lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeXuDIBTg79Ff-F0G-tF_Bca5se-qX-IljxfFyPaG2-vU6QtSTMfvhBXQM9i4GGJmPVXCfIQDZApreA2FYAA20Sb9emvmzuVyGu7TbsyNNNXRhLLIBaOJrA-DF8V5ut4Kn8CttvKmcxhk0vVevjKvkcVynR4CvT5G0XW6_fAqgK4gzdo6zYBhypR9-PtmKA-taoxvbE7Rq4AJd5E1E-jhkMDZVXUM6c241Fy2hTpLYYRN6XVyrgmVJ4Q"/>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-black hover:underline cursor-pointer">Elena Rostova</h4>
+<p class="text-[11px] text-gray-500">@elena_r · 7 mutuals</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-lg bg-white border border-gray-300 hover:bg-gray-100 text-black text-xs font-medium transition-colors active:scale-95 shadow-xs">
+              Follow
+            </button>
+</div>
+<!-- Connection 3 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-full overflow-hidden border border-gray-200">
+<img class="w-full h-full object-cover" data-alt="Portrait photo of Kaito Tanaka, interaction designer smiling gently with warm rim lighting in a minimal concrete architectural interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTYAXNKlb2abqQ31IOwdepoUFv0J2EqVocIR1MYLbcM-qtJTwrc2bT7zo4XoQQOBNvjcZ8hOSSoZ4ceMO0jrnJyTLT74U6v_tDYtrREe2t6fNil9bIm6jiY_H87uiKWqMpZ3ZAecmaXUxwIzpM1ynace6CKRgtaPeRcSruVA7DwSYEZzjsKAF4SjlYnL4Y-EBuSiMIChCoT4p7m7ugDDJe5vhdme-T_l4WFWT8wEmbLVCbhiOOlzrwjg"/>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-black hover:underline cursor-pointer">Kaito Tanaka</h4>
+<p class="text-[11px] text-gray-500">@kaito · 2 mutuals</p>
+</div>
+</div>
+<button class="px-3 py-1 rounded-lg bg-white border border-gray-300 hover:bg-gray-100 text-black text-xs font-medium transition-colors active:scale-95 shadow-xs">
+              Follow
+            </button>
+</div>
+</div>
+</div>
+<!-- Legal & Platform Footer -->
+<footer class="px-1 text-xs text-gray-400 flex flex-wrap gap-x-3 gap-y-1">
+<a class="hover:underline" href="#">Privacy Policy</a>
+<a class="hover:underline" href="#">Terms of Service</a>
+<a class="hover:underline" href="#">Community Rules</a>
+<a class="hover:underline" href="#">Cookies</a>
+<span>© 2025 Wink Network</span>
+</footer>
+</aside>
+</div>
+<!-- Shared BottomNavBar (Mobile Anchor) -->
+<nav aria-label="Mobile Navigation Dock" class="lg:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2.5 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-md">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="home">home</span>
+<span class="text-[10px] mt-0.5 font-medium">Home</span>
+</a>
+<!-- Explore -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="explore">explore</span>
+<span class="text-[10px] mt-0.5 font-medium">Explore</span>
+</a>
+<!-- Create -->
+<a class="flex flex-col items-center justify-center text-black active:scale-90 transition-transform duration-150 -mt-2" href="#">
+<div class="w-10 h-10 rounded-lg bg-black text-white flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[22px]" data-icon="add">add</span>
+</div>
+<span class="text-[10px] mt-0.5 font-semibold text-black">Create</span>
+</a>
+<!-- Inbox -->
+<a class="flex flex-col items-center justify-center text-gray-500 hover:text-black active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="mail">mail</span>
+<span class="text-[10px] mt-0.5 font-medium">Inbox</span>
+</a>
+<!-- Profile - ACTIVE -->
+<a class="flex flex-col items-center justify-center text-black scale-105 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined text-[24px]" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] font-bold mt-0.5">Profile</span>
+</a>
+</nav>
+<!-- Interactive script for View Toggle -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const gridBtn = document.getElementById('viewGridBtn');
+      const listBtn = document.getElementById('viewListBtn');
+
+      if (gridBtn && listBtn) {
+        gridBtn.addEventListener('click', () => {
+          gridBtn.className = 'p-1.5 rounded-lg bg-gray-100 text-black border border-gray-200 hover:bg-gray-200 transition-colors';
+          listBtn.className = 'p-1.5 rounded-lg text-gray-400 hover:text-black hover:bg-gray-100 transition-colors';
+        });
+
+        listBtn.addEventListener('click', () => {
+          listBtn.className = 'p-1.5 rounded-lg bg-gray-100 text-black border border-gray-200 hover:bg-gray-200 transition-colors';
+          gridBtn.className = 'p-1.5 rounded-lg text-gray-400 hover:text-black hover:bg-gray-100 transition-colors';
+        });
+      }
+    });
+  </script>
+</body></html>
