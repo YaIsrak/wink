@@ -22,3 +22,10 @@ Record of meaningful project decisions and the reasoning behind them.
 - Alternatives considered: separate backend service (rejected — unnecessary
   for scale); raw Supabase client only, no Prisma (rejected — wanted typed
   schema/migrations).
+
+## 2026-09-20 — Next.js 16 proxy.ts & Prisma 6 Pinning
+
+- Context: Supabase SSR integration and Prisma setup on Next.js 16.3.5.
+- Decision: Used Next.js 16's official `proxy.ts` convention instead of deprecated `middleware.ts` for cookie session refresh. Pinned Prisma CLI and `@prisma/client` to stable v6.19.3 rather than v8-rc to maintain compatibility with standard Prisma ORM commands (`generate`, `validate`, `db push`).
+- Alternatives considered: Prisma 8 RC (rejected — overhauled developer platform CLI lacking standard ORM generate/db commands).
+
