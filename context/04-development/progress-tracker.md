@@ -36,3 +36,17 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Generated Prisma client and verified build with `npx tsc --noEmit` and `npm run build`
 - Status: Done
 
+## 2026-09-20 — Phase 0: Zustand Store Scaffold & Supabase Keep-Alive Cron
+
+- Deliberated and ratified build spec `docs/specs/0001-zustand-scaffold-and-supabase-keep-alive.md`
+- Installed `zustand` and configured modular client stores:
+  - `lib/store/ui-store.ts` with `persist` middleware synchronizing navigation/modal state to localStorage
+  - `lib/store/auth-store.ts` for memory-only session and user state
+  - `lib/store/notification-store.ts` for real-time counters and badges
+  - `lib/store/index.ts` barrel export
+- Built `/api/cron/keep-alive` route handler in `app/api/cron/keep-alive/route.ts` performing a lightweight read query (`prisma.user.findFirst`)
+- Configured weekly Sunday midnight schedule in `vercel.json` (`0 0 * * 0`) to prevent Supabase Hobby plan pausing
+- Verified end-to-end database query execution and Next.js production build
+- Status: Done
+
+
