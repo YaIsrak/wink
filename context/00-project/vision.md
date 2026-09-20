@@ -1,6 +1,6 @@
 # Vision
 
-**Connect** (working title) is a social media web app where general users
+**Wink** (working title) is a social media web app where general users
 post photos or captions, follow each other, like and comment, message
 mutual follows in real time, and get notified of activity.
 

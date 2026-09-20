@@ -2,7 +2,7 @@
 
 ## What this project is
 
-A social media web app (working title: **Connect**) — users sign up, complete
+A social media web app (working title: **Wink**) — users sign up, complete
 a profile, post photos/captions, like/comment, follow each other, message
 mutual follows in real time, and get notified of activity. Personal
 portfolio project, built to comfortably support ~100 users.
@@ -13,15 +13,15 @@ Realtime, Storage) + Tailwind + shadcn/ui + Zustand. Full stack details in
 
 ## Where context lives
 
-| Need to know about... | Read |
-|---|---|
-| What we're building, MVP scope | `context/00-project/` |
-| Folder structure, data model, API shape | `context/01-architecture/` |
-| Design system, component reuse, UX rules | `context/02-ui/` |
-| Exact stack, dependency policy | `context/03-technical/` |
-| Build plan, progress, past decisions | `context/04-development/` |
-| Hard constraints | `.agents/rules/` |
-| How to do a recurring task | `.agents/skills/` |
+| Need to know about...                    | Read                       |
+| ---------------------------------------- | -------------------------- |
+| What we're building, MVP scope           | `context/00-project/`      |
+| Folder structure, data model, API shape  | `context/01-architecture/` |
+| Design system, component reuse, UX rules | `context/02-ui/`           |
+| Exact stack, dependency policy           | `context/03-technical/`    |
+| Build plan, progress, past decisions     | `context/04-development/`  |
+| Hard constraints                         | `.agents/rules/`           |
+| How to do a recurring task               | `.agents/skills/`          |
 
 Read `context/00-project/vision.md` and `context/01-architecture/architecture.md`
 before starting any non-trivial task if you haven't already this session.
@@ -56,7 +56,7 @@ All files in `.agents/rules/` are binding. In short:
 ## When to stop and ask for approval
 
 - Any architecture or data-model change.
-- Any new *major* dependency (auth provider swap, new framework/library
+- Any new _major_ dependency (auth provider swap, new framework/library
   class — small utility packages are fine without asking).
 - Anything not covered by existing context/rules where a wrong guess would
   be costly.

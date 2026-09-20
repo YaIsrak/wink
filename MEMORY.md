@@ -5,7 +5,7 @@ tracker** — see `context/04-development/progress-tracker.md` for that.
 
 ## Project decisions
 
-- Working title: **Connect** (placeholder — rename when finalized).
+- Working title: **Wink** (placeholder — rename when finalized).
 - Single Next.js monolith; no separate backend service.
 - Supabase covers DB + Auth + Realtime + Storage — avoid introducing a second
   service for any of these unless a real limitation is hit.
@@ -39,9 +39,9 @@ tracker** — see `context/04-development/progress-tracker.md` for that.
 
 ## Implementation discoveries
 
-*(empty — fill in as real implementation surfaces library quirks, gotchas,
-or Supabase/Prisma-specific behavior worth remembering)*
+_(empty — fill in as real implementation surfaces library quirks, gotchas,
+or Supabase/Prisma-specific behavior worth remembering)_
 
 ## Known issues
 
-*(empty — track ongoing known bugs/limitations here as they appear)*
+_(empty — track ongoing known bugs/limitations here as they appear)_
