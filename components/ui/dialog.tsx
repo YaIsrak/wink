@@ -35,14 +35,14 @@ export function Dialog({ open, onOpenChange, children }: DialogProps) {
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop: neutral #000000 at 30% opacity without heavy blur per DESIGN.md */}
       <div
-        className="fixed inset-0 bg-black/30 backdrop-blur-[1px] transition-opacity"
+        className="fixed inset-0 bg-black/40 backdrop-blur-[2px] transition-opacity"
         onClick={() => onOpenChange(false)}
       />
-      <div className="relative z-50 w-full max-w-[520px] rounded-xl border border-zinc-200 bg-white p-6 shadow-xl dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 animate-in fade-in-0 zoom-in-95 duration-150">
+      <div className="relative z-50 w-full max-w-[520px] rounded-xl border border-border bg-card p-6 shadow-xl text-card-foreground animate-in fade-in-0 zoom-in-95 duration-150">
         {children}
         <button
           onClick={() => onOpenChange(false)}
-          className="absolute right-4 top-4 rounded-sm p-1 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+          className="absolute right-4 top-4 rounded-sm p-1 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
         >
           <X className="size-4" />
           <span className="sr-only">Close</span>
@@ -70,10 +70,7 @@ export function DialogTitle({
 }: React.HTMLAttributes<HTMLHeadingElement>) {
   return (
     <h2
-      className={cn(
-        "text-lg font-semibold leading-none tracking-tight",
-        className,
-      )}
+      className={cn("text-lg font-semibold leading-none tracking-tight text-foreground", className)}
       {...props}
     />
   );
@@ -85,7 +82,7 @@ export function DialogDescription({
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn("text-sm text-zinc-500 dark:text-zinc-400 mt-1", className)}
+      className={cn("text-sm text-muted-foreground mt-1", className)}
       {...props}
     />
   );
@@ -98,8 +95,8 @@ export function DialogFooter({
   return (
     <div
       className={cn(
-        "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 pt-4 border-t border-zinc-100 dark:border-zinc-800 mt-4",
-        className,
+        "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2 pt-4 border-t border-border mt-4",
+        className
       )}
       {...props}
     />

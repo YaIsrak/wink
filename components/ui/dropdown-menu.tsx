@@ -96,9 +96,9 @@ export function DropdownMenuContent({
   return (
     <div
       className={cn(
-        "absolute z-50 mt-1 min-w-[180px] rounded-md border border-zinc-200 bg-white p-1 text-zinc-900 shadow-lg dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 animate-in fade-in-0 zoom-in-95 duration-100",
+        "absolute z-50 mt-1 min-w-[180px] rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-lg animate-in fade-in-0 zoom-in-95 duration-100",
         align === "right" ? "right-0" : "left-0",
-        className,
+        className
       )}
     >
       {children}
@@ -129,10 +129,10 @@ export function DropdownMenuItem({
       type="button"
       onClick={handleClick}
       className={cn(
-        "relative flex w-full cursor-pointer select-none items-center rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800",
+        "relative flex w-full cursor-pointer select-none items-center rounded-sm px-2.5 py-1.5 text-sm outline-none transition-colors hover:bg-muted text-foreground",
         destructive &&
-          "text-red-600 hover:bg-red-50 dark:text-red-500 dark:hover:bg-red-950/40",
-        className,
+          "text-destructive hover:bg-destructive/10",
+        className
       )}
     >
       {children}
@@ -143,7 +143,7 @@ export function DropdownMenuItem({
 export function DropdownMenuSeparator({ className }: { className?: string }) {
   return (
     <div
-      className={cn("-mx-1 my-1 h-px bg-zinc-100 dark:bg-zinc-800", className)}
+      className={cn("-mx-1 my-1 h-px bg-border", className)}
     />
   );
 }

@@ -401,7 +401,7 @@ export default function ThemePreviewPage() {
                     type="checkbox"
                     id="theme-cb"
                     defaultChecked
-                    className="size-4 rounded border-zinc-300 text-black focus:ring-black dark:border-zinc-700 dark:bg-zinc-800"
+                    className="size-4 rounded border-border text-primary focus:ring-ring bg-card"
                   />
                   <label
                     htmlFor="theme-cb"
@@ -599,7 +599,7 @@ export default function ThemePreviewPage() {
                 aesthetic on Wink ✨
               </p>
 
-              <div className="h-44 w-full rounded-md bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-muted-foreground text-xs border border-border">
+              <div className="h-44 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground text-xs border border-border">
                 [Photo Attachment Preview]
               </div>
 
@@ -679,15 +679,15 @@ export default function ThemePreviewPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Completion Banner */}
-            <Card className="space-y-3 bg-zinc-50 dark:bg-zinc-900/50">
+            <Card className="space-y-3 bg-muted/40">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">
                   Profile Completion
                 </span>
                 <span className="text-xs font-bold font-mono">75%</span>
               </div>
-              <div className="h-1.5 w-full rounded-full bg-zinc-200 dark:bg-zinc-800 overflow-hidden">
-                <div className="h-full bg-black dark:bg-white rounded-full transition-all duration-500 w-[75%]" />
+              <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                <div className="h-full bg-primary rounded-full transition-all duration-500 w-[75%]" />
               </div>
               <p className="text-xs text-muted-foreground">
                 Add an avatar to reach 100% and unlock your profile verification

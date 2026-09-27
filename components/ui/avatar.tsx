@@ -17,9 +17,9 @@ const sizeClasses = {
 };
 
 const statusClasses = {
-  online: "bg-emerald-500 ring-2 ring-white dark:ring-zinc-950",
-  away: "bg-amber-500 ring-2 ring-white dark:ring-zinc-950",
-  offline: "bg-zinc-400 ring-2 ring-white dark:ring-zinc-950",
+  online: "bg-emerald-500 ring-2 ring-background",
+  away: "bg-amber-500 ring-2 ring-background",
+  offline: "bg-zinc-400 ring-2 ring-background",
 };
 
 const statusSizeClasses = {
@@ -40,9 +40,9 @@ const Avatar = React.forwardRef<HTMLDivElement, AvatarProps>(
       <div
         ref={ref}
         className={cn(
-          "relative inline-flex shrink-0 items-center justify-center rounded-full bg-zinc-100 text-zinc-800 font-semibold overflow-visible border border-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 select-none",
+          "relative inline-flex shrink-0 items-center justify-center rounded-full bg-secondary text-secondary-foreground font-semibold overflow-visible border border-border select-none",
           sizeClasses[size],
-          className,
+          className
         )}
         {...props}
       >

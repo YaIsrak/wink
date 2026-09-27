@@ -47,6 +47,22 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Built `/api/cron/keep-alive` route handler in `app/api/cron/keep-alive/route.ts` performing a lightweight read query (`prisma.user.findFirst`)
 - Configured weekly Sunday midnight schedule in `vercel.json` (`0 0 * * 0`) to prevent Supabase Hobby plan pausing
 - Verified end-to-end database query execution and Next.js production build
+## 2026-09-27 — Phase 1: Authentication & Route Protection
+- Ratified build spec `docs/specs/0002-authentication-setup.md`
+- Installed `zod` and configured schemas in `lib/validation/auth.ts` with strict password rules and live criteria evaluation
+- Implemented `lib/services/auth.service.ts` for Prisma user profile provisioning and username/email availability checks
+- Created server actions in `actions/auth.ts` for `signUpAction`, `loginAction`, and `logoutAction` using `@supabase/ssr`
+- Built reusable `components/auth/password-input.tsx` with live criteria checklist and show/hide visibility toggle
+- Built reusable `components/auth/auth-card.tsx` and `components/auth/sign-out-button.tsx`
+- Created dedicated pages `app/(auth)/login/page.tsx`, `app/(auth)/sign-up/page.tsx`, and `app/(auth)/layout.tsx`
+- Enforced route protection in `lib/supabase/middleware.ts` and `proxy.ts`: unauthenticated guests redirected to `/login`, authenticated users redirected to `/feed`
+- Added placeholder landing views `app/(main)/feed/page.tsx` and `app/(onboarding)/onboarding/page.tsx`
+## 2026-09-27 — Fix: Dark Mode Theming Across All Views
+- Diagnosed root cause: `/feed` and `/onboarding` were hardcoded with `bg-zinc-50 dark:bg-black` and `bg-white/80 dark:bg-zinc-950/80` instead of semantic tokens; `:where()` in custom variant flattened specificity, allowing light classes to override dark backgrounds while text turned white on white
+- Upgraded `app/globals.css`: added `@source` directives for `../app` and `../components`, upgraded `@custom-variant dark (&:is(.dark, .dark *))` to maintain proper variant specificity
+- Added pre-hydration theme initialization script in `app/layout.tsx` `<head>` and corrected `suppressHydrationWarning` prop on `<html>` to eliminate theme flash
+- Refactored `app/(main)/feed/page.tsx`, `app/(onboarding)/onboarding/page.tsx`, `app/(auth)/layout.tsx`, `app/(auth)/login/page.tsx`, `app/(auth)/sign-up/page.tsx`, and all UI primitives (`Button`, `Card`, `Input`, `Textarea`, `Dialog`, `DropdownMenu`, `Avatar`, `Badge`, `Skeleton`) to use semantic design tokens (`bg-background`, `text-foreground`, `bg-card`, `border-border`, `text-muted-foreground`, etc.)
+- Verified full Next.js Turbopack production build with zero errors
 - Status: Done
 
 

@@ -10,17 +10,7 @@ export function ThemeToggle() {
 
   React.useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("wink-theme");
-    const systemDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
-    const initialDark = stored ? stored === "dark" : systemDark;
-    setIsDark(initialDark);
-    if (initialDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    setIsDark(document.documentElement.classList.contains("dark"));
   }, []);
 
   const toggleTheme = () => {
@@ -55,7 +45,7 @@ export function ThemeToggle() {
       {isDark ? (
         <Sun className="size-4 text-amber-400 transition-transform duration-200" />
       ) : (
-        <Moon className="size-4 text-zinc-700 transition-transform duration-200" />
+        <Moon className="size-4 text-foreground transition-transform duration-200" />
       )}
     </Button>
   );
