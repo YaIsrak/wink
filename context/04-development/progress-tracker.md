@@ -93,6 +93,39 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Cleaned up temporary header in `app/(main)/feed/page.tsx` and created placeholder stub routes for `/explore`, `/search`, `/messages`, `/notifications`, `/profile`, and `/settings`
 - Updated UI component registry `context/02-ui/ui-registry.md`
 - Verified end-to-end TypeScript compilation and Next.js Turbopack production build with zero errors
+## 2026-09-28 — Phase 2: Post Model & Creation with Optimistic UI
+- Deliberated and ratified build spec `docs/specs/0005-post-model-and-creation/index.md`
+- Added `Post` model to `prisma/schema.prisma` with UUID identifier, author relation with cascade delete, caption, imageUrl, and descending createdAt index
+- Pushed schema to Supabase Postgres database and generated updated `@prisma/client`
+- Enabled Row Level Security on `posts` table with authenticated read policy and author scoped insert, update, and delete policies
+- Configured public Supabase Storage `posts` bucket (5MB limit, image types whitelist) and user folder isolated storage policies
+- Created Zod validation schema in `lib/validation/post.ts` enforcing caption length (<=1000) and media presence
+- Implemented `lib/services/post.service.ts` for database CRUD queries and cursor pagination
+- Implemented Next.js Server Actions `createPostAction` and `getFeedPostsAction` in `actions/post.ts`
+- Created Zustand store `lib/store/post-store.ts` for client feed management with optimistic prepend, temporary UUID, server reconciliation, and rollback on error
+- Built reusable `components/posts/post-composer.tsx` supporting caption input, photo file selection, instant thumbnail preview, removal, and optimistic posting
+- Built `components/posts/post-card.tsx` rendering author identity, formatted relative timestamps, text caption, full image view, and posting state indicator
+- Integrated `PostComposer` inside global modal `components/layout/create-post-dialog.tsx`
+- Built client container `components/posts/feed-view.tsx` and updated `app/(main)/feed/page.tsx` with top inline composer and live post stream
+- Registered new components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
+
+## 2026-09-28 — Phase 2: Post Actions (Edit/Delete), Photo Lightbox & Profile Routing
+- Added `updatePostAction` and `deletePostAction` in `actions/post.ts` with strict session ownership verification
+- Implemented `updatePost`, `deletePost`, and `getUserPosts` in `lib/services/post.service.ts`
+- Added `updatePost` method to `usePostStore` for instant optimistic caption updates and reversible error rollbacks
+- Upgraded `components/posts/post-card.tsx` with:
+  - Three-dot contextual menu with owner-only Edit and Delete options, plus Copy Link
+  - Interactive edit dialog modal with live character counter (1000 limit) and optimistic state update
+  - Destructive confirmation dialog before executing post deletion
+  - Full-view photo lightbox modal with dark backdrop, close button, and responsive containment
+  - Clickable author avatar, display name, and username navigating to user profile
+- Extended `components/ui/dialog.tsx` to support custom `className` styling for large lightbox displays
+- Created `app/(main)/profile/[username]/page.tsx` rendering user profile headers, bio, stats, and individual post history
+- Updated `app/(main)/profile/page.tsx` to redirect to the canonical `/profile/[username]` route
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
 
 

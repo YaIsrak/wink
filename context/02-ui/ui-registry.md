@@ -25,6 +25,10 @@ component.** Update it whenever a new reusable component is added.
 | `MobileBottomNav` | `components/layout/mobile-bottom-nav.tsx` | Fixed thumb-friendly mobile bottom bar | `h-16`, `flex lg:hidden` |
 | `CreatePostDialog` | `components/layout/create-post-dialog.tsx` | Global post composer dialog connected to store | `max-w-[520px]`, `rounded-xl` |
 | `NavigationShell` | `components/layout/navigation-shell.tsx` | Responsive layout coordinator for desktop & mobile | app wrapper |
+| `PostComposer`    | `components/posts/post-composer.tsx` | Reusable post authoring card with photo upload & preview | inline / dialog (`rounded-xl`) |
+| `PostCard`        | `components/posts/post-card.tsx`     | Social feed post card with author, text, image, and status | default (`rounded-xl`) |
+| `FeedView`        | `components/posts/feed-view.tsx`     | Feed container coordinating inline composer and live post stream | container |
+
 
 ## Process before creating a new component
 

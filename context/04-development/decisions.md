@@ -35,3 +35,10 @@ Record of meaningful project decisions and the reasoning behind them.
 - Decision: Direct browser upload to Supabase Storage avatars bucket using react-easy-crop inside a shadcn dialog modal, with profile updates persisted through Next.js Server Actions. Layout is strictly bounded to a max-w-xl container.
 - Alternatives considered: Server action multipart streaming without cropping (rejected because avatars require consistent square framing and server streaming adds memory pressure), full client side database mutations (rejected to maintain Prisma schema validation).
 
+## 2026-09-28 (Spec 0005: Post model and creation with optimistic UI)
+
+- Context: Phase 2 core feature: authoring posts with text caption, photos, and optimistic feed updates.
+- Decision: Direct client-side upload to public `posts` bucket in Supabase Storage with user-scoped RLS policies. Post records persisted via Next.js Server Action (`createPostAction`) with Zod validation. Feed state managed via Zustand `usePostStore` with optimistic prepend, temporary UUID, posting state, and rollback on error without loss of drafted text.
+- Alternatives considered: Server Action multipart streaming (rejected due to 413 payload limits and increased serverless function execution costs), local React 19 `useOptimistic` (rejected due to multi-surface coordination across global modal and inline feed composer).
+
+
