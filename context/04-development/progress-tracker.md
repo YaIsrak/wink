@@ -65,4 +65,20 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified full Next.js Turbopack production build with zero errors
 - Status: Done
 
+## 2026-09-27 (Phase 1: User Onboarding Flow & Avatar Storage)
+- Deliberated build spec `docs/specs/0003-onboarding-profile-setup.md`
+- Added nullable `onboardedAt DateTime?` column to `User` model in `prisma/schema.prisma` and pushed schema to Supabase Postgres
+- Created public `avatars` bucket in Supabase Storage with file size limit (5MB) and mime type restriction
+- Applied user scoped storage row level security policies on `storage.objects` allowing authenticated users to upload and edit avatars within their own folder
+- Installed `react-easy-crop` and built canvas cropping helper `lib/utils/crop-image.ts`
+- Built interactive avatar cropping dialog `components/onboarding/avatar-crop-dialog.tsx`
+- Built avatar upload component `components/onboarding/avatar-upload.tsx` with direct Supabase Storage uploads
+- Built unified onboarding form `components/onboarding/onboarding-form.tsx` strictly bounded inside `max-w-xl` container
+- Created server actions `completeOnboardingAction` and `skipOnboardingAction` in `actions/onboarding.ts`
+- Implemented user service helper functions in `lib/services/user.service.ts`
+- Updated `app/(onboarding)/onboarding/page.tsx` with full profile editing, skip action, and auto redirect for already completed users
+- Updated `app/(main)/feed/page.tsx` to redirect users with null `onboardedAt` to `/onboarding`, and display avatar and bio for completed users
+- Verified production build with Turbopack and TypeScript compilation with zero errors
+- Status: Done
+
 

@@ -15,6 +15,7 @@ model User {
   displayName String
   avatarUrl   String?
   bio         String?
+  onboardedAt DateTime?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

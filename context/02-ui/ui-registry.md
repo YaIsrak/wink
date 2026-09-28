@@ -15,6 +15,9 @@ component.** Update it whenever a new reusable component is added.
 | `Dialog`       | `components/ui/dialog.tsx`           | Modal overlay dialog (max 520px)                   | default (`rounded-xl`, 30% black backdrop)                                                                         |
 | `DropdownMenu` | `components/ui/dropdown-menu.tsx`    | Contextual floating menu                           | default / align: left, right (`rounded-md`)                                                                        |
 | `ThemeToggle`  | `components/shared/theme-toggle.tsx` | Light/dark mode toggle button                      | default (`rounded-lg`)                                                                                             |
+| `AvatarCropDialog` | `components/onboarding/avatar-crop-dialog.tsx` | Interactive modal for square circular avatar crop | default (`max-w-[520px]`, `rounded-xl`) |
+| `AvatarUpload` | `components/onboarding/avatar-upload.tsx` | Avatar preview with camera button triggering crop & upload | size-24/28 preview with camera button |
+| `OnboardingForm` | `components/onboarding/onboarding-form.tsx` | Unified profile setup card in max-w-xl | `max-w-xl`, `rounded-xl` |
 
 ## Process before creating a new component
 
