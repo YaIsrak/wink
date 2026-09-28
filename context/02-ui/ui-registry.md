@@ -18,6 +18,13 @@ component.** Update it whenever a new reusable component is added.
 | `AvatarCropDialog` | `components/onboarding/avatar-crop-dialog.tsx` | Interactive modal for square circular avatar crop | default (`max-w-[520px]`, `rounded-xl`) |
 | `AvatarUpload` | `components/onboarding/avatar-upload.tsx` | Avatar preview with camera button triggering crop & upload | size-24/28 preview with camera button |
 | `OnboardingForm` | `components/onboarding/onboarding-form.tsx` | Unified profile setup card in max-w-xl | `max-w-xl`, `rounded-xl` |
+| `NavItem`        | `components/layout/nav-item.tsx`     | Navigation link with active state, hover, and badge | default (`rounded-xl`) |
+| `UserNavCard`    | `components/layout/user-nav-card.tsx` | Desktop user identity card with dropdown and logout | default (`rounded-xl`) |
+| `DesktopSidebar` | `components/layout/desktop-sidebar.tsx` | Fixed 260px desktop navigation rail | `w-[260px]`, `hidden lg:flex` |
+| `MobileHeader`   | `components/layout/mobile-header.tsx` | Sticky mobile top header with logo and alerts | `h-14`, `flex lg:hidden` |
+| `MobileBottomNav` | `components/layout/mobile-bottom-nav.tsx` | Fixed thumb-friendly mobile bottom bar | `h-16`, `flex lg:hidden` |
+| `CreatePostDialog` | `components/layout/create-post-dialog.tsx` | Global post composer dialog connected to store | `max-w-[520px]`, `rounded-xl` |
+| `NavigationShell` | `components/layout/navigation-shell.tsx` | Responsive layout coordinator for desktop & mobile | app wrapper |
 
 ## Process before creating a new component
 

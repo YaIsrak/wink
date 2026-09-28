@@ -80,10 +80,12 @@ export function DropdownMenuTrigger({
 
 export function DropdownMenuContent({
   align = "left",
+  side = "bottom",
   children,
   className,
 }: {
   align?: "left" | "right";
+  side?: "top" | "bottom";
   children: React.ReactNode;
   className?: string;
 }) {
@@ -96,7 +98,8 @@ export function DropdownMenuContent({
   return (
     <div
       className={cn(
-        "absolute z-50 mt-1 min-w-[180px] rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-lg animate-in fade-in-0 zoom-in-95 duration-100",
+        "absolute z-50 min-w-[180px] rounded-md border border-border bg-popover p-1 text-popover-foreground shadow-lg animate-in fade-in-0 zoom-in-95 duration-100",
+        side === "top" ? "bottom-full mb-2" : "top-full mt-1",
         align === "right" ? "right-0" : "left-0",
         className
       )}

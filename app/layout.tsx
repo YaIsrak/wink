@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Wink — Social Platform",
+  title: "Wink",
   description: "Connect, share moments, and chat with mutual follows.",
 };
 

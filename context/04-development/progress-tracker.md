@@ -81,4 +81,18 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified production build with Turbopack and TypeScript compilation with zero errors
 - Status: Done
 
+## 2026-09-28 — Phase 1: Responsive Navigation Shell (Desktop Sidebar & Mobile Bars)
+- Deliberated and ratified build spec `docs/specs/0004-responsive-navigation-shell/index.md`
+- Built reusable navigation item `components/layout/nav-item.tsx` supporting active route states, subtle container fills, and unread notification badge counters
+- Built desktop user card `components/layout/user-nav-card.tsx` with user avatar, presence dot, display name, handle, and three dot trigger opening an upward DropdownMenu with settings, theme toggle, and functional logout
+- Built fixed 260px desktop left sidebar `components/layout/desktop-sidebar.tsx` with Wink brand logo, primary navigation links (Home, Explore, Search, Messages, Notifications, Profile, Settings), "+ Create Post" action button, and user footer card
+- Built mobile sticky top bar `components/layout/mobile-header.tsx` with Wink logo and direct shortcuts to Notifications and Messages with live badge counters
+- Built mobile fixed bottom navigation bar `components/layout/mobile-bottom-nav.tsx` with 5 thumb-friendly slots (Home, Explore, elevated center Create Post button, Inbox, Profile) and safe area insets
+- Built global post composer dialog `components/layout/create-post-dialog.tsx` wired into Zustand `useUiStore` modal management
+- Assembled responsive navigation wrapper in `components/layout/navigation-shell.tsx` and connected it in server layout `app/(main)/layout.tsx` enforcing authentication and onboarding status gates
+- Cleaned up temporary header in `app/(main)/feed/page.tsx` and created placeholder stub routes for `/explore`, `/search`, `/messages`, `/notifications`, `/profile`, and `/settings`
+- Updated UI component registry `context/02-ui/ui-registry.md`
+- Verified end-to-end TypeScript compilation and Next.js Turbopack production build with zero errors
+- Status: Done
+
 
