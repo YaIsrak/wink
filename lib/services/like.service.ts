@@ -1,14 +1,15 @@
 import { prisma } from '@/lib/db'
 import type { LikeUser } from '@/types/post'
+import { createNotification, deleteNotification } from '@/lib/services/notification.service'
 
 export async function toggleLike(
   postId: string,
   userId: string
 ): Promise<{ liked: boolean; likesCount: number }> {
-  // Confirm post exists
+  // Confirm post exists and obtain authorId
   const post = await prisma.post.findUnique({
     where: { id: postId },
-    select: { id: true },
+    select: { id: true, authorId: true },
   })
 
   if (!post) {
@@ -36,6 +37,14 @@ export async function toggleLike(
       },
     })
     liked = false
+
+    // Remove notification if it exists
+    await deleteNotification({
+      recipientId: post.authorId,
+      actorId: userId,
+      type: 'LIKE',
+      postId,
+    })
   } else {
     await prisma.like.create({
       data: {
@@ -44,6 +53,14 @@ export async function toggleLike(
       },
     })
     liked = true
+
+    // Create like notification for post author
+    await createNotification({
+      recipientId: post.authorId,
+      actorId: userId,
+      type: 'LIKE',
+      postId,
+    })
   }
 
   const likesCount = await prisma.like.count({

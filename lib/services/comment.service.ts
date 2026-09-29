@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db'
 import type { CommentWithAuthor } from '@/types/post'
+import { createNotification } from '@/lib/services/notification.service'
 
 const AUTHOR_SELECT = {
   id: true,
@@ -25,7 +26,7 @@ export async function createComment(
 
   const post = await prisma.post.findUnique({
     where: { id: postId },
-    select: { id: true },
+    select: { id: true, authorId: true },
   })
 
   if (!post) {
@@ -43,6 +44,15 @@ export async function createComment(
         select: AUTHOR_SELECT,
       },
     },
+  })
+
+  // Create notification for post author
+  await createNotification({
+    recipientId: post.authorId,
+    actorId: authorId,
+    type: 'COMMENT',
+    postId,
+    commentId: comment.id,
   })
 
   return comment

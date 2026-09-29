@@ -82,6 +82,7 @@ export async function createCommentAction(
     }
 
     revalidatePath('/feed')
+    revalidatePath('/notifications')
 
     return {
       success: true,

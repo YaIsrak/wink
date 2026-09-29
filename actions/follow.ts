@@ -50,6 +50,7 @@ export async function toggleFollowAction(
     const result = await toggleFollow(user.id, targetUserId)
     revalidatePath('/profile/[username]', 'page')
     revalidatePath('/feed', 'page')
+    revalidatePath('/notifications')
 
     return {
       success: true,

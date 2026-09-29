@@ -228,5 +228,26 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
 
+## 2026-09-29 — Phase 3: Notifications System
+- Deliberated and ratified architecture build spec `docs/specs/0010-notifications-system/index.md`
+- Added `NotificationType` enum (`LIKE`, `COMMENT`, `FOLLOW`) and `Notification` model to `prisma/schema.prisma` with foreign key relations, cascade delete, and indexing
+- Synchronized schema to Supabase Postgres database and regenerated `@prisma/client`
+- Enabled Supabase Row Level Security on `notifications` table with recipient scoped SELECT, UPDATE, and DELETE policies, and added table to `supabase_realtime` publication
+- Created TypeScript interfaces in `types/notification.ts` and Zod validation schemas in `lib/validation/notification.ts`
+- Implemented `lib/services/notification.service.ts` for creating, deleting, querying with cursor pagination, and marking notifications as read
+- Integrated notification creation and cleanup hooks into `lib/services/like.service.ts`, `lib/services/comment.service.ts`, and `lib/services/follow.service.ts`
+- Implemented Server Actions in `actions/notification.ts` (`getNotificationsAction`, `getUnreadNotificationCountAction`, `markNotificationAsReadAction`, `markAllNotificationsAsReadAction`) enforcing session authentication
+- Extended Zustand store `lib/store/notification-store.ts` with notification list cache, optimistic read actions, and batch sync methods
+- Created client hook `lib/hooks/use-notification-subscription.ts` for Supabase postgres changes subscription, navigation badge updates, and Sonner toast popups
+- Built `components/notifications/notification-tabs.tsx` coordinating All and Unread views with badge counter
+- Built `components/notifications/notification-item.tsx` rendering actor identity, action badge, relative timestamp, comment/post preview, and unread indicator
+- Built `components/notifications/notification-empty-state.tsx` displaying friendly caught up and empty activity states
+- Built `components/notifications/notification-list.tsx` coordinating list state, optimistic mark all as read, and infinite scroll sentinel
+- Upgraded `app/(main)/notifications/page.tsx` with server prefetching for zero layout shift
+- Mounted `useNotificationSubscription` in `components/layout/navigation-shell.tsx` connecting live badges across desktop and mobile
+- Registered notification components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
 
 

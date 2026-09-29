@@ -5,6 +5,7 @@ import { DesktopSidebar } from '@/components/layout/desktop-sidebar'
 import { MobileHeader } from '@/components/layout/mobile-header'
 import { MobileBottomNav } from '@/components/layout/mobile-bottom-nav'
 import { CreatePostDialog } from '@/components/layout/create-post-dialog'
+import { useNotificationSubscription } from '@/lib/hooks/use-notification-subscription'
 
 export interface NavigationShellProps {
   user: {
@@ -17,6 +18,8 @@ export interface NavigationShellProps {
 }
 
 export function NavigationShell({ user, children }: NavigationShellProps) {
+  // Listen to realtime notifications and maintain unread counter
+  useNotificationSubscription(user.id)
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-foreground selection:text-background">
       {/* Desktop Left Rail Sidebar */}

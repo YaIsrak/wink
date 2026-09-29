@@ -46,6 +46,11 @@ component.** Update it whenever a new reusable component is added.
 | `UserSearchResultCard` | `components/search/user-search-result.tsx` | User card with identity, bio, follower count, and optimistic FollowButton | default (`rounded-xl`) |
 | `SearchEmptyState` | `components/search/search-empty-state.tsx` | Zero results card with search tips and suggested creators | container (`rounded-xl`) |
 | `SearchView`      | `components/search/search-view.tsx`  | Unified search coordinator with debounced queries, URL sync, and pagination | container view |
+| `NotificationTabs` | `components/notifications/notification-tabs.tsx` | Filter switcher for All and Unread notifications with badge count | tabbed bar |
+| `NotificationItem` | `components/notifications/notification-item.tsx` | Activity row with actor identity, action badge, timestamp, post preview, and unread dot | default (`rounded-xl`) |
+| `NotificationEmptyState` | `components/notifications/notification-empty-state.tsx` | Empty state card for caught up or empty activity stream | container (`rounded-xl`) |
+| `NotificationList` | `components/notifications/notification-list.tsx` | Main notifications stream coordinator with infinite scroll and mark all as read | container stream |
+
 
 ## Process before creating a new component
 

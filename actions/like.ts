@@ -38,6 +38,7 @@ export async function toggleLikeAction(
 
     const result = await toggleLike(postId, user.id)
     revalidatePath('/feed')
+    revalidatePath('/notifications')
 
     return {
       success: true,

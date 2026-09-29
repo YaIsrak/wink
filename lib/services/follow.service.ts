@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/db'
 import type { FollowUserItem } from '@/types/profile'
+import { createNotification, deleteNotification } from '@/lib/services/notification.service'
 
 export async function toggleFollow(
   followerId: string,
@@ -40,6 +41,13 @@ export async function toggleFollow(
       },
     })
     isFollowing = false
+
+    // Remove follow notification
+    await deleteNotification({
+      recipientId: followingId,
+      actorId: followerId,
+      type: 'FOLLOW',
+    })
   } else {
     await prisma.follow.create({
       data: {
@@ -48,6 +56,13 @@ export async function toggleFollow(
       },
     })
     isFollowing = true
+
+    // Create follow notification
+    await createNotification({
+      recipientId: followingId,
+      actorId: followerId,
+      type: 'FOLLOW',
+    })
   }
 
   const followersCount = await prisma.follow.count({

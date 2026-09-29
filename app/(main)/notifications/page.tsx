@@ -1,23 +1,44 @@
 import * as React from 'react'
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Bell } from 'lucide-react'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import {
+  getNotifications,
+  getUnreadNotificationCount,
+} from '@/lib/services/notification.service'
+import { NotificationList } from '@/components/notifications/notification-list'
 
-export default function NotificationsPage() {
+export const metadata = {
+  title: 'Notifications | Wink',
+  description: 'View your activity stream, likes, comments, and new followers on Wink',
+}
+
+export default async function NotificationsPage() {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/login')
+  }
+
+  // Pre-fetch initial notification batch and unread count on the server
+  const [notificationsResult, unreadCount] = await Promise.all([
+    getNotifications({
+      recipientId: user.id,
+      filter: 'all',
+      limit: 15,
+    }),
+    getUnreadNotificationCount(user.id),
+  ])
+
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 lg:py-10">
-      <Card className="p-6">
-        <CardHeader className="p-0 flex flex-row items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
-            <Bell className="size-5" />
-          </div>
-          <div>
-            <CardTitle className="text-xl font-bold">Notifications</CardTitle>
-            <CardDescription>
-              Activity stream for likes, comments, and follows coming in Phase 3.
-            </CardDescription>
-          </div>
-        </CardHeader>
-      </Card>
+    <div className="mx-auto max-w-2xl px-4 py-6 lg:py-8">
+      <NotificationList
+        initialNotifications={notificationsResult.notifications}
+        initialNextCursor={notificationsResult.nextCursor}
+        initialUnreadCount={unreadCount}
+      />
     </div>
   )
 }
