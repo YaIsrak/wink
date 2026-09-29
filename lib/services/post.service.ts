@@ -12,6 +12,7 @@ export interface CreatePostParams {
 export interface GetFeedPostsParams {
   cursor?: string
   limit?: number
+  currentUserId?: string
 }
 
 const AUTHOR_SELECT = {
@@ -44,7 +45,13 @@ export async function createPost(params: CreatePostParams): Promise<PostWithAuth
     },
   })
 
-  return post
+  return {
+    ...post,
+    likesCount: 0,
+    commentsCount: 0,
+    isLikedByMe: false,
+    previewComments: [],
+  }
 }
 
 export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
@@ -52,7 +59,7 @@ export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
   nextCursor?: string
 }> {
   const limit = Math.min(Math.max(params.limit ?? 20, 1), 50)
-  const { cursor } = params
+  const { cursor, currentUserId } = params
 
   const posts = await prisma.post.findMany({
     take: limit + 1,
@@ -65,6 +72,33 @@ export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
       author: {
         select: AUTHOR_SELECT,
       },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
+        },
+      },
+      likes: currentUserId
+        ? {
+            where: {
+              userId: currentUserId,
+            },
+            select: {
+              userId: true,
+            },
+          }
+        : false,
+      comments: {
+        take: 2,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          author: {
+            select: AUTHOR_SELECT,
+          },
+        },
+      },
     },
   })
 
@@ -74,21 +108,81 @@ export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
     nextCursor = nextItem?.id
   }
 
+  const formattedPosts: PostWithAuthor[] = posts.map((post) => ({
+    id: post.id,
+    authorId: post.authorId,
+    caption: post.caption,
+    imageUrl: post.imageUrl,
+    createdAt: post.createdAt,
+    updatedAt: post.updatedAt,
+    author: post.author,
+    likesCount: post._count.likes,
+    commentsCount: post._count.comments,
+    isLikedByMe: Array.isArray(post.likes) && post.likes.length > 0,
+    previewComments: (post.comments || []).slice().reverse(),
+  }))
+
   return {
-    posts,
+    posts: formattedPosts,
     nextCursor,
   }
 }
 
-export async function getPostById(postId: string): Promise<PostWithAuthor | null> {
-  return await prisma.post.findUnique({
+export async function getPostById(
+  postId: string,
+  currentUserId?: string
+): Promise<PostWithAuthor | null> {
+  const post = await prisma.post.findUnique({
     where: { id: postId },
     include: {
       author: {
         select: AUTHOR_SELECT,
       },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
+        },
+      },
+      likes: currentUserId
+        ? {
+            where: {
+              userId: currentUserId,
+            },
+            select: {
+              userId: true,
+            },
+          }
+        : false,
+      comments: {
+        take: 2,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          author: {
+            select: AUTHOR_SELECT,
+          },
+        },
+      },
     },
   })
+
+  if (!post) return null
+
+  return {
+    id: post.id,
+    authorId: post.authorId,
+    caption: post.caption,
+    imageUrl: post.imageUrl,
+    createdAt: post.createdAt,
+    updatedAt: post.updatedAt,
+    author: post.author,
+    likesCount: post._count.likes,
+    commentsCount: post._count.comments,
+    isLikedByMe: Array.isArray(post.likes) && post.likes.length > 0,
+    previewComments: (post.comments || []).slice().reverse(),
+  }
 }
 
 export async function deletePost(postId: string, userId: string): Promise<boolean> {
@@ -127,7 +221,7 @@ export async function updatePost(
     throw new Error('Post must have either a caption or an image.')
   }
 
-  return await prisma.post.update({
+  const updated = await prisma.post.update({
     where: { id: postId },
     data: {
       caption: trimmedCaption,
@@ -136,19 +230,101 @@ export async function updatePost(
       author: {
         select: AUTHOR_SELECT,
       },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
+        },
+      },
+      likes: {
+        where: {
+          userId,
+        },
+        select: {
+          userId: true,
+        },
+      },
+      comments: {
+        take: 2,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          author: {
+            select: AUTHOR_SELECT,
+          },
+        },
+      },
     },
   })
+
+  return {
+    id: updated.id,
+    authorId: updated.authorId,
+    caption: updated.caption,
+    imageUrl: updated.imageUrl,
+    createdAt: updated.createdAt,
+    updatedAt: updated.updatedAt,
+    author: updated.author,
+    likesCount: updated._count.likes,
+    commentsCount: updated._count.comments,
+    isLikedByMe: Array.isArray(updated.likes) && updated.likes.length > 0,
+    previewComments: (updated.comments || []).slice().reverse(),
+  }
 }
 
-export async function getUserPosts(authorId: string): Promise<PostWithAuthor[]> {
-  return await prisma.post.findMany({
+export async function getUserPosts(
+  authorId: string,
+  currentUserId?: string
+): Promise<PostWithAuthor[]> {
+  const posts = await prisma.post.findMany({
     where: { authorId },
     orderBy: { createdAt: 'desc' },
     include: {
       author: {
         select: AUTHOR_SELECT,
       },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
+        },
+      },
+      likes: currentUserId
+        ? {
+            where: {
+              userId: currentUserId,
+            },
+            select: {
+              userId: true,
+            },
+          }
+        : false,
+      comments: {
+        take: 2,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          author: {
+            select: AUTHOR_SELECT,
+          },
+        },
+      },
     },
   })
-}
 
+  return posts.map((post) => ({
+    id: post.id,
+    authorId: post.authorId,
+    caption: post.caption,
+    imageUrl: post.imageUrl,
+    createdAt: post.createdAt,
+    updatedAt: post.updatedAt,
+    author: post.author,
+    likesCount: post._count.likes,
+    commentsCount: post._count.comments,
+    isLikedByMe: Array.isArray(post.likes) && post.likes.length > 0,
+    previewComments: (post.comments || []).slice().reverse(),
+  }))
+}

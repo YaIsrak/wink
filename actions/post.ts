@@ -86,7 +86,10 @@ export async function getFeedPostsAction(params: {
       return { error: 'Unauthorized. Please sign in.' }
     }
 
-    const result = await getFeedPosts(params)
+    const result = await getFeedPosts({
+      ...params,
+      currentUserId: user.id,
+    })
 
     return {
       success: true,

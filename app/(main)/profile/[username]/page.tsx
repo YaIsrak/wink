@@ -47,7 +47,7 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
     notFound()
   }
 
-  const posts = await getUserPosts(targetProfile.id)
+  const posts = await getUserPosts(targetProfile.id, sessionUser.id)
   const isOwner = sessionUser.id === targetProfile.id
 
   const joinDate = new Date(targetProfile.createdAt).toLocaleDateString(undefined, {
@@ -144,6 +144,7 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
               key={post.id}
               post={post}
               currentUserId={sessionUser.id}
+              currentUserProfile={viewerProfile}
             />
           ))
         ) : (

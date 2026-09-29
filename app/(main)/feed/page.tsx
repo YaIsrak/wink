@@ -21,7 +21,10 @@ export default async function FeedPage() {
     redirect('/onboarding')
   }
 
-  const { posts, nextCursor } = await getFeedPosts({ limit: 20 })
+  const { posts, nextCursor } = await getFeedPosts({
+    limit: 20,
+    currentUserId: user.id,
+  })
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 lg:py-8">

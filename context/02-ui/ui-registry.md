@@ -26,8 +26,11 @@ component.** Update it whenever a new reusable component is added.
 | `CreatePostDialog` | `components/layout/create-post-dialog.tsx` | Global post composer dialog connected to store | `max-w-[520px]`, `rounded-xl` |
 | `NavigationShell` | `components/layout/navigation-shell.tsx` | Responsive layout coordinator for desktop & mobile | app wrapper |
 | `PostComposer`    | `components/posts/post-composer.tsx` | Reusable post authoring card with photo upload & preview | inline / dialog (`rounded-xl`) |
-| `PostCard`        | `components/posts/post-card.tsx`     | Social feed post card with author, text, image, and status | default (`rounded-xl`) |
+| `PostCard`        | `components/posts/post-card.tsx`     | Social feed post card with author, text, image, likes, comments, and lightbox | default (`rounded-xl`) |
 | `FeedView`        | `components/posts/feed-view.tsx`     | Feed container coordinating inline composer and live post stream | container |
+| `LikersDialog`    | `components/posts/likers-dialog.tsx` | Dialog modal displaying users who liked a post | modal dialog (`max-w-[520px]`, `rounded-xl`) |
+| `CommentItem`     | `components/posts/comment-item.tsx`  | Individual comment row with author identity, timestamp, and delete action | default (`text-sm`) |
+| `CommentsSection` | `components/posts/comments-section.tsx` | Expandable post comments drawer with composer and list | drawer container |
 
 
 ## Process before creating a new component

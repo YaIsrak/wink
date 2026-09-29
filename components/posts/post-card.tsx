@@ -33,42 +33,47 @@ import {
 } from '@/components/ui/dialog'
 import { usePostStore } from '@/lib/store'
 import { deletePostAction, updatePostAction } from '@/actions/post'
+import { toggleLikeAction } from '@/actions/like'
+import { LikersDialog } from '@/components/posts/likers-dialog'
+import { CommentsSection } from '@/components/posts/comments-section'
+import { formatRelativeTime } from '@/lib/utils'
 import type { FeedPost } from '@/types/post'
 
 export interface PostCardProps {
   post: FeedPost
   currentUserId?: string
+  currentUserProfile?: {
+    username: string
+    displayName: string
+    avatarUrl?: string | null
+  }
 }
 
-function formatRelativeTime(dateInput: Date | string): string {
-  const date = typeof dateInput === 'string' ? new Date(dateInput) : dateInput
-  const now = new Date()
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000)
+export function PostCard({
+  post,
+  currentUserId,
+  currentUserProfile,
+}: PostCardProps) {
+  const posts = usePostStore((state) => state.posts)
+  const storePost = posts.find((p) => p.id === post.id)
+  const activePost = storePost || post
 
-  if (diffInSeconds < 30) return 'Just now'
-  if (diffInSeconds < 60) return `${diffInSeconds}s ago`
-
-  const diffInMinutes = Math.floor(diffInSeconds / 60)
-  if (diffInMinutes < 60) return `${diffInMinutes}m ago`
-
-  const diffInHours = Math.floor(diffInMinutes / 60)
-  if (diffInHours < 24) return `${diffInHours}h ago`
-
-  const diffInDays = Math.floor(diffInHours / 24)
-  if (diffInDays < 7) return `${diffInDays}d ago`
-
-  return date.toLocaleDateString(undefined, {
-    month: 'short',
-    day: 'numeric',
-  })
-}
-
-export function PostCard({ post, currentUserId }: PostCardProps) {
-  const { id, author, caption, imageUrl, createdAt, isOptimistic } = post
+  const {
+    id,
+    author,
+    caption,
+    imageUrl,
+    createdAt,
+    isOptimistic,
+    likesCount = 0,
+    commentsCount = 0,
+    isLikedByMe = false,
+  } = activePost
 
   const [isImageModalOpen, setIsImageModalOpen] = React.useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = React.useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false)
+  const [isLikersModalOpen, setIsLikersModalOpen] = React.useState(false)
 
   const [editCaption, setEditCaption] = React.useState(caption || '')
   const [isSavingEdit, setIsSavingEdit] = React.useState(false)
@@ -78,6 +83,15 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
   const removePostFromStore = usePostStore((state) => state.removePost)
   const addOptimisticPost = usePostStore((state) => state.addOptimisticPost)
 
+  // Like & Comment store handlers
+  const optimisticToggleLike = usePostStore((state) => state.optimisticToggleLike)
+  const rollbackLike = usePostStore((state) => state.rollbackLike)
+  const confirmLike = usePostStore((state) => state.confirmLike)
+  const setLiking = usePostStore((state) => state.setLiking)
+  const likingPostIds = usePostStore((state) => state.likingPostIds)
+  const toggleCommentsExpanded = usePostStore((state) => state.toggleCommentsExpanded)
+
+  const isLikingThisPost = likingPostIds.has(id)
   const isOwner = Boolean(currentUserId && currentUserId === author.id)
 
   const handleCopyLink = () => {
@@ -85,6 +99,37 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
       const url = `${window.location.origin}/feed#${id}`
       navigator.clipboard.writeText(url)
       toast.success('Link copied to clipboard')
+    }
+  }
+
+  const handleToggleLike = async () => {
+    if (!currentUserId) {
+      toast.error('You must be signed in to like posts')
+      return
+    }
+
+    if (isLikingThisPost || isOptimistic) return
+
+    setLiking(id, true)
+    const backup = optimisticToggleLike(id)
+    if (!backup) {
+      setLiking(id, false)
+      return
+    }
+
+    try {
+      const res = await toggleLikeAction(id)
+      if (res.error || res.liked === undefined || res.likesCount === undefined) {
+        rollbackLike(id, backup.previousLiked, backup.previousCount)
+        toast.error(res.error || 'Failed to like post')
+      } else {
+        confirmLike(id, res.liked, res.likesCount)
+      }
+    } catch {
+      rollbackLike(id, backup.previousLiked, backup.previousCount)
+      toast.error('Network error. Failed to like post')
+    } finally {
+      setLiking(id, false)
     }
   }
 
@@ -272,21 +317,47 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
         {/* Action Footer (Likes, Comments, Share) */}
         <div className="flex items-center justify-between pt-2 border-t border-border/60 text-muted-foreground text-xs">
           <div className="flex items-center gap-4">
+            {/* Like Button & Likers Modal Trigger */}
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={handleToggleLike}
+                disabled={isLikingThisPost || isOptimistic}
+                className="hover:text-foreground transition-all cursor-pointer group active:scale-125"
+                title={isLikedByMe ? 'Unlike post' : 'Like post'}
+              >
+                <Heart
+                  className={`size-4 transition-all duration-200 ${
+                    isLikedByMe
+                      ? 'text-red-500 fill-red-500 scale-110 animate-in zoom-in-75'
+                      : 'group-hover:scale-110'
+                  }`}
+                />
+              </button>
+              {likesCount > 0 ? (
+                <button
+                  type="button"
+                  onClick={() => setIsLikersModalOpen(true)}
+                  className="hover:text-foreground hover:underline cursor-pointer"
+                  title="View likes"
+                >
+                  <span>{likesCount}</span>
+                </button>
+              ) : (
+                <span>0</span>
+              )}
+            </div>
+
+            {/* Comment Count / Drawer Trigger */}
             <button
               type="button"
-              className="flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
-              title="Like post"
-            >
-              <Heart className="size-4" />
-              <span>0</span>
-            </button>
-            <button
-              type="button"
+              onClick={() => toggleCommentsExpanded(id)}
+              disabled={isOptimistic}
               className="flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
               title="Comments"
             >
               <MessageCircle className="size-4" />
-              <span>0</span>
+              <span>{commentsCount}</span>
             </button>
           </div>
 
@@ -299,6 +370,47 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
             <Share2 className="size-4" />
           </button>
         </div>
+
+        {/* Inline Preview Comments when collapsed */}
+        {!activePost.isCommentsExpanded && commentsCount > 0 && (
+          <div className="mt-3 pt-2.5 border-t border-border/40 space-y-1">
+            {commentsCount > 2 && (
+              <button
+                type="button"
+                onClick={() => toggleCommentsExpanded(id)}
+                className="text-xs text-muted-foreground hover:text-foreground hover:underline transition-colors block mb-1"
+              >
+                View all {commentsCount} comments
+              </button>
+            )}
+
+            {(activePost.comments && activePost.comments.length > 0
+              ? activePost.comments.slice(-2)
+              : (activePost.previewComments || []).slice(0, 2)
+            ).map((c) => (
+              <div key={c.id} className="text-xs flex items-baseline gap-1.5">
+                <Link
+                  href={`/profile/${c.author.username}`}
+                  className="font-semibold text-foreground hover:underline shrink-0"
+                >
+                  {c.author.displayName}
+                </Link>
+                <span className="text-muted-foreground break-words truncate">
+                  {c.content}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Expandable Comments Drawer */}
+        {activePost.isCommentsExpanded && (
+          <CommentsSection
+            post={activePost}
+            currentUserId={currentUserId}
+            currentUserProfile={currentUserProfile}
+          />
+        )}
       </article>
 
       {/* 1. Full Image Lightbox Modal */}
@@ -320,101 +432,104 @@ export function PostCard({ post, currentUserId }: PostCardProps) {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={imageUrl}
-              alt={caption || 'Full view'}
-              className="max-h-[85vh] w-auto max-w-full rounded-lg object-contain"
+              alt={caption || 'Post image'}
+              className="w-full max-h-[85vh] object-contain rounded-md"
             />
           </div>
         </Dialog>
       )}
 
-      {/* 2. Edit Post Modal (Owner Only) */}
-      {isOwner && (
-        <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-          <DialogHeader>
-            <DialogTitle>Edit Post</DialogTitle>
-            <DialogDescription>
-              Update your caption below.
-            </DialogDescription>
-          </DialogHeader>
+      {/* 2. Edit Caption Modal */}
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogHeader>
+          <DialogTitle>Edit post</DialogTitle>
+          <DialogDescription>
+            Update your caption. Photos cannot be changed after posting.
+          </DialogDescription>
+        </DialogHeader>
 
-          <div className="flex flex-col gap-4 py-2">
-            <Textarea
-              value={editCaption}
-              onChange={(e) => setEditCaption(e.target.value)}
-              placeholder="Write a caption..."
-              className="min-h-[120px] resize-none"
-              autoFocus
-            />
-
-            <div className="flex items-center justify-between text-xs text-muted-foreground">
-              <span>{editCaption.length}/1000 characters</span>
-            </div>
-
-            <div className="flex items-center justify-end gap-2 pt-2 border-t border-border">
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setIsEditModalOpen(false)}
-                disabled={isSavingEdit}
-              >
-                Cancel
-              </Button>
-              <Button
-                size="sm"
-                onClick={handleSaveEdit}
-                disabled={isSavingEdit || editCaption.length > 1000}
-              >
-                {isSavingEdit ? (
-                  <>
-                    <Loader2 className="mr-1.5 size-3.5 animate-spin" />
-                    <span>Saving...</span>
-                  </>
-                ) : (
-                  <span>Save Changes</span>
-                )}
-              </Button>
-            </div>
+        <div className="space-y-4 py-2">
+          <Textarea
+            value={editCaption}
+            onChange={(e) => setEditCaption(e.target.value)}
+            placeholder="What's on your mind?"
+            rows={4}
+            maxLength={1000}
+            className="resize-none"
+          />
+          <div className="flex justify-between items-center text-xs text-muted-foreground">
+            <span>{editCaption.length} / 1,000 characters</span>
           </div>
-        </Dialog>
-      )}
 
-      {/* 3. Delete Confirmation Modal (Owner Only) */}
-      {isOwner && (
-        <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
-          <DialogHeader>
-            <DialogTitle>Delete Post</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete this post? This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="flex items-center justify-end gap-2 pt-4">
+          <div className="flex justify-end gap-2 pt-2 border-t border-border">
             <Button
               variant="outline"
               size="sm"
-              onClick={() => setIsDeleteModalOpen(false)}
-              disabled={isDeleting}
+              onClick={() => setIsEditModalOpen(false)}
+              disabled={isSavingEdit}
             >
               Cancel
             </Button>
             <Button
-              variant="destructive"
               size="sm"
-              onClick={handleDeletePost}
-              disabled={isDeleting}
+              onClick={handleSaveEdit}
+              disabled={isSavingEdit || (!editCaption.trim() && !imageUrl)}
             >
-              {isDeleting ? (
+              {isSavingEdit ? (
                 <>
-                  <Loader2 className="mr-1.5 size-3.5 animate-spin" />
-                  <span>Deleting...</span>
+                  <Loader2 className="mr-2 size-3.5 animate-spin" />
+                  Saving...
                 </>
               ) : (
-                <span>Delete</span>
+                'Save changes'
               )}
             </Button>
           </div>
-        </Dialog>
-      )}
+        </div>
+      </Dialog>
+
+      {/* 3. Delete Confirmation Modal */}
+      <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
+        <DialogHeader>
+          <DialogTitle>Delete post?</DialogTitle>
+          <DialogDescription>
+            This action cannot be undone. This post will be permanently removed from your profile and feed.
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="flex justify-end gap-2 pt-4 border-t border-border">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => setIsDeleteModalOpen(false)}
+            disabled={isDeleting}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="destructive"
+            size="sm"
+            onClick={handleDeletePost}
+            disabled={isDeleting}
+          >
+            {isDeleting ? (
+              <>
+                <Loader2 className="mr-2 size-3.5 animate-spin" />
+                Deleting...
+              </>
+            ) : (
+              'Delete'
+            )}
+          </Button>
+        </div>
+      </Dialog>
+
+      {/* 4. Likers Modal Dialog */}
+      <LikersDialog
+        postId={id}
+        open={isLikersModalOpen}
+        onOpenChange={setIsLikersModalOpen}
+      />
     </>
   )
 }

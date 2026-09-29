@@ -28,10 +28,8 @@ export function FeedView({
   const setInitialPosts = usePostStore((state) => state.setInitialPosts)
 
   React.useEffect(() => {
-    if (!hasLoadedInitial) {
-      setInitialPosts(initialPosts, initialCursor)
-    }
-  }, [hasLoadedInitial, initialPosts, initialCursor, setInitialPosts])
+    setInitialPosts(initialPosts, initialCursor)
+  }, [initialPosts, initialCursor, setInitialPosts])
 
   const displayPosts = hasLoadedInitial ? posts : initialPosts
 
@@ -44,7 +42,12 @@ export function FeedView({
       <div className="flex flex-col gap-4">
         {displayPosts.length > 0 ? (
           displayPosts.map((post) => (
-            <PostCard key={post.id} post={post} currentUserId={user.id} />
+            <PostCard
+              key={post.id}
+              post={post}
+              currentUserId={user.id}
+              currentUserProfile={user}
+            />
           ))
         ) : (
           <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-10 text-center">

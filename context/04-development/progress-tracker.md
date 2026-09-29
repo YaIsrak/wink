@@ -127,5 +127,25 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
 
+## 2026-09-29 — Phase 2: Optimistic Likes and Post Comments
+- Deliberated and ratified build spec `docs/specs/0006-likes-and-comments/index.md`
+- Added `Like` and `Comment` models to `prisma/schema.prisma` with foreign key relations, unique composite index, and cascade deletions
+- Pushed schema to Supabase Postgres database and generated updated `@prisma/client`
+- Enabled Supabase Row Level Security on `likes` and `comments` tables with select, insert, and delete ownership & moderation policies
+- Created Zod validation schemas in `lib/validation/comment.ts` enforcing 280 character limit and trimmed strings
+- Implemented `lib/services/like.service.ts` for toggling likes, querying likers list, and checking user like status
+- Implemented `lib/services/comment.service.ts` for creating comments, deleting comments with moderation checks, and querying chronological comment threads
+- Implemented Next.js Server Actions `toggleLikeAction` and `getPostLikesAction` in `actions/like.ts`, and `createCommentAction`, `deleteCommentAction`, and `getPostCommentsAction` in `actions/comment.ts`
+- Enriched `getFeedPosts`, `getPostById`, and `getUserPosts` in `lib/services/post.service.ts` and `types/post.ts` with `likesCount`, `commentsCount`, `isLikedByMe`, and `previewComments`
+- Extended Zustand store `lib/store/post-store.ts` with optimistic like toggling, in flight lock management, optimistic comment insertion, temporary ID reconciliation, and rollback helpers
+- Built `components/posts/likers-dialog.tsx` displaying users who liked a post with profile links and timestamps
+- Built `components/posts/comment-item.tsx` with author info, timestamps, and owner & post author moderation delete triggers
+- Built `components/posts/comments-section.tsx` with expandable comments list and inline comment composer
+- Upgraded `components/posts/post-card.tsx` with interactive animated heart toggle, likers dialog modal trigger, comment counter trigger, preview comments inline display, and expandable comments drawer
+- Updated UI component registry in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
+
 
 

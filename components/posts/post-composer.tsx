@@ -124,6 +124,10 @@ export function PostComposer({
         avatarUrl: user.avatarUrl ?? null,
       },
       isOptimistic: true,
+      likesCount: 0,
+      commentsCount: 0,
+      isLikedByMe: false,
+      previewComments: [],
     }
 
     // 2. Prepend optimistic post to store immediately
