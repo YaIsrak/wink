@@ -374,15 +374,15 @@ export function PostCard({
         {/* Inline Preview Comments when collapsed */}
         {!activePost.isCommentsExpanded && commentsCount > 0 && (
           <div className="mt-3 pt-2.5 border-t border-border/40 space-y-1">
-            {commentsCount > 2 && (
-              <button
-                type="button"
-                onClick={() => toggleCommentsExpanded(id)}
-                className="text-xs text-muted-foreground hover:text-foreground hover:underline transition-colors block mb-1"
-              >
-                View all {commentsCount} comments
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={() => toggleCommentsExpanded(id)}
+              className="text-xs text-muted-foreground hover:text-foreground hover:underline transition-colors block mb-1 cursor-pointer"
+            >
+              {commentsCount === 1
+                ? 'View 1 comment'
+                : `View all ${commentsCount} comments`}
+            </button>
 
             {(activePost.comments && activePost.comments.length > 0
               ? activePost.comments.slice(-2)

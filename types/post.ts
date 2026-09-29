@@ -43,4 +43,5 @@ export interface FeedPost extends PostWithAuthor {
   comments?: CommentWithAuthor[]
   isCommentsExpanded?: boolean
   isLoadingComments?: boolean
+  hasLoadedAllComments?: boolean
 }

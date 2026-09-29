@@ -29,6 +29,7 @@ export function CommentsSection({
     posts,
     setPostComments,
     setLoadingComments,
+    toggleCommentsExpanded,
     addOptimisticComment,
     reconcileComment,
     rollbackOptimisticComment,
@@ -42,36 +43,43 @@ export function CommentsSection({
   const inputRef = React.useRef<HTMLInputElement>(null)
 
   const comments = activePost.comments || []
-  const isLoading = activePost.isLoadingComments || false
+  const isLoading = Boolean(activePost.isLoadingComments)
+  const isExpanded = Boolean(activePost.isCommentsExpanded)
+  const hasLoadedAll = Boolean(activePost.hasLoadedAllComments)
+
+  // Track if we already started fetching for this post ID to avoid infinite re-fetching
+  const fetchingPostIdRef = React.useRef<string | null>(null)
 
   // Load all comments if expanded and hasn't loaded full thread yet
   React.useEffect(() => {
-    let isMounted = true
+    if (!isExpanded || hasLoadedAll) return
+    if (fetchingPostIdRef.current === activePost.id) return
 
-    if (activePost.isCommentsExpanded && activePost.commentsCount > comments.length && !isLoading) {
-      setLoadingComments(activePost.id, true)
-      getPostCommentsAction(activePost.id)
-        .then((res) => {
-          if (!isMounted) return
-          if (res.error) {
-            toast.error(res.error)
-          } else if (res.comments) {
-            setPostComments(activePost.id, res.comments)
-          }
-        })
-        .catch(() => {
-          if (!isMounted) return
-          toast.error('Failed to load full comments')
-        })
-        .finally(() => {
-          if (isMounted) setLoadingComments(activePost.id, false)
-        })
-    }
+    fetchingPostIdRef.current = activePost.id
+    setLoadingComments(activePost.id, true)
 
-    return () => {
-      isMounted = false
-    }
-  }, [activePost.id, activePost.isCommentsExpanded, activePost.commentsCount, comments.length, isLoading, setLoadingComments, setPostComments])
+    getPostCommentsAction(activePost.id)
+      .then((res) => {
+        if (res.error) {
+          toast.error(res.error)
+          setLoadingComments(activePost.id, false)
+        } else if (res.comments) {
+          setPostComments(activePost.id, res.comments)
+        } else {
+          setLoadingComments(activePost.id, false)
+        }
+      })
+      .catch(() => {
+        toast.error('Failed to load comments')
+        setLoadingComments(activePost.id, false)
+      })
+  }, [
+    activePost.id,
+    isExpanded,
+    hasLoadedAll,
+    setLoadingComments,
+    setPostComments,
+  ])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -138,8 +146,22 @@ export function CommentsSection({
 
   return (
     <div className="pt-3 border-t border-border/60 space-y-3">
+      {/* Comments Header */}
+      <div className="flex items-center justify-between text-xs text-muted-foreground pb-0.5">
+        <span className="font-medium text-foreground">
+          Comments ({activePost.commentsCount})
+        </span>
+        <button
+          type="button"
+          onClick={() => toggleCommentsExpanded(activePost.id)}
+          className="text-xs text-muted-foreground hover:text-foreground hover:underline transition-colors cursor-pointer"
+        >
+          Hide comments
+        </button>
+      </div>
+
       {/* Comments List */}
-      {isLoading ? (
+      {isLoading && comments.length === 0 ? (
         <div className="space-y-3 py-2">
           {[1, 2].map((i) => (
             <div key={i} className="flex items-start gap-2.5">
@@ -166,6 +188,12 @@ export function CommentsSection({
               currentUserId={currentUserId}
             />
           ))}
+          {isLoading && (
+            <div className="flex items-center justify-center py-2 text-xs text-muted-foreground gap-2">
+              <Loader2 className="size-3.5 animate-spin" />
+              <span>Loading comments...</span>
+            </div>
+          )}
         </div>
       )}
 

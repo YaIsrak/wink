@@ -105,10 +105,11 @@ export function CommentItem({
           onClick={handleDelete}
           disabled={isDeleting}
           aria-label="Delete comment"
-          className="opacity-0 group-hover:opacity-100 focus:opacity-100 p-1 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded transition-all mt-0.5 shrink-0"
+          title={isAuthor ? 'Delete your comment' : 'Delete comment (moderation)'}
+          className="p-1.5 text-muted-foreground/70 hover:text-destructive hover:bg-destructive/10 rounded-md transition-colors mt-0.5 shrink-0 cursor-pointer"
         >
           {isDeleting ? (
-            <Loader2 className="size-3.5 animate-spin" />
+            <Loader2 className="size-3.5 animate-spin text-destructive" />
           ) : (
             <Trash2 className="size-3.5" />
           )}

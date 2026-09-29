@@ -45,17 +45,31 @@ export const usePostStore = create<PostState>((set, get) => ({
   setIsLoading: (loading) => set({ isLoading: loading }),
 
   setInitialPosts: (posts, nextCursor) =>
-    set({
-      posts: posts.map((p) => ({
-        ...p,
-        comments: p.previewComments ? [...p.previewComments] : [],
-        isCommentsExpanded: false,
-        isLoadingComments: false,
-      })),
-      nextCursor,
-      hasMore: Boolean(nextCursor),
-      hasLoadedInitial: true,
-      isLoading: false,
+    set((state) => {
+      const existingMap = new Map(state.posts.map((p) => [p.id, p]))
+      return {
+        posts: posts.map((p) => {
+          const existing = existingMap.get(p.id)
+          return {
+            ...p,
+            comments:
+              existing?.hasLoadedAllComments && existing.comments
+                ? existing.comments
+                : existing && existing.comments && existing.comments.length > (p.previewComments?.length || 0)
+                ? existing.comments
+                : p.previewComments
+                ? [...p.previewComments]
+                : [],
+            isCommentsExpanded: existing ? existing.isCommentsExpanded : false,
+            isLoadingComments: false,
+            hasLoadedAllComments: existing ? existing.hasLoadedAllComments : false,
+          }
+        }),
+        nextCursor,
+        hasMore: Boolean(nextCursor),
+        hasLoadedInitial: true,
+        isLoading: false,
+      }
     }),
 
   appendPosts: (newPosts, nextCursor) =>
@@ -198,7 +212,9 @@ export const usePostStore = create<PostState>((set, get) => ({
           ? {
               ...p,
               comments,
+              previewComments: comments.slice(-2),
               isLoadingComments: false,
+              hasLoadedAllComments: true,
             }
           : p
       ),
@@ -232,6 +248,7 @@ export const usePostStore = create<PostState>((set, get) => ({
         return {
           ...p,
           comments: updatedComments,
+          previewComments: updatedComments.slice(-2),
           commentsCount: p.commentsCount + 1,
           isCommentsExpanded: true,
         }
@@ -242,11 +259,13 @@ export const usePostStore = create<PostState>((set, get) => ({
     set((state) => ({
       posts: state.posts.map((p) => {
         if (p.id !== postId) return p
+        const updatedComments = (p.comments || []).map((c) =>
+          c.id === tempId ? realComment : c
+        )
         return {
           ...p,
-          comments: (p.comments || []).map((c) =>
-            c.id === tempId ? realComment : c
-          ),
+          comments: updatedComments,
+          previewComments: updatedComments.slice(-2),
         }
       }),
     })),
@@ -255,9 +274,11 @@ export const usePostStore = create<PostState>((set, get) => ({
     set((state) => ({
       posts: state.posts.map((p) => {
         if (p.id !== postId) return p
+        const remaining = (p.comments || []).filter((c) => c.id !== tempId)
         return {
           ...p,
-          comments: (p.comments || []).filter((c) => c.id !== tempId),
+          comments: remaining,
+          previewComments: remaining.slice(-2),
           commentsCount: Math.max(0, p.commentsCount - 1),
         }
       }),
@@ -266,14 +287,19 @@ export const usePostStore = create<PostState>((set, get) => ({
   removeComment: (postId, commentId) => {
     const post = get().posts.find((p) => p.id === postId)
     if (!post) return null
-    const targetComment = (post.comments || []).find((c) => c.id === commentId) || null
+    const targetComment =
+      (post.comments || []).find((c) => c.id === commentId) ||
+      (post.previewComments || []).find((c) => c.id === commentId) ||
+      null
 
     set((state) => ({
       posts: state.posts.map((p) => {
         if (p.id !== postId) return p
+        const remaining = (p.comments || []).filter((c) => c.id !== commentId)
         return {
           ...p,
-          comments: (p.comments || []).filter((c) => c.id !== commentId),
+          comments: remaining,
+          previewComments: (p.previewComments || []).filter((c) => c.id !== commentId),
           commentsCount: Math.max(0, p.commentsCount - 1),
         }
       }),
@@ -286,12 +312,14 @@ export const usePostStore = create<PostState>((set, get) => ({
     set((state) => ({
       posts: state.posts.map((p) => {
         if (p.id !== postId) return p
+        const restored = [...(p.comments || []), comment].sort(
+          (a, b) =>
+            new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        )
         return {
           ...p,
-          comments: [...(p.comments || []), comment].sort(
-            (a, b) =>
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-          ),
+          comments: restored,
+          previewComments: restored.slice(-2),
           commentsCount: p.commentsCount + 1,
         }
       }),

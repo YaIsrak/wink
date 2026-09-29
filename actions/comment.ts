@@ -54,11 +54,32 @@ export async function createCommentAction(
       return { error: 'Your session has expired. Please sign in again.' }
     }
 
-    const comment = await createComment(
+    const rawComment = await createComment(
       validation.data.postId,
       user.id,
       validation.data.content
     )
+
+    const comment: CommentWithAuthor = {
+      id: rawComment.id,
+      postId: rawComment.postId,
+      authorId: rawComment.authorId,
+      content: rawComment.content,
+      createdAt:
+        typeof rawComment.createdAt === 'string'
+          ? rawComment.createdAt
+          : rawComment.createdAt.toISOString(),
+      updatedAt:
+        typeof rawComment.updatedAt === 'string'
+          ? rawComment.updatedAt
+          : rawComment.updatedAt.toISOString(),
+      author: {
+        id: rawComment.author.id,
+        username: rawComment.author.username,
+        displayName: rawComment.author.displayName,
+        avatarUrl: rawComment.author.avatarUrl,
+      },
+    }
 
     revalidatePath('/feed')
 
@@ -119,17 +140,27 @@ export async function getPostCommentsAction(
   }
 
   try {
-    const supabase = await createClient()
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser()
-
-    if (authError || !user) {
-      return { error: 'Unauthorized. Please sign in.' }
-    }
-
-    const comments = await getPostComments(postId)
+    const rawComments = await getPostComments(postId)
+    const comments: CommentWithAuthor[] = rawComments.map((c) => ({
+      id: c.id,
+      postId: c.postId,
+      authorId: c.authorId,
+      content: c.content,
+      createdAt:
+        typeof c.createdAt === 'string'
+          ? c.createdAt
+          : c.createdAt.toISOString(),
+      updatedAt:
+        typeof c.updatedAt === 'string'
+          ? c.updatedAt
+          : c.updatedAt.toISOString(),
+      author: {
+        id: c.author.id,
+        username: c.author.username,
+        displayName: c.author.displayName,
+        avatarUrl: c.author.avatarUrl,
+      },
+    }))
 
     return {
       success: true,

@@ -146,6 +146,10 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
 
-
-
-
+## 2026-09-29 — Fix: Comment Thread Loading Loop and Deletion Refinements
+- Fixed infinite fetch loop and stuck skeleton state in comments section caused by store re-render effect dependency race condition
+- Serialized comment creation and update timestamps to ISO strings across server action boundaries
+- Preserved existing preview comments immediately when expanding threads, displaying inline indicator only while fetching additional comments
+- Synchronized preview comments and full thread arrays in post store during optimistic additions, reconciliations, rollbacks, and deletions
+- Verified own comment deletion with instant optimistic store removal and toast feedback
+- Status: Done
