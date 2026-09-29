@@ -55,8 +55,9 @@ export function PostCard({
   currentUserId,
   currentUserProfile,
 }: PostCardProps) {
-  const posts = usePostStore((state) => state.posts)
-  const storePost = posts.find((p) => p.id === post.id)
+  const storePost = usePostStore((state) =>
+    state.posts.find((p) => p.id === post.id)
+  )
   const activePost = storePost || post
 
   const {

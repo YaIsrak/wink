@@ -11,6 +11,7 @@ import {
 import {
   createPost,
   getFeedPosts,
+  getExplorePosts,
   updatePost,
   deletePost,
   type PostWithAuthor,
@@ -27,6 +28,7 @@ export interface GetFeedPostsActionResult {
   error?: string
   posts?: PostWithAuthor[]
   nextCursor?: string
+  hasMore?: boolean
 }
 
 export async function createPostAction(
@@ -87,8 +89,10 @@ export async function getFeedPostsAction(params: {
       return { error: 'Unauthorized. Please sign in.' }
     }
 
+    const limit = params.limit ?? 10
     const result = await getFeedPosts({
       ...params,
+      limit,
       currentUserId: user.id,
     })
 
@@ -96,11 +100,56 @@ export async function getFeedPostsAction(params: {
       success: true,
       posts: result.posts,
       nextCursor: result.nextCursor,
+      hasMore: Boolean(result.nextCursor),
     }
   } catch (err: unknown) {
     console.error('Failed to fetch feed posts:', err)
     return {
       error: 'Unable to load feed posts at this time.',
+    }
+  }
+}
+
+export interface GetExploreFeedPostsActionResult {
+  success?: boolean
+  error?: string
+  posts?: PostWithAuthor[]
+  nextCursor?: string
+  hasMore?: boolean
+}
+
+export async function getExploreFeedPostsAction(params: {
+  cursor?: string
+  limit?: number
+} = {}): Promise<GetExploreFeedPostsActionResult> {
+  try {
+    const supabase = await createClient()
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser()
+
+    if (authError || !user) {
+      return { error: 'Unauthorized. Please sign in.' }
+    }
+
+    const limit = params.limit ?? 10
+    const result = await getExplorePosts({
+      cursor: params.cursor,
+      limit,
+      currentUserId: user.id,
+    })
+
+    return {
+      success: true,
+      posts: result.posts,
+      nextCursor: result.nextCursor,
+      hasMore: Boolean(result.nextCursor),
+    }
+  } catch (err: unknown) {
+    console.error('Failed to fetch explore posts:', err)
+    return {
+      error: 'Unable to load explore posts at this time.',
     }
   }
 }

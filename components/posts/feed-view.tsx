@@ -2,9 +2,11 @@
 
 import * as React from 'react'
 import { MessageSquareDashed, Users, Sparkles } from 'lucide-react'
+import { toast } from 'sonner'
 import { PostComposer } from '@/components/posts/post-composer'
 import { PostCard } from '@/components/posts/post-card'
 import { Skeleton } from '@/components/ui/skeleton'
+import { InfiniteScrollSentinel } from '@/components/posts/infinite-scroll-sentinel'
 import { SuggestedUsers, type SuggestedUserItem } from '@/components/profile/suggested-users'
 import { getFeedPostsAction } from '@/actions/post'
 import { usePostStore } from '@/lib/store'
@@ -33,10 +35,17 @@ export function FeedView({
 }: FeedViewProps) {
   const [feedFilter, setFeedFilter] = React.useState<'all' | 'following'>(initialFilter)
   const [isSwitchingTab, setIsSwitchingTab] = React.useState(false)
+  const [isError, setIsError] = React.useState(false)
+  const isFetchingRef = React.useRef(false)
 
   const posts = usePostStore((state) => state.posts)
+  const nextCursor = usePostStore((state) => state.nextCursor)
+  const hasMore = usePostStore((state) => state.hasMore)
+  const isLoading = usePostStore((state) => state.isLoading)
   const hasLoadedInitial = usePostStore((state) => state.hasLoadedInitial)
   const setInitialPosts = usePostStore((state) => state.setInitialPosts)
+  const appendPosts = usePostStore((state) => state.appendPosts)
+  const setIsLoading = usePostStore((state) => state.setIsLoading)
 
   React.useEffect(() => {
     setInitialPosts(initialPosts, initialCursor)
@@ -47,22 +56,58 @@ export function FeedView({
 
     setFeedFilter(newFilter)
     setIsSwitchingTab(true)
+    setIsError(false)
 
     try {
       const res = await getFeedPostsAction({
         filter: newFilter,
-        limit: 20,
+        limit: 10,
       })
 
       if (res.success && res.posts) {
         setInitialPosts(res.posts, res.nextCursor)
+      } else {
+        toast.error(res.error || 'Failed to load posts for this feed.')
       }
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to switch feed filter:', err)
+      toast.error('Network error switching feeds. Please try again.')
     } finally {
       setIsSwitchingTab(false)
     }
   }
+
+  const handleLoadMore = React.useCallback(async () => {
+    if (isFetchingRef.current || !hasMore || isLoading || isSwitchingTab) {
+      return
+    }
+
+    isFetchingRef.current = true
+    setIsLoading(true)
+    setIsError(false)
+
+    try {
+      const res = await getFeedPostsAction({
+        cursor: nextCursor,
+        limit: 10,
+        filter: feedFilter,
+      })
+
+      if (res.success && res.posts) {
+        appendPosts(res.posts, res.nextCursor)
+      } else {
+        setIsError(true)
+        toast.error(res.error || 'Failed to load more posts.')
+      }
+    } catch (err: unknown) {
+      console.error('Failed to fetch more feed posts:', err)
+      setIsError(true)
+      toast.error('Network error loading posts. Please try again.')
+    } finally {
+      isFetchingRef.current = false
+      setIsLoading(false)
+    }
+  }, [hasMore, isLoading, isSwitchingTab, nextCursor, feedFilter, appendPosts, setIsLoading])
 
   const displayPosts = hasLoadedInitial ? posts : initialPosts
 
@@ -77,13 +122,14 @@ export function FeedView({
             aria-selected={feedFilter === 'all'}
             onClick={() => handleTabChange('all')}
             className={cn(
-              'relative pb-2.5 text-sm font-semibold transition-colors cursor-pointer select-none',
+              'relative pb-2.5 text-sm font-semibold transition-colors cursor-pointer select-none flex items-center gap-1.5',
               feedFilter === 'all'
                 ? 'text-foreground'
                 : 'text-muted-foreground hover:text-foreground'
             )}
           >
             <span>For You</span>
+            <Sparkles className="size-3 text-amber-500" />
             {feedFilter === 'all' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground rounded-t-full" />
             )}
@@ -149,7 +195,17 @@ export function FeedView({
                 />
               ))}
 
-              {/* Suggested users prompt at end of following feed */}
+              {/* Infinite Scroll Sentinel for Batch 10 Pagination */}
+              <InfiniteScrollSentinel
+                hasMore={hasMore}
+                isLoading={isLoading}
+                onLoadMore={handleLoadMore}
+                isError={isError}
+                onRetry={handleLoadMore}
+                endMessage="You are all caught up!"
+              />
+
+              {/* Suggested creators at end of following feed */}
               {feedFilter === 'following' && suggestedUsers.length > 0 && (
                 <SuggestedUsers
                   users={suggestedUsers}

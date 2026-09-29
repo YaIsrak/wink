@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   Home,
-  Compass,
   Search,
   MessageSquare,
   Bell,
@@ -43,12 +42,6 @@ export function DesktopSidebar({ user }: DesktopSidebarProps) {
       label: 'Home',
       icon: Home,
       isActive: pathname === '/feed' || pathname === '/',
-    },
-    {
-      href: '/explore',
-      label: 'Explore',
-      icon: Compass,
-      isActive: pathname.startsWith('/explore'),
     },
     {
       href: '/search',

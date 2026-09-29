@@ -59,7 +59,7 @@ export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
   posts: PostWithAuthor[]
   nextCursor?: string
 }> {
-  const limit = Math.min(Math.max(params.limit ?? 20, 1), 50)
+  const limit = Math.min(Math.max(params.limit ?? 10, 1), 50)
   const { cursor, currentUserId, filter = 'all' } = params
 
   let whereClause: any = {}
@@ -80,14 +80,25 @@ export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
     }
   }
 
+  const orderBy =
+    filter === 'all'
+      ? [
+          { likes: { _count: 'desc' } },
+          { comments: { _count: 'desc' } },
+          { createdAt: 'desc' },
+          { id: 'desc' },
+        ]
+      : [
+          { createdAt: 'desc' },
+          { id: 'desc' },
+        ]
+
   const posts = await prisma.post.findMany({
     where: whereClause,
     take: limit + 1,
     cursor: cursor ? { id: cursor } : undefined,
     skip: cursor ? 1 : 0,
-    orderBy: {
-      createdAt: 'desc',
-    },
+    orderBy: orderBy as any,
     include: {
       author: {
         select: AUTHOR_SELECT,
@@ -364,4 +375,102 @@ export async function getUserPosts(
     isFollowingAuthor,
     previewComments: (post.comments || []).slice().reverse(),
   }))
+}
+
+export interface GetExplorePostsParams {
+  cursor?: string
+  limit?: number
+  currentUserId?: string
+}
+
+export async function getExplorePosts(params: GetExplorePostsParams = {}): Promise<{
+  posts: PostWithAuthor[]
+  nextCursor?: string
+}> {
+  const limit = Math.min(Math.max(params.limit ?? 10, 1), 20)
+  const { cursor, currentUserId } = params
+
+  let followingSet = new Set<string>()
+  if (currentUserId) {
+    const userFollows = await prisma.follow.findMany({
+      where: { followerId: currentUserId },
+      select: { followingId: true },
+    })
+    followingSet = new Set(userFollows.map((f) => f.followingId))
+  }
+
+  const posts = await prisma.post.findMany({
+    where: currentUserId
+      ? {
+          authorId: { not: currentUserId },
+        }
+      : {},
+    take: limit + 1,
+    cursor: cursor ? { id: cursor } : undefined,
+    skip: cursor ? 1 : 0,
+    orderBy: [
+      { likes: { _count: 'desc' } },
+      { comments: { _count: 'desc' } },
+      { createdAt: 'desc' },
+      { id: 'desc' },
+    ],
+    include: {
+      author: {
+        select: AUTHOR_SELECT,
+      },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
+        },
+      },
+      likes: currentUserId
+        ? {
+            where: {
+              userId: currentUserId,
+            },
+            select: {
+              userId: true,
+            },
+          }
+        : false,
+      comments: {
+        take: 2,
+        orderBy: {
+          createdAt: 'desc',
+        },
+        include: {
+          author: {
+            select: AUTHOR_SELECT,
+          },
+        },
+      },
+    },
+  })
+
+  let nextCursor: string | undefined = undefined
+  if (posts.length > limit) {
+    const nextItem = posts.pop()
+    nextCursor = nextItem?.id
+  }
+
+  const formattedPosts: PostWithAuthor[] = posts.map((post) => ({
+    id: post.id,
+    authorId: post.authorId,
+    caption: post.caption,
+    imageUrl: post.imageUrl,
+    createdAt: post.createdAt,
+    updatedAt: post.updatedAt,
+    author: post.author,
+    likesCount: post._count.likes,
+    commentsCount: post._count.comments,
+    isLikedByMe: Array.isArray(post.likes) && post.likes.length > 0,
+    isFollowingAuthor: followingSet.has(post.authorId),
+    previewComments: (post.comments || []).slice().reverse(),
+  }))
+
+  return {
+    posts: formattedPosts,
+    nextCursor,
+  }
 }

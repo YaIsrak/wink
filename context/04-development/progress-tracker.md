@@ -188,4 +188,45 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
 
+## 2026-09-29 — Phase 3: Explore and Discover Feed
+- Deliberated and ratified architecture build spec `docs/specs/0008-explore-and-discover-feed/index.md`
+- Implemented `getExplorePosts` query service in `lib/services/post.service.ts` with engagement blended ranking (likes and comments weighting), author self exclusion, and batch cursor pagination
+- Implemented Server Action `getExploreFeedPostsAction` in `actions/post.ts` enforcing session authentication and parameter limits (batches of 10 posts)
+- Extended Zustand `usePostStore` in `lib/store/post-store.ts` with explore feed state (`explorePosts`, `exploreCursor`, `hasMoreExplore`, `isLoadingExplore`) and synchronized post mutations across both feeds
+- Built reusable `components/posts/infinite-scroll-sentinel.tsx` using native browser `IntersectionObserver` with loading skeletons, network retry card, and completion indicator
+- Built `components/explore/explore-feed-view.tsx` with header, discovery post stream, infinite scroll sentinel, and back to top navigation
+- Upgraded `app/(main)/explore/page.tsx` server component to pre-fetch initial 10 posts with zero layout shift
+- Registered new components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
+## 2026-09-29 — Phase 3: Explore Merged into Unified Feed with Infinite Scroll
+- Merged all explore capabilities directly into the `/feed` page and removed the standalone explore page
+- Replaced `/explore` with an automatic redirect to `/feed`
+- Updated desktop navigation sidebar and mobile bottom navigation: removed explore link and added Search to mobile bottom navigation
+- Integrated `InfiniteScrollSentinel` into `components/posts/feed-view.tsx` with batch 10 post pagination, loading skeletons, error retry state, and end of feed indicator
+- Enhanced `getFeedPosts` in `lib/services/post.service.ts` with engagement blended ranking (likes and comments) for the "For You" tab while preserving chronological order for "Following"
+- Streamlined `usePostStore` to manage feed posts with seamless infinite scroll append and optimistic interactions
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
+## 2026-09-29 — Phase 3: Search Feature and Page
+- Deliberated build specification in `docs/specs/0009-search-feature-and-page/index.md`
+- Created TypeScript interfaces and Zod validation schemas in `types/search.ts` and `lib/validation/search.ts`
+- Implemented search queries in `lib/services/search.service.ts` (`searchUsers`, `searchPosts`, `searchTopSummary`) with case insensitive substring matching and cursor pagination
+- Implemented Server Actions in `actions/search.ts` (`searchTopAction`, `searchUsersAction`, `searchPostsAction`) enforcing session authentication
+- Built client search history utility in `lib/utils/search-history.ts` storing recent queries in browser local storage
+- Built `components/search/search-input.tsx` with 300 millisecond debouncing, clear button, and loading spinner
+- Built `components/search/search-tabs.tsx` coordinating Top, Accounts, and Posts tabs
+- Built `components/search/recent-searches.tsx` with single item removal and clear all controls
+- Built `components/search/user-search-result.tsx` with user details and optimistic `FollowButton`
+- Built `components/search/post-search-result.tsx` integrating post card with engagement stats and lightbox trigger
+- Built `components/search/search-empty-state.tsx` displaying search tips and suggested creators
+- Built `components/search/search-view.tsx` coordinating search state, URL sync, recent searches, and infinite scroll sentinel
+- Upgraded `app/(main)/search/page.tsx` with server prefetching for shared links and suggested creators fallback
+- Registered search components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
+
 

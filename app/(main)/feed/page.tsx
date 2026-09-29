@@ -24,7 +24,7 @@ export default async function FeedPage() {
 
   const [{ posts, nextCursor }, suggestedUsers] = await Promise.all([
     getFeedPosts({
-      limit: 20,
+      limit: 10,
       currentUserId: user.id,
       filter: 'all',
     }),

@@ -1,23 +1,70 @@
 import * as React from 'react'
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Search } from 'lucide-react'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import { SearchView } from '@/components/search/search-view'
+import { getSuggestedUsers } from '@/lib/services/follow.service'
+import {
+  searchTopSummary,
+  searchUsers,
+  searchPosts,
+} from '@/lib/services/search.service'
+import type { SearchTab } from '@/types/search'
 
-export default function SearchPage() {
+interface SearchPageProps {
+  searchParams: Promise<{
+    q?: string
+    tab?: string
+  }>
+}
+
+export const metadata = {
+  title: 'Search | Wink',
+  description: 'Search creators, accounts, and posts across Wink',
+}
+
+export default async function SearchPage({ searchParams }: SearchPageProps) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/login')
+  }
+
+  const resolvedParams = await searchParams
+  const rawQuery = resolvedParams.q?.trim() || ''
+  const validTabs: SearchTab[] = ['top', 'accounts', 'posts']
+  const rawTab = resolvedParams.tab as SearchTab
+  const activeTab: SearchTab = validTabs.includes(rawTab) ? rawTab : 'top'
+
+  // Pre-fetch initial data on server based on query
+  let initialTopResult = null
+  let initialUsersResult = null
+  let initialPostsResult = null
+
+  if (rawQuery) {
+    if (activeTab === 'accounts') {
+      initialUsersResult = await searchUsers(user.id, rawQuery, null, 10)
+    } else if (activeTab === 'posts') {
+      initialPostsResult = await searchPosts(user.id, rawQuery, null, 10)
+    } else {
+      initialTopResult = await searchTopSummary(user.id, rawQuery)
+    }
+  }
+
+  // Fetch suggested users for zero query and empty state
+  const suggestedUsers = await getSuggestedUsers(user.id, 5)
+
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 lg:py-10">
-      <Card className="p-6">
-        <CardHeader className="p-0 flex flex-row items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
-            <Search className="size-5" />
-          </div>
-          <div>
-            <CardTitle className="text-xl font-bold">Search</CardTitle>
-            <CardDescription>
-              Search users, tags, and posts across Wink. Arriving in Phase 3.
-            </CardDescription>
-          </div>
-        </CardHeader>
-      </Card>
-    </div>
+    <SearchView
+      initialQuery={rawQuery}
+      initialTab={activeTab}
+      initialTopResult={initialTopResult}
+      initialUsersResult={initialUsersResult}
+      initialPostsResult={initialPostsResult}
+      suggestedUsers={suggestedUsers}
+      currentUserId={user.id}
+    />
   )
 }

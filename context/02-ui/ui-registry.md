@@ -39,7 +39,13 @@ component.** Update it whenever a new reusable component is added.
 | `ProfileTabs`     | `components/profile/profile-tabs.tsx` | Content switcher for Posts (feed/grid toggle), Media, Replies, and Saved | tabbed view |
 | `ProfileHeader`   | `components/profile/profile-header.tsx` | User identity header with banner, stats counters, follow actions, and dialog triggers | container card (`rounded-2xl`) |
 | `SuggestedUsers`  | `components/profile/suggested-users.tsx` | Card displaying recommended creators to follow with instant follow button | container card (`rounded-xl`) |
-
+| `InfiniteScrollSentinel` | `components/posts/infinite-scroll-sentinel.tsx` | IntersectionObserver sentinel with loading skeletons, retry card, and completion indicator | sentinel (`w-full`) |
+| `SearchInput`     | `components/search/search-input.tsx` | Search bar with search icon, clear button, and loading spinner | default (`rounded-xl`) |
+| `SearchTabs`      | `components/search/search-tabs.tsx`  | Category switcher for Top, Accounts, and Posts tabs | tabbed bar |
+| `RecentSearches`  | `components/search/recent-searches.tsx` | Recent search history list with item deletion and clear all | container (`rounded-xl`) |
+| `UserSearchResultCard` | `components/search/user-search-result.tsx` | User card with identity, bio, follower count, and optimistic FollowButton | default (`rounded-xl`) |
+| `SearchEmptyState` | `components/search/search-empty-state.tsx` | Zero results card with search tips and suggested creators | container (`rounded-xl`) |
+| `SearchView`      | `components/search/search-view.tsx`  | Unified search coordinator with debounced queries, URL sync, and pagination | container view |
 
 ## Process before creating a new component
 

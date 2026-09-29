@@ -3,7 +3,7 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Compass, Plus, Mail } from 'lucide-react'
+import { Home, Search, Plus, Mail } from 'lucide-react'
 import { Avatar } from '@/components/ui/avatar'
 import { useUiStore } from '@/lib/store/ui-store'
 import { useNotificationStore } from '@/lib/store/notification-store'
@@ -26,7 +26,7 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
   )
 
   const isHomeActive = pathname === '/feed' || pathname === '/'
-  const isExploreActive = pathname.startsWith('/explore')
+  const isSearchActive = pathname.startsWith('/search')
   const isMessagesActive = pathname.startsWith('/messages')
   const isProfileActive = pathname.startsWith('/profile')
 
@@ -54,23 +54,23 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
         <span className="text-[10px] tracking-tight">Home</span>
       </Link>
 
-      {/* 2. Explore */}
+      {/* 2. Search */}
       <Link
-        href="/explore"
+        href="/search"
         className={cn(
           'flex flex-1 flex-col items-center justify-center gap-1 py-1 transition-colors',
-          isExploreActive
+          isSearchActive
             ? 'text-foreground font-semibold'
             : 'text-muted-foreground hover:text-foreground'
         )}
       >
-        <Compass
+        <Search
           className={cn(
             'size-5 transition-transform duration-150',
-            isExploreActive ? 'fill-current stroke-[2.2]' : 'stroke-2'
+            isSearchActive ? 'stroke-[2.5]' : 'stroke-2'
           )}
         />
-        <span className="text-[10px] tracking-tight">Explore</span>
+        <span className="text-[10px] tracking-tight">Search</span>
       </Link>
 
       {/* 3. Center Create Button */}
