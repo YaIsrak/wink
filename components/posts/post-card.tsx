@@ -36,6 +36,7 @@ import { deletePostAction, updatePostAction } from '@/actions/post'
 import { toggleLikeAction } from '@/actions/like'
 import { LikersDialog } from '@/components/posts/likers-dialog'
 import { CommentsSection } from '@/components/posts/comments-section'
+import { FollowButton } from '@/components/profile/follow-button'
 import { formatRelativeTime } from '@/lib/utils'
 import type { FeedPost } from '@/types/post'
 
@@ -239,18 +240,28 @@ export function PostCard({
             </div>
           </Link>
 
-          {/* Three-Dot Options Menu */}
-          {!isOptimistic && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  type="button"
-                  aria-label="Post actions"
-                  className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors cursor-pointer"
-                >
-                  <MoreHorizontal className="size-4" />
-                </button>
-              </DropdownMenuTrigger>
+          {/* Right Header Actions: Follow Button + Three-Dot Options Menu */}
+          <div className="flex items-center gap-2 shrink-0">
+            {!isOwner && currentUserId && (
+              <FollowButton
+                targetUserId={author.id}
+                initialIsFollowing={Boolean(activePost.isFollowingAuthor)}
+                size="sm"
+                className="h-7 text-xs px-2.5 rounded-lg"
+              />
+            )}
+
+            {!isOptimistic && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button
+                    type="button"
+                    aria-label="Post actions"
+                    className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors cursor-pointer"
+                  >
+                    <MoreHorizontal className="size-4" />
+                  </button>
+                </DropdownMenuTrigger>
               <DropdownMenuContent align="right">
                 {isOwner && (
                   <>
@@ -279,6 +290,7 @@ export function PostCard({
               </DropdownMenuContent>
             </DropdownMenu>
           )}
+          </div>
         </div>
 
         {/* Post Text Caption */}

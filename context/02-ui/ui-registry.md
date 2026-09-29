@@ -31,6 +31,14 @@ component.** Update it whenever a new reusable component is added.
 | `LikersDialog`    | `components/posts/likers-dialog.tsx` | Dialog modal displaying users who liked a post | modal dialog (`max-w-[520px]`, `rounded-xl`) |
 | `CommentItem`     | `components/posts/comment-item.tsx`  | Individual comment row with author identity, timestamp, and delete action | default (`text-sm`) |
 | `CommentsSection` | `components/posts/comments-section.tsx` | Expandable post comments drawer with composer and list | drawer container |
+| `FollowButton`    | `components/profile/follow-button.tsx` | Optimistic follow and unfollow toggle button with pending spinner and toast rollback | default, outline (`rounded-lg`) |
+| `FollowListDialog` | `components/profile/follow-list-dialog.tsx` | Modal dialog listing followers or following with inline follow action | modal dialog (`max-w-[520px]`, `rounded-xl`) |
+| `EditProfileDialog` | `components/profile/edit-profile-dialog.tsx` | Modal dialog for inline editing of name, bio, location, website, and avatar | modal dialog (`max-w-lg`, `rounded-xl`) |
+| `ProfileCompletionBanner` | `components/profile/profile-completion-banner.tsx` | Gamified milestone card with completion percentage and progress bar | default (`rounded-xl`) |
+| `PostGrid`        | `components/profile/post-grid.tsx`   | Responsive multi-column thumbnail grid with hover engagement metrics and lightbox | grid 2-col / 3-col (`rounded-xl`) |
+| `ProfileTabs`     | `components/profile/profile-tabs.tsx` | Content switcher for Posts (feed/grid toggle), Media, Replies, and Saved | tabbed view |
+| `ProfileHeader`   | `components/profile/profile-header.tsx` | User identity header with banner, stats counters, follow actions, and dialog triggers | container card (`rounded-2xl`) |
+| `SuggestedUsers`  | `components/profile/suggested-users.tsx` | Card displaying recommended creators to follow with instant follow button | container card (`rounded-xl`) |
 
 
 ## Process before creating a new component

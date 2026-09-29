@@ -16,6 +16,7 @@ interface PostState {
   rollbackOptimisticPost: (tempId: string) => void
   removePost: (postId: string) => void
   updatePost: (postId: string, data: Partial<PostWithAuthor>) => void
+  updateAuthorFollowStatus: (authorId: string, isFollowing: boolean) => void
 
   // Likes
   optimisticToggleLike: (postId: string) => { previousLiked: boolean; previousCount: number } | null
@@ -137,6 +138,15 @@ export const usePostStore = create<PostState>((set, get) => ({
     set((state) => ({
       posts: state.posts.map((p) =>
         p.id === postId ? { ...p, ...data } : p
+      ),
+    })),
+
+  updateAuthorFollowStatus: (authorId, isFollowing) =>
+    set((state) => ({
+      posts: state.posts.map((p) =>
+        p.author.id === authorId
+          ? { ...p, isFollowingAuthor: isFollowing }
+          : p
       ),
     })),
 

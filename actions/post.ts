@@ -74,6 +74,7 @@ export async function createPostAction(
 export async function getFeedPostsAction(params: {
   cursor?: string
   limit?: number
+  filter?: 'all' | 'following'
 } = {}): Promise<GetFeedPostsActionResult> {
   try {
     const supabase = await createClient()

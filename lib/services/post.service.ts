@@ -13,6 +13,7 @@ export interface GetFeedPostsParams {
   cursor?: string
   limit?: number
   currentUserId?: string
+  filter?: 'all' | 'following'
 }
 
 const AUTHOR_SELECT = {
@@ -59,9 +60,28 @@ export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
   nextCursor?: string
 }> {
   const limit = Math.min(Math.max(params.limit ?? 20, 1), 50)
-  const { cursor, currentUserId } = params
+  const { cursor, currentUserId, filter = 'all' } = params
+
+  let whereClause: any = {}
+  let followingSet = new Set<string>()
+
+  if (currentUserId) {
+    const userFollows = await prisma.follow.findMany({
+      where: { followerId: currentUserId },
+      select: { followingId: true },
+    })
+    const followingIds = userFollows.map((f) => f.followingId)
+    followingSet = new Set(followingIds)
+
+    if (filter === 'following') {
+      whereClause = {
+        authorId: { in: [...followingIds, currentUserId] },
+      }
+    }
+  }
 
   const posts = await prisma.post.findMany({
+    where: whereClause,
     take: limit + 1,
     cursor: cursor ? { id: cursor } : undefined,
     skip: cursor ? 1 : 0,
@@ -119,6 +139,7 @@ export async function getFeedPosts(params: GetFeedPostsParams = {}): Promise<{
     likesCount: post._count.likes,
     commentsCount: post._count.comments,
     isLikedByMe: Array.isArray(post.likes) && post.likes.length > 0,
+    isFollowingAuthor: followingSet.has(post.authorId),
     previewComments: (post.comments || []).slice().reverse(),
   }))
 
@@ -277,42 +298,57 @@ export async function getUserPosts(
   authorId: string,
   currentUserId?: string
 ): Promise<PostWithAuthor[]> {
-  const posts = await prisma.post.findMany({
-    where: { authorId },
-    orderBy: { createdAt: 'desc' },
-    include: {
-      author: {
-        select: AUTHOR_SELECT,
-      },
-      _count: {
-        select: {
-          likes: true,
-          comments: true,
+  const [posts, followRecord] = await Promise.all([
+    prisma.post.findMany({
+      where: { authorId },
+      orderBy: { createdAt: 'desc' },
+      include: {
+        author: {
+          select: AUTHOR_SELECT,
         },
-      },
-      likes: currentUserId
-        ? {
-            where: {
-              userId: currentUserId,
-            },
-            select: {
-              userId: true,
-            },
-          }
-        : false,
-      comments: {
-        take: 2,
-        orderBy: {
-          createdAt: 'desc',
+        _count: {
+          select: {
+            likes: true,
+            comments: true,
+          },
         },
-        include: {
-          author: {
-            select: AUTHOR_SELECT,
+        likes: currentUserId
+          ? {
+              where: {
+                userId: currentUserId,
+              },
+              select: {
+                userId: true,
+              },
+            }
+          : false,
+        comments: {
+          take: 2,
+          orderBy: {
+            createdAt: 'desc',
+          },
+          include: {
+            author: {
+              select: AUTHOR_SELECT,
+            },
           },
         },
       },
-    },
-  })
+    }),
+    currentUserId && currentUserId !== authorId
+      ? prisma.follow.findUnique({
+          where: {
+            followerId_followingId: {
+              followerId: currentUserId,
+              followingId: authorId,
+            },
+          },
+          select: { id: true },
+        })
+      : null,
+  ])
+
+  const isFollowingAuthor = Boolean(followRecord)
 
   return posts.map((post) => ({
     id: post.id,
@@ -325,6 +361,7 @@ export async function getUserPosts(
     likesCount: post._count.likes,
     commentsCount: post._count.comments,
     isLikedByMe: Array.isArray(post.likes) && post.likes.length > 0,
+    isFollowingAuthor,
     previewComments: (post.comments || []).slice().reverse(),
   }))
 }

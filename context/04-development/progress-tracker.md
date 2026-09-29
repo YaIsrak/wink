@@ -153,3 +153,39 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Synchronized preview comments and full thread arrays in post store during optimistic additions, reconciliations, rollbacks, and deletions
 - Verified own comment deletion with instant optimistic store removal and toast feedback
 - Status: Done
+
+## 2026-09-29 — Phase 2: Full Profile Experience and Follow System
+- Ratified architecture build spec `docs/specs/0007-profile-page-and-follow-system/index.md`
+- Extended `User` model in `prisma/schema.prisma` with optional `website` and `location` fields
+- Added `Follow` model in `prisma/schema.prisma` with foreign key relations, cascade delete, and unique composite index `(followerId, followingId)`
+- Pushed schema to Supabase Postgres database and regenerated `@prisma/client` v6.19.3
+- Enabled Supabase Row Level Security on `follows` table with authenticated read policy and follower scoped insert and delete policies
+- Created Zod validation schemas in `lib/validation/profile.ts` for profile updates, follow actions, and list queries
+- Implemented `lib/services/follow.service.ts` for toggling follows, follower/following count queries, status checks, and paginated user lists
+- Updated `lib/services/user.service.ts` with profile update handler, full profile stats aggregator, and gamified completion score calculator
+- Created Server Actions in `actions/follow.ts` (`toggleFollowAction`, `getUserFollowersAction`, `getUserFollowingAction`) and `actions/profile.ts` (`updateProfileDetailsAction`, `getProfileDataAction`)
+- Built `components/profile/follow-button.tsx` with optimistic toggle, loading indicator, and toast rollback on error
+- Built `components/profile/follow-list-dialog.tsx` displaying paginated followers or following lists with user cards and interactive follow buttons
+- Built `components/profile/edit-profile-dialog.tsx` providing an inline form for editing name, bio, location, website, and avatar with live character counter
+- Built `components/profile/profile-completion-banner.tsx` displaying milestone percentage, dynamic progress bar, and edit trigger
+- Built `components/profile/post-grid.tsx` with responsive photo grid, hover engagement overlay, and photo lightbox dialog
+- Built `components/profile/profile-tabs.tsx` coordinating Posts (feed & grid views), Media gallery, Replies, and Saved tabs
+- Built `components/profile/profile-header.tsx` assembling banner graphics, avatar with online status beacon, owner edit actions, follower/following clickable counters, and metadata chips
+- Upgraded `app/(main)/profile/[username]/page.tsx` with full profile data, responsive layout, and not found handling
+- Registered new profile components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
+## 2026-09-29 — Phase 2: Follow System Integration & Feed Filtering
+- Implemented `getSuggestedUsers` service in `lib/services/follow.service.ts` querying creators not yet followed by the active user
+- Added `getSuggestedUsersAction` in `actions/follow.ts`
+- Built `components/profile/suggested-users.tsx` card widget showing recommended creators with one click follow buttons
+- Integrated optimistic `FollowButton` directly into post card header in `components/posts/post-card.tsx` for non owner authors
+- Added `updateAuthorFollowStatus` to `lib/store/post-store.ts` to instantly synchronize follow status across all posts authored by that user
+- Upgraded `components/posts/feed-view.tsx` with "For You" and "Following" tabs, skeleton loading transitions, and empty state suggestions
+- Updated `app/(main)/feed/page.tsx` with parallel server queries for feed posts and suggested creators
+- Registered new components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
+

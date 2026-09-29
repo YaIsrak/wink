@@ -35,6 +35,7 @@ export interface PostWithAuthor {
   likesCount: number
   commentsCount: number
   isLikedByMe: boolean
+  isFollowingAuthor?: boolean
   previewComments?: CommentWithAuthor[]
 }
 
