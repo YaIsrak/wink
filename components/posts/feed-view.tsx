@@ -8,9 +8,11 @@ import { PostCard } from '@/components/posts/post-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { InfiniteScrollSentinel } from '@/components/posts/infinite-scroll-sentinel'
 import { SuggestedUsers, type SuggestedUserItem } from '@/components/profile/suggested-users'
+import { GettingStartedChecklist } from '@/components/feed/getting-started-checklist'
 import { getFeedPostsAction } from '@/actions/post'
 import { usePostStore } from '@/lib/store'
 import type { PostWithAuthor } from '@/types/post'
+import type { ChecklistProgress } from '@/types/checklist'
 import { cn } from '@/lib/utils'
 
 export interface FeedViewProps {
@@ -19,11 +21,15 @@ export interface FeedViewProps {
     username: string
     displayName: string
     avatarUrl?: string | null
+    bio?: string | null
+    location?: string | null
+    website?: string | null
   }
   initialPosts: PostWithAuthor[]
   initialCursor?: string
   suggestedUsers?: SuggestedUserItem[]
   initialFilter?: 'all' | 'following'
+  checklistProgress?: ChecklistProgress
 }
 
 export function FeedView({
@@ -32,6 +38,7 @@ export function FeedView({
   initialCursor,
   suggestedUsers = [],
   initialFilter = 'all',
+  checklistProgress,
 }: FeedViewProps) {
   const [feedFilter, setFeedFilter] = React.useState<'all' | 'following'>(initialFilter)
   const [isSwitchingTab, setIsSwitchingTab] = React.useState(false)
@@ -113,6 +120,14 @@ export function FeedView({
 
   return (
     <div className="flex flex-col gap-6">
+      {/* Getting Started Checklist */}
+      {checklistProgress && (
+        <GettingStartedChecklist
+          initialProgress={checklistProgress}
+          user={user}
+        />
+      )}
+
       {/* Feed Filter Tabs */}
       <div className="flex items-center justify-between border-b border-border pb-1">
         <div className="flex items-center gap-6" role="tablist">

@@ -58,6 +58,7 @@ component.** Update it whenever a new reusable component is added.
 | `MessageComposer` | `components/messages/message-composer.tsx` | Chat composer with photo attachment upload, expanding textarea, and Enter to send | container |
 | `ChatWindow`      | `components/messages/chat-window.tsx` | Complete chat view with presence header, message stream, and request decision card | container |
 | `MessagesShell`   | `components/messages/messages-shell.tsx` | Responsive layout coordinator for desktop two-pane and mobile navigation | container wrapper |
+| `GettingStartedChecklist` | `components/feed/getting-started-checklist.tsx` | Gamified onboarding checklist with dynamic milestone checks, action triggers, and dismissal | container card (`rounded-xl`) |
 
 
 ## Process before creating a new component

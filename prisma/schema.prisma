@@ -18,6 +18,7 @@ model User {
   website     String?   @db.VarChar(255)
   location    String?   @db.VarChar(100)
   onboardedAt DateTime?
+  checklistDismissedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 

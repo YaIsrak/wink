@@ -5,11 +5,14 @@ interface UiState {
   sidebarOpen: boolean
   activeTab: string
   activeModal: string | null
+  isChecklistCollapsed: boolean
   setSidebarOpen: (open: boolean) => void
   toggleSidebar: () => void
   setActiveTab: (tab: string) => void
   setActiveModal: (modal: string | null) => void
   closeModal: () => void
+  toggleChecklistCollapsed: () => void
+  setChecklistCollapsed: (collapsed: boolean) => void
 }
 
 export const useUiStore = create<UiState>()(
@@ -18,11 +21,16 @@ export const useUiStore = create<UiState>()(
       sidebarOpen: true,
       activeTab: 'feed',
       activeModal: null,
+      isChecklistCollapsed: false,
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
       toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
       setActiveTab: (tab) => set({ activeTab: tab }),
       setActiveModal: (modal) => set({ activeModal: modal }),
       closeModal: () => set({ activeModal: null }),
+      toggleChecklistCollapsed: () =>
+        set((state) => ({ isChecklistCollapsed: !state.isChecklistCollapsed })),
+      setChecklistCollapsed: (collapsed) =>
+        set({ isChecklistCollapsed: collapsed }),
     }),
     {
       name: 'wink-ui-storage',
@@ -30,6 +38,7 @@ export const useUiStore = create<UiState>()(
       partialize: (state) => ({
         sidebarOpen: state.sidebarOpen,
         activeTab: state.activeTab,
+        isChecklistCollapsed: state.isChecklistCollapsed,
       }),
     }
   )

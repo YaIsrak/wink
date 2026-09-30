@@ -45,3 +45,10 @@ Record of meaningful project decisions and the reasoning behind them.
 * Context: Phase 6 core feature: enabling real time chat between users who follow each other, while routing non mutual follows into a Message Requests tab.
 * Decision: Used Supabase Realtime postgres changes channel combined with Realtime Presence for live online indicator lights. Conversations enforce follow prerequisites in the database service layer. Messages support soft deletion preserving rows for moderation, inline message editing with an edited indicator, and photo attachments via Supabase Storage messages bucket. Web Notifications API provides desktop push alerts alongside in app notification badges.
 * Alternatives considered: Pure polling via React Query or SWR (rejected because real time chat demands immediate feedback and presence tracking), hard deleting messages (rejected to prevent broken conversation history and keep audit records), allowing arbitrary user messaging without follow checks (rejected to protect users from unsolicited spam).
+
+## 2026-09-30 (Spec 0012: Getting Started Checklist Widget)
+
+- Context: Phase 3 gamification feature providing new members with clear onboarding milestones on the home feed.
+- Decision: Milestone states are dynamically queried from live database tables (profiles, follows, posts, and messages) rather than maintaining duplicated boolean columns, preventing state drift. Once all four milestones are completed, a permanent dismissal writes a timestamp to `checklistDismissedAt` on the `User` table, syncing dismissal across all devices. View collapsing is persisted client side via Zustand `useUiStore`.
+- Alternatives considered: Pure client side local storage tracking (rejected because dismissal does not sync across mobile and desktop devices and clearing browser data resurrects the widget), dedicated tracking table with audit rows for each step (rejected as unnecessary complexity and synchronization overhead for a portfolio scale application).
+

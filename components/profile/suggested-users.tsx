@@ -34,6 +34,7 @@ export function SuggestedUsers({
 
   return (
     <div
+      id="suggested-creators-card"
       className={cn(
         'rounded-xl border border-border bg-card p-5 shadow-xs flex flex-col gap-4',
         className

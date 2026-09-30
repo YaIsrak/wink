@@ -279,3 +279,18 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Registered all new components in `context/02-ui/ui-registry.md`
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
+
+## 2026-09-30 — Phase 3: Getting Started Checklist Widget
+- Deliberated and ratified build spec `docs/specs/0012-getting-started-checklist/index.md`
+- Added nullable `checklistDismissedAt DateTime?` to `User` model in `prisma/schema.prisma` and synchronized database via `npx prisma db push`
+- Created TypeScript interfaces in `types/checklist.ts` for checklist steps and progress structure
+- Implemented `lib/services/checklist.service.ts` for dynamic evaluation of milestone criteria (profile completion, follow counts, post counts, direct message counts) and permanent user dismissal
+- Created Server Actions in `actions/checklist.ts` (`getChecklistProgressAction`, `dismissChecklistAction`) enforcing session authentication
+- Extended Zustand `useUiStore` in `lib/store/ui-store.ts` with persisted `isChecklistCollapsed` view preference
+- Built `components/feed/getting-started-checklist.tsx` with progress bar, milestone checkmarks, action triggers (profile edit dialog, focus suggested creators, create post modal, messages deep link), and optimistic dismissal
+- Added target anchor `id="suggested-creators-card"` to `components/profile/suggested-users.tsx`
+- Integrated `GettingStartedChecklist` into `app/(main)/feed/page.tsx` and `components/posts/feed-view.tsx` with server prefetching for zero layout shift
+- Registered `GettingStartedChecklist` in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done
+
