@@ -50,6 +50,14 @@ component.** Update it whenever a new reusable component is added.
 | `NotificationItem` | `components/notifications/notification-item.tsx` | Activity row with actor identity, action badge, timestamp, post preview, and unread dot | default (`rounded-xl`) |
 | `NotificationEmptyState` | `components/notifications/notification-empty-state.tsx` | Empty state card for caught up or empty activity stream | container (`rounded-xl`) |
 | `NotificationList` | `components/notifications/notification-list.tsx` | Main notifications stream coordinator with infinite scroll and mark all as read | container stream |
+| `EmptyChatState`  | `components/messages/empty-chat-state.tsx` | Empty chat placeholder with action to start conversation | container |
+| `NewConversationDialog` | `components/messages/new-conversation-dialog.tsx` | Modal dialog for picking followed creators and sending initial message | modal dialog (`max-w-[480px]`, `rounded-2xl`) |
+| `ConversationItemCard` | `components/messages/conversation-item-card.tsx` | Conversation row in list with avatar, presence beacon, snippet, and unread pill | default (`rounded-2xl`) |
+| `ConversationList` | `components/messages/conversation-list.tsx` | Conversations sidebar with search filter, All/Requests/Unread tabs, and list | container |
+| `MessageBubble`   | `components/messages/message-bubble.tsx` | Chat bubble with sender/recipient alignment, photo lightbox, edit/delete actions, and delivery status | default (`rounded-2xl`) |
+| `MessageComposer` | `components/messages/message-composer.tsx` | Chat composer with photo attachment upload, expanding textarea, and Enter to send | container |
+| `ChatWindow`      | `components/messages/chat-window.tsx` | Complete chat view with presence header, message stream, and request decision card | container |
+| `MessagesShell`   | `components/messages/messages-shell.tsx` | Responsive layout coordinator for desktop two-pane and mobile navigation | container wrapper |
 
 
 ## Process before creating a new component

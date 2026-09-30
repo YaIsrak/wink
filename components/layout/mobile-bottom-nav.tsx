@@ -29,6 +29,11 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
   const isSearchActive = pathname.startsWith('/search')
   const isMessagesActive = pathname.startsWith('/messages')
   const isProfileActive = pathname.startsWith('/profile')
+  const isConversationPage = pathname.startsWith('/messages/') && pathname !== '/messages'
+
+  if (isConversationPage) {
+    return null
+  }
 
   return (
     <nav

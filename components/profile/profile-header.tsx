@@ -1,12 +1,14 @@
 'use client'
 
 import * as React from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Calendar,
   MapPin,
   Globe,
   Settings,
   Share2,
+  MessageSquare,
 } from 'lucide-react'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -43,6 +45,7 @@ export function ProfileHeader({
   const [editDialogOpen, setEditDialogOpen] = React.useState(false)
   const [followListOpen, setFollowListOpen] = React.useState(false)
   const [followListType, setFollowListType] = React.useState<'followers' | 'following'>('followers')
+  const router = useRouter()
 
   const completionPercentage = React.useMemo(() => {
     return calculateProfileCompletion({
@@ -152,6 +155,17 @@ export function ProfileHeader({
                     size="default"
                     className="px-5"
                   />
+                  {isFollowing && (
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      onClick={() => router.push('/messages')}
+                      className="rounded-lg font-semibold text-xs gap-1.5 shadow-2xs h-9 px-3"
+                    >
+                      <MessageSquare className="size-3.5" />
+                      <span>Message</span>
+                    </Button>
+                  )}
                   <Button
                     size="icon"
                     variant="outline"

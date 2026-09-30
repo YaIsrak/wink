@@ -245,9 +245,37 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Built `components/notifications/notification-list.tsx` coordinating list state, optimistic mark all as read, and infinite scroll sentinel
 - Upgraded `app/(main)/notifications/page.tsx` with server prefetching for zero layout shift
 - Mounted `useNotificationSubscription` in `components/layout/navigation-shell.tsx` connecting live badges across desktop and mobile
-- Registered notification components in `context/02-ui/ui-registry.md`
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
 
-
-
+## 2026-09-30 — Phase 6: Realtime Direct Messages and Message Requests
+- Deliberated and ratified architecture build specification in `docs/specs/0011-realtime-direct-messages/index.md`
+- Added `ConversationStatus` enum (`PENDING`, `ACCEPTED`, `DECLINED`), `Conversation` model, and `Message` model to `prisma/schema.prisma` with foreign key relations, cascade delete, and unique composite index on participants
+- Pushed updated schema to Supabase Postgres database and regenerated `@prisma/client`
+- Enabled Supabase Row Level Security on `conversations` and `messages` tables restricting SELECT and UPDATE to conversation participants, with physical deletion blocked
+- Configured public Supabase Storage `messages` bucket (5MB limit, image types whitelist) and user folder isolated storage policies
+- Added `conversations` and `messages` tables to `supabase_realtime` publication for instant websocket broadcasting
+- Created TypeScript interfaces and Zod validation schemas in `types/message.ts` and `lib/validation/message.ts`
+- Implemented query and mutation services in `lib/services/conversation.service.ts` and `lib/services/message.service.ts` supporting conversations, request filters, message sending, inline edits, soft deletes, and read receipts
+- Created Server Actions in `actions/conversation.ts` and `actions/message.ts` with session authentication and participant authorization
+- Created Zustand store `lib/store/message-store.ts` for managing conversations, optimistic message streams, unread badges, and presence state
+- Created client hooks:
+  - `lib/hooks/use-presence.ts` for tracking active online status via Supabase Realtime Presence
+  - `lib/hooks/use-chat-subscription.ts` for live conversation message streaming, status checkmarks, and auto read synchronization
+  - `lib/hooks/use-inbox-subscription.ts` for app wide unread messages count and incoming request counters
+- Implemented browser push notification helper `lib/utils/notifications.ts` via the Web Notifications API
+- Built modular messages components:
+  - `components/messages/empty-chat-state.tsx` displaying friendly placeholder and new message action
+  - `components/messages/new-conversation-dialog.tsx` for searching followed users and sending an initial message
+  - `components/messages/conversation-item-card.tsx` rendering avatar with presence beacon, preview snippet, unread counter, and active state
+  - `components/messages/conversation-list.tsx` coordinating search, All/Requests/Unread tab filters, and conversation list
+  - `components/messages/message-bubble.tsx` with sender/recipient alignment, photo lightbox, inline edit, soft delete, and delivery checkmarks
+  - `components/messages/message-composer.tsx` supporting photo upload, expanding textarea, and Enter to send
+  - `components/messages/chat-window.tsx` coordinating presence header, message stream, and request accept/decline action card
+  - `components/messages/messages-shell.tsx` coordinating responsive desktop two pane view and mobile screen navigation
+- Upgraded `app/(main)/messages/page.tsx` and created `app/(main)/messages/[conversationId]/page.tsx` with server prefetching for zero layout shift
+- Mounted `useInboxSubscription` in `components/layout/navigation-shell.tsx` connecting live badges in `DesktopSidebar` and `MobileHeader`
+- Added direct "Message" button in `components/profile/profile-header.tsx` for followed creators
+- Registered all new components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
+- Status: Done

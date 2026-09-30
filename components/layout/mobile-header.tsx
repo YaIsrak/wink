@@ -16,6 +16,11 @@ export function MobileHeader() {
 
   const isNotificationsActive = pathname.startsWith('/notifications')
   const isMessagesActive = pathname.startsWith('/messages')
+  const isConversationPage = pathname.startsWith('/messages/') && pathname !== '/messages'
+
+  if (isConversationPage) {
+    return null
+  }
 
   return (
     <header className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-background/90 px-4 backdrop-blur-md lg:hidden select-none">

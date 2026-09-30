@@ -40,5 +40,8 @@ Record of meaningful project decisions and the reasoning behind them.
 - Context: Phase 2 core feature: authoring posts with text caption, photos, and optimistic feed updates.
 - Decision: Direct client-side upload to public `posts` bucket in Supabase Storage with user-scoped RLS policies. Post records persisted via Next.js Server Action (`createPostAction`) with Zod validation. Feed state managed via Zustand `usePostStore` with optimistic prepend, temporary UUID, posting state, and rollback on error without loss of drafted text.
 - Alternatives considered: Server Action multipart streaming (rejected due to 413 payload limits and increased serverless function execution costs), local React 19 `useOptimistic` (rejected due to multi-surface coordination across global modal and inline feed composer).
+## 2026-09-30 (Spec 0011: Realtime Direct Messages and Message Requests)
 
-
+* Context: Phase 6 core feature: enabling real time chat between users who follow each other, while routing non mutual follows into a Message Requests tab.
+* Decision: Used Supabase Realtime postgres changes channel combined with Realtime Presence for live online indicator lights. Conversations enforce follow prerequisites in the database service layer. Messages support soft deletion preserving rows for moderation, inline message editing with an edited indicator, and photo attachments via Supabase Storage messages bucket. Web Notifications API provides desktop push alerts alongside in app notification badges.
+* Alternatives considered: Pure polling via React Query or SWR (rejected because real time chat demands immediate feedback and presence tracking), hard deleting messages (rejected to prevent broken conversation history and keep audit records), allowing arbitrary user messaging without follow checks (rejected to protect users from unsolicited spam).

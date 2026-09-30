@@ -1,23 +1,33 @@
-import * as React from 'react'
-import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { MessageSquare } from 'lucide-react'
+import * as React from 'react';
+import { redirect } from 'next/navigation';
+import { createClient } from '@/lib/supabase/server';
+import { getUserConversations } from '@/lib/services/conversation.service';
+import { MessagesShell } from '@/components/messages/messages-shell';
 
-export default function MessagesPage() {
+export const metadata = {
+  title: 'Messages | Wink',
+  description: 'Private direct messages with creators you follow.',
+};
+
+export default async function MessagesPage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
+  const { conversations, unreadRequestsCount } = await getUserConversations(user.id, 'ALL');
+
   return (
-    <div className="mx-auto max-w-2xl px-4 py-8 lg:py-10">
-      <Card className="p-6">
-        <CardHeader className="p-0 flex flex-row items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
-            <MessageSquare className="size-5" />
-          </div>
-          <div>
-            <CardTitle className="text-xl font-bold">Messages</CardTitle>
-            <CardDescription>
-              Real-time direct messaging between mutual followers coming in Phase 6.
-            </CardDescription>
-          </div>
-        </CardHeader>
-      </Card>
+    <div className="w-full h-[calc(100dvh-8.5rem)] lg:h-[calc(100dvh-2rem)] p-2 lg:p-4">
+      <MessagesShell
+        initialConversations={conversations}
+        initialUnreadRequestsCount={unreadRequestsCount}
+        currentUserId={user.id}
+      />
     </div>
-  )
+  );
 }
