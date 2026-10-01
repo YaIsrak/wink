@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server'
 import { getUserProfileById } from '@/lib/services/auth.service'
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { ThemeToggle } from '@/components/shared/theme-toggle'
+import { Logo } from '@/components/shared/logo'
 import { OnboardingForm } from '@/components/onboarding/onboarding-form'
 
 export default async function OnboardingPage() {
@@ -33,9 +34,10 @@ export default async function OnboardingPage() {
       <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-border bg-background/80 px-6 backdrop-blur-sm">
         <Link
           href="/feed"
-          className="text-xl font-bold tracking-tight text-foreground hover:opacity-90 transition-opacity"
+          className="flex items-center gap-2.5 text-xl font-bold tracking-tight text-foreground hover:opacity-90 transition-opacity"
         >
-          Wink
+          <Logo size={28} />
+          <span>Wink</span>
         </Link>
         <div className="flex items-center gap-3">
           <ThemeToggle />

@@ -2,7 +2,11 @@
 
 import * as React from 'react'
 import Cropper, { type Area, type Point } from 'react-easy-crop'
-import { ZoomIn, ZoomOut, Loader2 } from 'lucide-react'
+import {
+  MagnifyingGlassPlusIcon,
+  MagnifyingGlassMinusIcon,
+  ArrowPathIcon,
+} from '@heroicons/react/24/outline'
 import {
   Dialog,
   DialogHeader,
@@ -90,7 +94,7 @@ export function AvatarCropDialog({
         </div>
 
         <div className="mt-4 flex items-center gap-3 px-2">
-          <ZoomOut className="size-4 text-muted-foreground shrink-0" />
+          <MagnifyingGlassMinusIcon className="size-4 text-muted-foreground shrink-0" />
           <input
             type="range"
             min={1}
@@ -101,7 +105,7 @@ export function AvatarCropDialog({
             onChange={(e) => setZoom(Number(e.target.value))}
             className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-secondary accent-foreground"
           />
-          <ZoomIn className="size-4 text-muted-foreground shrink-0" />
+          <MagnifyingGlassPlusIcon className="size-4 text-muted-foreground shrink-0" />
         </div>
       </div>
 
@@ -121,7 +125,7 @@ export function AvatarCropDialog({
         >
           {isUploading || isProcessing ? (
             <>
-              <Loader2 className="mr-2 size-4 animate-spin" />
+              <ArrowPathIcon className="mr-2 size-4 animate-spin" />
               Saving...
             </>
           ) : (

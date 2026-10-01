@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { SearchX, Lightbulb } from 'lucide-react'
+import { MagnifyingGlassIcon, LightBulbIcon } from '@heroicons/react/24/outline'
 import { Card } from '@/components/ui/card'
 import { SuggestedUsers, type SuggestedUserItem } from '@/components/profile/suggested-users'
 import { cn } from '@/lib/utils'
@@ -21,7 +21,7 @@ export function SearchEmptyState({
     <div className={cn('space-y-6', className)}>
       <Card className="flex flex-col items-center justify-center p-8 text-center bg-card/60 backdrop-blur-xs border-border/80">
         <div className="flex size-14 items-center justify-center rounded-2xl bg-muted/80 text-muted-foreground mb-4">
-          <SearchX className="size-7" />
+          <MagnifyingGlassIcon className="size-7" />
         </div>
 
         <h3 className="text-base font-semibold text-foreground">
@@ -33,7 +33,7 @@ export function SearchEmptyState({
         </p>
 
         <div className="flex items-start gap-2.5 mt-5 p-3 rounded-xl bg-secondary/50 border border-border/50 text-left text-xs text-muted-foreground max-w-md">
-          <Lightbulb className="size-4 text-amber-500 shrink-0 mt-0.5" />
+          <LightBulbIcon className="size-4 text-amber-500 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <span className="font-semibold text-foreground">Search tips:</span>
             <ul className="list-disc list-inside space-y-0.5 text-muted-foreground/90">

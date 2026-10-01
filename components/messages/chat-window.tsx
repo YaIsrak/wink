@@ -18,13 +18,12 @@ import {
 import { respondToRequestAction } from '@/actions/conversation';
 import { toast } from 'sonner';
 import {
-  ArrowLeft,
-  ShieldCheck,
-  Check,
-  X,
-  ExternalLink,
-  Loader2,
-} from 'lucide-react';
+  ArrowLeftIcon,
+  ShieldCheckIcon,
+  CheckIcon,
+  XMarkIcon,
+  ArrowTopRightOnSquareIcon,
+} from '@heroicons/react/24/outline';
 import type { ConversationItem, MessageItem } from '@/types/message';
 
 interface ChatWindowProps {
@@ -171,7 +170,7 @@ export function ChatWindow({
               onClick={onBack}
               className="lg:hidden size-8 rounded-xl text-muted-foreground hover:text-foreground"
             >
-              <ArrowLeft className="size-4" />
+              <ArrowLeftIcon className="size-4" />
             </Button>
           )}
 
@@ -217,7 +216,7 @@ export function ChatWindow({
         <div className="flex items-center gap-1">
           <Link href={`/profile/${conversation.otherUser.username}`}>
             <Button size="icon" variant="ghost" className="size-8 rounded-xl text-muted-foreground hover:text-foreground">
-              <ExternalLink className="size-4" />
+              <ArrowTopRightOnSquareIcon className="size-4" />
             </Button>
           </Link>
         </div>
@@ -225,7 +224,7 @@ export function ChatWindow({
 
       {/* Privacy Banner */}
       <div className="px-4 py-2 bg-secondary/30 border-b border-border/20 flex items-center justify-center gap-2 text-[11px] text-muted-foreground select-none">
-        <ShieldCheck className="size-3.5 text-muted-foreground" />
+        <ShieldCheckIcon className="size-3.5 text-muted-foreground" />
         <span>End to end encrypted direct connection between mutual follows</span>
       </div>
 
@@ -291,7 +290,7 @@ export function ChatWindow({
               onClick={() => handleRespondToRequest('DECLINE')}
               className="flex-1 sm:flex-initial rounded-xl text-xs gap-1.5 h-8 text-destructive hover:bg-destructive/10"
             >
-              <X className="size-3.5" />
+              <XMarkIcon className="size-3.5" />
               <span>Decline</span>
             </Button>
             <Button
@@ -299,7 +298,7 @@ export function ChatWindow({
               onClick={() => handleRespondToRequest('ACCEPT')}
               className="flex-1 sm:flex-initial rounded-xl text-xs gap-1.5 h-8"
             >
-              <Check className="size-3.5" />
+              <CheckIcon className="size-3.5" />
               <span>Accept</span>
             </Button>
           </div>

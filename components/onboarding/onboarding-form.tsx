@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { Loader2, ArrowRight } from 'lucide-react'
+import { ArrowPathIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import {
   Card,
@@ -208,13 +208,13 @@ export function OnboardingForm({ user }: OnboardingFormProps) {
             >
               {isSubmitting ? (
                 <>
-                  <Loader2 className="mr-2 size-4 animate-spin" />
+                  <ArrowPathIcon className="mr-2 size-4 animate-spin" />
                   Saving profile...
                 </>
               ) : (
                 <>
                   Complete Profile
-                  <ArrowRight className="ml-2 size-4" />
+                  <ArrowRightIcon className="ml-2 size-4" />
                 </>
               )}
             </Button>
@@ -227,7 +227,7 @@ export function OnboardingForm({ user }: OnboardingFormProps) {
             >
               {isSkipping ? (
                 <span className="inline-flex items-center gap-1.5">
-                  <Loader2 className="size-3.5 animate-spin" />
+                  <ArrowPathIcon className="size-3.5 animate-spin" />
                   Skipping...
                 </span>
               ) : (

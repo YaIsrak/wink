@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Sparkles, Users } from 'lucide-react'
+import { SparklesIcon } from '@heroicons/react/24/outline'
 import { Avatar } from '@/components/ui/avatar'
 import { FollowButton } from '@/components/profile/follow-button'
 import { cn } from '@/lib/utils'
@@ -43,7 +43,7 @@ export function SuggestedUsers({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex size-7 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <Sparkles className="size-4" />
+            <SparklesIcon className="size-4" />
           </div>
           <div>
             <h3 className="text-sm font-semibold text-foreground leading-tight">

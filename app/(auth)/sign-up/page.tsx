@@ -10,14 +10,13 @@ import { signUpAction } from "@/actions/auth";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Logo } from "@/components/shared/logo";
 
 function WinkBrand() {
   return (
-    <div className="flex items-center justify-center gap-2">
-      <div className="flex size-6 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold text-xs tracking-tighter shadow-sm">
-        W
-      </div>
-      <span className="text-base font-bold tracking-tight text-foreground">
+    <div className="flex items-center justify-center gap-2.5">
+      <Logo size={28} />
+      <span className="text-xl font-bold tracking-tight text-foreground">
         Wink
       </span>
     </div>

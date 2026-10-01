@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Loader2 } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
@@ -50,7 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         {...props}
       >
-        {isLoading && <Loader2 className="size-4 animate-spin text-current" />}
+        {isLoading && <ArrowPathIcon className="size-4 animate-spin text-current" />}
         {children}
       </button>
     );

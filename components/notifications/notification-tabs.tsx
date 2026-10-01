@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import type { NotificationFilter } from '@/types/notification'
-import { Bell, Inbox } from 'lucide-react'
+import { BellIcon, InboxIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 
 interface NotificationTabsProps {
@@ -19,8 +19,8 @@ export function NotificationTabs({
   className,
 }: NotificationTabsProps) {
   const tabs = [
-    { id: 'all' as NotificationFilter, label: 'All', icon: Bell },
-    { id: 'unread' as NotificationFilter, label: 'Unread', icon: Inbox, count: unreadCount },
+    { id: 'all' as NotificationFilter, label: 'All', icon: BellIcon },
+    { id: 'unread' as NotificationFilter, label: 'Unread', icon: InboxIcon, count: unreadCount },
   ]
 
   return (

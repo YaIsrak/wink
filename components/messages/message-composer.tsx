@@ -4,7 +4,12 @@ import * as React from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { ImagePlus, Send, X, Loader2 } from 'lucide-react';
+import {
+  PhotoIcon,
+  PaperAirplaneIcon,
+  XMarkIcon,
+  ArrowPathIcon,
+} from '@heroicons/react/24/outline';
 import { toast } from 'sonner';
 
 interface MessageComposerProps {
@@ -130,7 +135,7 @@ export function MessageComposer({
             onClick={removeSelectedFile}
             className="absolute -top-1.5 -right-1.5 size-5 bg-background border border-border rounded-full flex items-center justify-center text-foreground hover:bg-secondary cursor-pointer shadow-xs"
           >
-            <X className="size-3" />
+            <XMarkIcon className="size-3" />
           </button>
         </div>
       )}
@@ -155,7 +160,7 @@ export function MessageComposer({
           className="size-8 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary shrink-0"
           title="Attach photo"
         >
-          <ImagePlus className="size-4" />
+          <PhotoIcon className="size-4" />
         </Button>
 
         <Textarea
@@ -185,9 +190,9 @@ export function MessageComposer({
           title="Send"
         >
           {isUploading ? (
-            <Loader2 className="size-4 animate-spin" />
+            <ArrowPathIcon className="size-4 animate-spin" />
           ) : (
-            <Send className="size-4" />
+            <PaperAirplaneIcon className="size-4 -rotate-45" />
           )}
         </Button>
       </div>

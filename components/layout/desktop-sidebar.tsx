@@ -4,15 +4,15 @@ import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  Home,
-  Search,
-  MessageSquare,
-  Bell,
-  User,
-  Settings,
-  Plus,
-  Sparkles,
-} from 'lucide-react'
+  HomeIcon,
+  MagnifyingGlassIcon,
+  ChatBubbleLeftRightIcon,
+  BellIcon,
+  UserIcon,
+  Cog6ToothIcon,
+  PlusIcon,
+} from '@heroicons/react/24/outline'
+import { Logo } from '@/components/shared/logo'
 import { Button } from '@/components/ui/button'
 import { NavItem } from '@/components/layout/nav-item'
 import { UserNavCard } from '@/components/layout/user-nav-card'
@@ -40,39 +40,39 @@ export function DesktopSidebar({ user }: DesktopSidebarProps) {
     {
       href: '/feed',
       label: 'Home',
-      icon: Home,
+      icon: HomeIcon,
       isActive: pathname === '/feed' || pathname === '/',
     },
     {
       href: '/search',
       label: 'Search',
-      icon: Search,
+      icon: MagnifyingGlassIcon,
       isActive: pathname.startsWith('/search'),
     },
     {
       href: '/messages',
       label: 'Messages',
-      icon: MessageSquare,
+      icon: ChatBubbleLeftRightIcon,
       isActive: pathname.startsWith('/messages'),
       badge: unreadMessagesCount,
     },
     {
       href: '/notifications',
       label: 'Notifications',
-      icon: Bell,
+      icon: BellIcon,
       isActive: pathname.startsWith('/notifications'),
       badge: unreadCount,
     },
     {
       href: '/profile',
       label: 'Profile',
-      icon: User,
+      icon: UserIcon,
       isActive: pathname.startsWith('/profile'),
     },
     {
       href: '/settings',
       label: 'Settings',
-      icon: Settings,
+      icon: Cog6ToothIcon,
       isActive: pathname.startsWith('/settings'),
     },
   ]
@@ -86,9 +86,7 @@ export function DesktopSidebar({ user }: DesktopSidebarProps) {
             href="/feed"
             className="flex items-center gap-2.5 transition-opacity hover:opacity-90"
           >
-            <div className="flex size-9 items-center justify-center rounded-xl bg-foreground text-background shadow-xs">
-              <Sparkles className="size-5" />
-            </div>
+            <Logo size={34} />
             <span className="text-xl font-bold tracking-tight text-foreground">
               Wink
             </span>
@@ -116,7 +114,7 @@ export function DesktopSidebar({ user }: DesktopSidebarProps) {
             onClick={() => setActiveModal('create-post')}
             className="w-full gap-2 rounded-xl py-6 font-semibold shadow-xs transition-transform active:scale-[0.98] cursor-pointer"
           >
-            <Plus className="size-4" strokeWidth={2.5} />
+            <PlusIcon className="size-5 stroke-[2.5]" />
             <span>Create Post</span>
           </Button>
         </div>

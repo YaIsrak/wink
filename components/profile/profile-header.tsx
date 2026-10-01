@@ -3,13 +3,13 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import {
-  Calendar,
-  MapPin,
-  Globe,
-  Settings,
-  Share2,
-  MessageSquare,
-} from 'lucide-react'
+  CalendarIcon,
+  MapPinIcon,
+  GlobeAltIcon,
+  Cog6ToothIcon,
+  ShareIcon,
+  ChatBubbleLeftRightIcon,
+} from '@heroicons/react/24/outline'
 import { Avatar } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { FollowButton } from '@/components/profile/follow-button'
@@ -130,7 +130,7 @@ export function ProfileHeader({
                     onClick={() => setEditDialogOpen(true)}
                     className="rounded-lg font-semibold text-xs gap-1.5 shadow-2xs"
                   >
-                    <Settings className="size-3.5" />
+                    <Cog6ToothIcon className="size-3.5" />
                     <span>Edit Profile</span>
                   </Button>
                   <Button
@@ -140,7 +140,7 @@ export function ProfileHeader({
                     aria-label="Share profile"
                     className="size-8.5 rounded-lg shadow-2xs"
                   >
-                    <Share2 className="size-3.5" />
+                    <ShareIcon className="size-3.5" />
                   </Button>
                 </>
               ) : (
@@ -162,7 +162,7 @@ export function ProfileHeader({
                       onClick={() => router.push('/messages')}
                       className="rounded-lg font-semibold text-xs gap-1.5 shadow-2xs h-9 px-3"
                     >
-                      <MessageSquare className="size-3.5" />
+                      <ChatBubbleLeftRightIcon className="size-3.5" />
                       <span>Message</span>
                     </Button>
                   )}
@@ -173,7 +173,7 @@ export function ProfileHeader({
                     aria-label="Share profile"
                     className="size-9 rounded-lg shadow-2xs"
                   >
-                    <Share2 className="size-4" />
+                    <ShareIcon className="size-4" />
                   </Button>
                 </>
               )}
@@ -206,7 +206,7 @@ export function ProfileHeader({
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 text-xs text-muted-foreground">
               {profile.location && (
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="size-3.5 text-muted-foreground/80 shrink-0" />
+                  <MapPinIcon className="size-3.5 text-muted-foreground/80 shrink-0" />
                   <span>{profile.location}</span>
                 </span>
               )}
@@ -223,7 +223,7 @@ export function ProfileHeader({
                   rel="noopener noreferrer"
                   className="flex items-center gap-1.5 text-foreground font-medium hover:underline hover:text-primary transition-colors"
                 >
-                  <Globe className="size-3.5 text-muted-foreground/80 shrink-0" />
+                  <GlobeAltIcon className="size-3.5 text-muted-foreground/80 shrink-0" />
                   <span className="truncate max-w-[220px]">
                     {profile.website.replace(/^https?:\/\//, '')}
                   </span>
@@ -231,7 +231,7 @@ export function ProfileHeader({
               )}
 
               <span className="flex items-center gap-1.5">
-                <Calendar className="size-3.5 text-muted-foreground/80 shrink-0" />
+                <CalendarIcon className="size-3.5 text-muted-foreground/80 shrink-0" />
                 <span>Joined {joinDate}</span>
               </span>
             </div>

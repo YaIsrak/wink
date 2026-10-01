@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun } from "lucide-react";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
@@ -28,7 +28,7 @@ export function ThemeToggle() {
   if (!mounted) {
     return (
       <Button variant="outline" size="icon" className="size-9" disabled>
-        <Sun className="size-4 opacity-50" />
+        <SunIcon className="size-4 opacity-50" />
       </Button>
     );
   }
@@ -43,9 +43,9 @@ export function ThemeToggle() {
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
     >
       {isDark ? (
-        <Sun className="size-4 text-amber-400 transition-transform duration-200" />
+        <SunIcon className="size-4 text-amber-400 transition-transform duration-200" />
       ) : (
-        <Moon className="size-4 text-foreground transition-transform duration-200" />
+        <MoonIcon className="size-4 text-foreground transition-transform duration-200" />
       )}
     </Button>
   );

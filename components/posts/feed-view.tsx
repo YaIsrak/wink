@@ -1,7 +1,11 @@
 'use client'
 
 import * as React from 'react'
-import { MessageSquareDashed, Users, Sparkles } from 'lucide-react'
+import {
+  ChatBubbleLeftIcon,
+  UsersIcon,
+  SparklesIcon,
+} from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import { PostComposer } from '@/components/posts/post-composer'
 import { PostCard } from '@/components/posts/post-card'
@@ -144,7 +148,7 @@ export function FeedView({
             )}
           >
             <span>For You</span>
-            <Sparkles className="size-3 text-amber-500" />
+            <SparklesIcon className="size-3 text-amber-500" />
             {feedFilter === 'all' && (
               <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground rounded-t-full" />
             )}
@@ -235,7 +239,7 @@ export function FeedView({
             <div className="flex flex-col gap-5">
               <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-8 text-center">
                 <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground mb-3">
-                  <Users className="size-6" />
+                  <UsersIcon className="size-6" />
                 </div>
                 <h3 className="text-base font-semibold text-foreground">
                   Your Following feed is empty
@@ -252,7 +256,7 @@ export function FeedView({
           ) : (
             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-10 text-center">
               <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground mb-3">
-                <MessageSquareDashed className="size-6" />
+                <ChatBubbleLeftIcon className="size-6" />
               </div>
               <h3 className="text-base font-semibold text-foreground">
                 No posts yet

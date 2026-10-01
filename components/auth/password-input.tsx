@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Eye, EyeOff, Check, X } from "lucide-react";
+import { EyeIcon, EyeSlashIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import {
   checkPasswordCriteria,
   type PasswordCriteriaStatus,
@@ -113,9 +113,9 @@ export const PasswordInput = React.forwardRef<
             className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground focus:outline-none disabled:opacity-50"
           >
             {isVisible ? (
-              <EyeOff className="size-4" />
+              <EyeSlashIcon className="size-4" />
             ) : (
-              <Eye className="size-4" />
+              <EyeIcon className="size-4" />
             )}
           </button>
         </div>
@@ -147,9 +147,9 @@ export const PasswordInput = React.forwardRef<
                       )}
                     >
                       {met ? (
-                        <Check className="size-2.5 stroke-[3]" />
+                        <CheckIcon className="size-2.5 stroke-[3]" />
                       ) : (
-                        <X className="size-2.5 stroke-[2.5]" />
+                        <XMarkIcon className="size-2.5 stroke-[2.5]" />
                       )}
                     </span>
                     <span>{item.label}</span>

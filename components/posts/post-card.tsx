@@ -3,17 +3,18 @@
 import * as React from 'react'
 import Link from 'next/link'
 import {
-  Heart,
-  MessageCircle,
-  Share2,
-  Loader2,
-  MoreHorizontal,
-  Pencil,
-  Trash2,
-  Copy,
-  X,
-  Maximize2,
-} from 'lucide-react'
+  HeartIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  ShareIcon,
+  ArrowPathIcon,
+  EllipsisHorizontalIcon,
+  PencilSquareIcon,
+  TrashIcon,
+  DocumentDuplicateIcon,
+  XMarkIcon,
+  ArrowsPointingOutIcon,
+} from '@heroicons/react/24/outline'
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid'
 import { toast } from 'sonner'
 import { Avatar } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
@@ -233,7 +234,7 @@ export function PostCard({
                     variant="secondary"
                     className="h-4 px-1.5 text-[10px] gap-1 font-medium bg-muted text-muted-foreground"
                   >
-                    <Loader2 className="size-2.5 animate-spin" />
+                    <ArrowPathIcon className="size-2.5 animate-spin" />
                     <span>Posting</span>
                   </Badge>
                 )}
@@ -260,7 +261,7 @@ export function PostCard({
                     aria-label="Post actions"
                     className="text-muted-foreground hover:text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors cursor-pointer"
                   >
-                    <MoreHorizontal className="size-4" />
+                    <EllipsisHorizontalIcon className="size-4" />
                   </button>
                 </DropdownMenuTrigger>
               <DropdownMenuContent align="right">
@@ -272,20 +273,20 @@ export function PostCard({
                         setIsEditModalOpen(true)
                       }}
                     >
-                      <Pencil className="mr-2 size-4" />
+                      <PencilSquareIcon className="mr-2 size-4" />
                       <span>Edit post</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem
                       destructive
                       onClick={() => setIsDeleteModalOpen(true)}
                     >
-                      <Trash2 className="mr-2 size-4" />
+                      <TrashIcon className="mr-2 size-4" />
                       <span>Delete post</span>
                     </DropdownMenuItem>
                   </>
                 )}
                 <DropdownMenuItem onClick={handleCopyLink}>
-                  <Copy className="mr-2 size-4" />
+                  <DocumentDuplicateIcon className="mr-2 size-4" />
                   <span>Copy link</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -322,7 +323,7 @@ export function PostCard({
               className="absolute bottom-2.5 right-2.5 flex size-7 items-center justify-center rounded-md bg-background/80 text-foreground backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer shadow-xs"
               title="View full photo"
             >
-              <Maximize2 className="size-3.5" />
+              <ArrowsPointingOutIcon className="size-3.5" />
             </button>
           </div>
         )}
@@ -339,13 +340,11 @@ export function PostCard({
                 className="hover:text-foreground transition-all cursor-pointer group active:scale-125"
                 title={isLikedByMe ? 'Unlike post' : 'Like post'}
               >
-                <Heart
-                  className={`size-4 transition-all duration-200 ${
-                    isLikedByMe
-                      ? 'text-red-500 fill-red-500 scale-110 animate-in zoom-in-75'
-                      : 'group-hover:scale-110'
-                  }`}
-                />
+                {isLikedByMe ? (
+                  <HeartIconSolid className="size-4 text-red-500 scale-110 animate-in zoom-in-75" />
+                ) : (
+                  <HeartIcon className="size-4 group-hover:scale-110" />
+                )}
               </button>
               {likesCount > 0 ? (
                 <button
@@ -369,7 +368,7 @@ export function PostCard({
               className="flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
               title="Comments"
             >
-              <MessageCircle className="size-4" />
+              <ChatBubbleOvalLeftEllipsisIcon className="size-4" />
               <span>{commentsCount}</span>
             </button>
           </div>
@@ -380,7 +379,7 @@ export function PostCard({
             className="hover:text-foreground transition-colors cursor-pointer"
             title="Share"
           >
-            <Share2 className="size-4" />
+            <ShareIcon className="size-4" />
           </button>
         </div>
 
@@ -440,7 +439,7 @@ export function PostCard({
               className="absolute top-2 right-2 z-10 flex size-8 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-xs hover:bg-muted transition-colors cursor-pointer"
               title="Close"
             >
-              <X className="size-4" />
+              <XMarkIcon className="size-4" />
             </button>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -490,7 +489,7 @@ export function PostCard({
             >
               {isSavingEdit ? (
                 <>
-                  <Loader2 className="mr-2 size-3.5 animate-spin" />
+                  <ArrowPathIcon className="mr-2 size-3.5 animate-spin" />
                   Saving...
                 </>
               ) : (
@@ -527,7 +526,7 @@ export function PostCard({
           >
             {isDeleting ? (
               <>
-                <Loader2 className="mr-2 size-3.5 animate-spin" />
+                <ArrowPathIcon className="mr-2 size-3.5 animate-spin" />
                 Deleting...
               </>
             ) : (

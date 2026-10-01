@@ -11,7 +11,11 @@ import { getUserFollowingAction } from '@/actions/follow';
 import { startConversationAction } from '@/actions/conversation';
 import { useMessageStore } from '@/lib/store/message-store';
 import { toast } from 'sonner';
-import { Search, Loader2, Send } from 'lucide-react';
+import {
+  MagnifyingGlassIcon,
+  ArrowPathIcon,
+  PaperAirplaneIcon,
+} from '@heroicons/react/24/outline';
 import type { FollowUserItem } from '@/types/profile';
 
 interface NewConversationDialogProps {
@@ -117,7 +121,7 @@ export function NewConversationDialog({
           <div className="flex flex-col h-[380px]">
             <div className="p-3 border-b border-border/30">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                 <Input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
@@ -131,7 +135,7 @@ export function NewConversationDialog({
             <div className="flex-1 overflow-y-auto p-2 divide-y divide-border/20">
               {isLoading ? (
                 <div className="flex items-center justify-center h-full text-muted-foreground">
-                  <Loader2 className="size-5 animate-spin mr-2" />
+                  <ArrowPathIcon className="size-5 animate-spin mr-2" />
                   <span className="text-xs">Loading people you follow...</span>
                 </div>
               ) : filteredFollowing.length === 0 ? (
@@ -232,9 +236,9 @@ export function NewConversationDialog({
                 className="gap-2 rounded-xl"
               >
                 {isSubmitting ? (
-                  <Loader2 className="size-4 animate-spin" />
+                  <ArrowPathIcon className="size-4 animate-spin" />
                 ) : (
-                  <Send className="size-4" />
+                  <PaperAirplaneIcon className="size-4 -rotate-45" />
                 )}
                 <span>Send message</span>
               </Button>

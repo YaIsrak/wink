@@ -2,7 +2,8 @@
 
 import * as React from 'react'
 import Image from 'next/image'
-import { Heart, MessageSquare, Image as ImageIcon } from 'lucide-react'
+import { PhotoIcon as ImageIcon } from '@heroicons/react/24/outline'
+import { HeartIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/solid'
 import { Dialog } from '@/components/ui/dialog'
 import type { PostWithAuthor } from '@/types/post'
 
@@ -57,11 +58,11 @@ export function PostGrid({
             {/* Hover overlay with engagement metrics */}
             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center gap-4 text-white text-xs font-semibold backdrop-blur-xs select-none">
               <span className="flex items-center gap-1.5">
-                <Heart className="size-4 fill-white text-white" />
+                <HeartIcon className="size-4" />
                 <span>{post.likesCount ?? 0}</span>
               </span>
               <span className="flex items-center gap-1.5">
-                <MessageSquare className="size-4 fill-white text-white" />
+                <ChatBubbleLeftIcon className="size-4" />
                 <span>{post.commentsCount ?? 0}</span>
               </span>
             </div>
@@ -97,11 +98,11 @@ export function PostGrid({
                 </p>
                 <div className="flex items-center gap-4 mt-2 text-xs text-zinc-400">
                   <span className="flex items-center gap-1">
-                    <Heart className="size-3.5 fill-red-500 text-red-500" />
+                    <HeartIcon className="size-3.5 text-red-500" />
                     <span>{selectedPost.likesCount ?? 0} likes</span>
                   </span>
                   <span className="flex items-center gap-1">
-                    <MessageSquare className="size-3.5" />
+                    <ChatBubbleLeftIcon className="size-3.5" />
                     <span>{selectedPost.commentsCount ?? 0} comments</span>
                   </span>
                 </div>

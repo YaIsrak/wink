@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import type { SearchTab } from '@/types/search'
-import { Sparkles, Users, Image as ImageIcon } from 'lucide-react'
+import { SparklesIcon, UsersIcon, PhotoIcon as ImageIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 
 interface SearchTabsProps {
@@ -20,8 +20,8 @@ interface TabItem {
 }
 
 const TABS: TabItem[] = [
-  { id: 'top', label: 'Top', icon: Sparkles },
-  { id: 'accounts', label: 'Accounts', icon: Users },
+  { id: 'top', label: 'Top', icon: SparklesIcon },
+  { id: 'accounts', label: 'Accounts', icon: UsersIcon },
   { id: 'posts', label: 'Posts', icon: ImageIcon },
 ]
 

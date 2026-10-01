@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { LogOut } from 'lucide-react'
+import { ArrowRightStartOnRectangleIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { logoutAction } from '@/actions/auth'
@@ -48,7 +48,7 @@ export function SignOutButton({
       isLoading={isPending}
       {...props}
     >
-      {showIcon && !isPending && <LogOut className="size-4" />}
+      {showIcon && !isPending && <ArrowRightStartOnRectangleIcon className="size-4" />}
       {children || 'Sign out'}
     </Button>
   )

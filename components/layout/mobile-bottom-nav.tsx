@@ -3,7 +3,17 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Search, Plus, Mail } from 'lucide-react'
+import {
+  HomeIcon,
+  MagnifyingGlassIcon,
+  PlusIcon,
+  EnvelopeIcon,
+} from '@heroicons/react/24/outline'
+import {
+  HomeIcon as HomeIconSolid,
+  MagnifyingGlassIcon as MagnifyingGlassIconSolid,
+  EnvelopeIcon as EnvelopeIconSolid,
+} from '@heroicons/react/24/solid'
 import { Avatar } from '@/components/ui/avatar'
 import { useUiStore } from '@/lib/store/ui-store'
 import { useNotificationStore } from '@/lib/store/notification-store'
@@ -50,12 +60,11 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
             : 'text-muted-foreground hover:text-foreground'
         )}
       >
-        <Home
-          className={cn(
-            'size-5 transition-transform duration-150',
-            isHomeActive ? 'fill-current stroke-[2.2]' : 'stroke-2'
-          )}
-        />
+        {isHomeActive ? (
+          <HomeIconSolid className="size-5 transition-transform duration-150" />
+        ) : (
+          <HomeIcon className="size-5 transition-transform duration-150 stroke-[1.8]" />
+        )}
         <span className="text-[10px] tracking-tight">Home</span>
       </Link>
 
@@ -69,12 +78,11 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
             : 'text-muted-foreground hover:text-foreground'
         )}
       >
-        <Search
-          className={cn(
-            'size-5 transition-transform duration-150',
-            isSearchActive ? 'stroke-[2.5]' : 'stroke-2'
-          )}
-        />
+        {isSearchActive ? (
+          <MagnifyingGlassIconSolid className="size-5 transition-transform duration-150" />
+        ) : (
+          <MagnifyingGlassIcon className="size-5 transition-transform duration-150 stroke-[2]" />
+        )}
         <span className="text-[10px] tracking-tight">Search</span>
       </Link>
 
@@ -86,7 +94,7 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
           className="flex size-10 items-center justify-center rounded-xl bg-foreground text-background shadow-md transition-transform active:scale-95 cursor-pointer hover:opacity-90"
           aria-label="Create Post"
         >
-          <Plus className="size-5 stroke-[2.5]" />
+          <PlusIcon className="size-5 stroke-[2.5]" />
         </button>
       </div>
 
@@ -101,12 +109,11 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
         )}
       >
         <div className="relative">
-          <Mail
-            className={cn(
-              'size-5 transition-transform duration-150',
-              isMessagesActive ? 'fill-current stroke-[2.2]' : 'stroke-2'
-            )}
-          />
+          {isMessagesActive ? (
+            <EnvelopeIconSolid className="size-5 transition-transform duration-150" />
+          ) : (
+            <EnvelopeIcon className="size-5 transition-transform duration-150 stroke-[1.8]" />
+          )}
           {unreadMessagesCount > 0 && (
             <span className="absolute -top-1 -right-1.5 flex size-2 rounded-full bg-destructive ring-2 ring-background" />
           )}

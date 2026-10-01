@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Camera, Loader2 } from 'lucide-react'
+import { CameraIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import { Avatar } from '@/components/ui/avatar'
 import { createClient } from '@/lib/supabase/client'
@@ -113,9 +113,9 @@ export function AvatarUpload({
           className="absolute bottom-0 right-0 flex size-8 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-md transition-transform hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-50"
         >
           {isUploading ? (
-            <Loader2 className="size-4 animate-spin" />
+            <ArrowPathIcon className="size-4 animate-spin" />
           ) : (
-            <Camera className="size-4" />
+            <CameraIcon className="size-4" />
           )}
         </button>
 

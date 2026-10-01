@@ -6,7 +6,12 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useMessageStore } from '@/lib/store/message-store';
-import { Search, SquarePen, Inbox, Sparkles } from 'lucide-react';
+import {
+  MagnifyingGlassIcon,
+  PencilSquareIcon,
+  InboxIcon,
+  SparklesIcon,
+} from '@heroicons/react/24/outline';
 import type { ConversationFilter, ConversationItem } from '@/types/message';
 
 interface ConversationListProps {
@@ -92,13 +97,13 @@ export function ConversationList({
             className="size-8 rounded-xl hover:bg-secondary text-foreground"
             title="New message"
           >
-            <SquarePen className="size-4" />
+            <PencilSquareIcon className="size-4" />
           </Button>
         </div>
 
         {/* Search */}
         <div className="relative mb-3">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+          <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
           <Input
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -145,9 +150,9 @@ export function ConversationList({
           <div className="flex flex-col items-center justify-center h-48 text-center p-4">
             <div className="size-10 rounded-full bg-secondary/80 flex items-center justify-center mb-2 text-muted-foreground">
               {activeFilter === 'REQUESTS' ? (
-                <Inbox className="size-5" />
+                <InboxIcon className="size-5" />
               ) : (
-                <Sparkles className="size-5" />
+                <SparklesIcon className="size-5" />
               )}
             </div>
             <p className="text-xs font-semibold text-foreground">

@@ -3,19 +3,18 @@
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import {
-  CheckCircle2,
-  Circle,
-  ChevronDown,
-  ChevronUp,
-  Sparkles,
-  User as UserIcon,
-  Users,
-  Image as ImageIcon,
-  MessageSquare,
-  PartyPopper,
-  ArrowRight,
-  Loader2,
-} from 'lucide-react'
+  CheckCircleIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  SparklesIcon,
+  UserIcon,
+  UsersIcon,
+  PhotoIcon as ImageIcon,
+  ChatBubbleLeftRightIcon,
+  ArrowRightIcon,
+  ArrowPathIcon,
+} from '@heroicons/react/24/outline'
+import { CheckCircleIcon as CheckCircleIconSolid } from '@heroicons/react/24/solid'
 import { Button } from '@/components/ui/button'
 import { useUiStore } from '@/lib/store/ui-store'
 import { EditProfileDialog } from '@/components/profile/edit-profile-dialog'
@@ -118,11 +117,11 @@ export function GettingStartedChecklist({
       case 'profile':
         return UserIcon
       case 'follow':
-        return Users
+        return UsersIcon
       case 'post':
         return ImageIcon
       case 'message':
-        return MessageSquare
+        return ChatBubbleLeftRightIcon
     }
   }
 
@@ -138,7 +137,7 @@ export function GettingStartedChecklist({
         <div className="flex items-center justify-between p-4 sm:p-5">
           <div className="flex items-center gap-3">
             <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-              <Sparkles className="size-4" />
+              <SparklesIcon className="size-4" />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -169,9 +168,9 @@ export function GettingStartedChecklist({
               }
             >
               {isChecklistCollapsed ? (
-                <ChevronDown className="size-4" />
+                <ChevronDownIcon className="size-4" />
               ) : (
-                <ChevronUp className="size-4" />
+                <ChevronUpIcon className="size-4" />
               )}
             </Button>
           </div>
@@ -205,9 +204,17 @@ export function GettingStartedChecklist({
                     <div className="flex items-start gap-2.5 min-w-0">
                       <div className="mt-0.5 shrink-0">
                         {step.isCompleted ? (
-                          <CheckCircle2 className="size-4 text-emerald-500" />
+                          <CheckCircleIconSolid className="size-4 text-emerald-500" />
                         ) : (
-                          <Circle className="size-4 text-muted-foreground" />
+                          <svg
+                            className="size-4 text-muted-foreground"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth={1.5}
+                          >
+                            <circle cx="12" cy="12" r="8" />
+                          </svg>
                         )}
                       </div>
                       <div className="min-w-0">
@@ -237,7 +244,7 @@ export function GettingStartedChecklist({
                         className="shrink-0 h-7 px-2.5 text-[11px] font-medium gap-1 rounded-md"
                       >
                         <span>{step.actionText}</span>
-                        <ArrowRight className="size-3" />
+                        <ArrowRightIcon className="size-3" />
                       </Button>
                     )}
                   </div>
@@ -249,7 +256,7 @@ export function GettingStartedChecklist({
             {progress.allCompleted && (
               <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-foreground">
                 <div className="flex items-center gap-2 text-xs font-medium">
-                  <PartyPopper className="size-4 text-emerald-500 shrink-0" />
+                  <SparklesIcon className="size-4 text-emerald-500 shrink-0" />
                   <span>
                     Congratulations! You have completed all getting started steps.
                   </span>
@@ -263,7 +270,7 @@ export function GettingStartedChecklist({
                   className="w-full sm:w-auto h-7 px-3 text-xs font-semibold shrink-0"
                 >
                   {isDismissing ? (
-                    <Loader2 className="size-3.5 animate-spin" />
+                    <ArrowPathIcon className="size-3.5 animate-spin" />
                   ) : (
                     <span>Dismiss Checklist</span>
                   )}

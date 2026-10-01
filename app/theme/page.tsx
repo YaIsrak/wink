@@ -3,21 +3,22 @@
 import * as React from "react";
 import { toast } from "sonner";
 import {
-  Heart,
-  MessageCircle,
-  Search,
-  Send,
-  MoreHorizontal,
-  Bell,
-  CheckCircle2,
-  AlertCircle,
-  Sparkles,
-  User,
-  Share2,
-  Trash2,
-  Settings,
-  X,
-} from "lucide-react";
+  HeartIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  MagnifyingGlassIcon,
+  PaperAirplaneIcon,
+  EllipsisHorizontalIcon,
+  BellIcon,
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  SparklesIcon,
+  UserIcon,
+  ShareIcon,
+  TrashIcon,
+  Cog6ToothIcon,
+} from "@heroicons/react/24/outline";
+import { HeartIcon as HeartIconSolid } from "@heroicons/react/24/solid";
+import { Logo } from "@/components/shared/logo";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -88,9 +89,7 @@ export default function ThemePreviewPage() {
         <section className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border pb-6">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2 mb-1">
-              <span className="flex size-7 items-center justify-center rounded-lg bg-black text-white dark:bg-white dark:text-black text-xs font-bold tracking-tighter">
-                W
-              </span>
+              <Logo size={28} />
               <Badge variant="outline" size="sm">
                 Tailwind v4
               </Badge>
@@ -226,10 +225,10 @@ export default function ThemePreviewPage() {
                 <Button size="default">Default (40px)</Button>
                 <Button size="lg">Large (44px)</Button>
                 <Button size="icon" variant="outline" title="Search">
-                  <Search className="size-4" />
+                  <MagnifyingGlassIcon className="size-4" />
                 </Button>
                 <Button size="icon-sm" variant="ghost" title="Options">
-                  <MoreHorizontal className="size-4" />
+                  <EllipsisHorizontalIcon className="size-4" />
                 </Button>
                 <Button
                   variant="default"
@@ -268,7 +267,7 @@ export default function ThemePreviewPage() {
                     })
                   }
                 >
-                  <CheckCircle2 className="size-4 text-emerald-500 mr-1" />
+                  <CheckCircleIcon className="size-4 text-emerald-500 mr-1" />
                   Success Toast
                 </Button>
 
@@ -282,7 +281,7 @@ export default function ThemePreviewPage() {
                     })
                   }
                 >
-                  <AlertCircle className="size-4 text-red-500 mr-1" />
+                  <ExclamationCircleIcon className="size-4 text-red-500 mr-1" />
                   Error Toast
                 </Button>
 
@@ -295,7 +294,7 @@ export default function ThemePreviewPage() {
                     })
                   }
                 >
-                  <Bell className="size-4 text-zinc-500 mr-1" />
+                  <BellIcon className="size-4 text-zinc-500 mr-1" />
                   Info Toast
                 </Button>
 
@@ -312,7 +311,7 @@ export default function ThemePreviewPage() {
                     });
                   }}
                 >
-                  <Sparkles className="size-4 text-amber-500 mr-1" />
+                  <SparklesIcon className="size-4 text-amber-500 mr-1" />
                   Promise Toast
                 </Button>
               </div>
@@ -372,7 +371,7 @@ export default function ThemePreviewPage() {
                   Search Bar
                 </label>
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+                  <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
                   <Input
                     placeholder="Search users or captions..."
                     className="pl-9 pr-8"
@@ -412,7 +411,7 @@ export default function ThemePreviewPage() {
                 </div>
 
                 <Button size="sm" variant="default">
-                  <Send className="size-3.5 mr-1" />
+                  <PaperAirplaneIcon className="size-3.5 mr-1 -rotate-45" />
                   Post
                 </Button>
               </div>
@@ -504,21 +503,21 @@ export default function ThemePreviewPage() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
-                    <MoreHorizontal className="size-4 mr-2" />
+                    <EllipsisHorizontalIcon className="size-4 mr-2" />
                     Open Menu
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="left">
                   <DropdownMenuItem onClick={() => toast("Profile clicked")}>
-                    <User className="size-4 mr-2" />
+                    <UserIcon className="size-4 mr-2" />
                     View Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => toast("Share link copied")}>
-                    <Share2 className="size-4 mr-2" />
+                    <ShareIcon className="size-4 mr-2" />
                     Share Profile
                   </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => toast("Settings opened")}>
-                    <Settings className="size-4 mr-2" />
+                    <Cog6ToothIcon className="size-4 mr-2" />
                     Settings
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -526,7 +525,7 @@ export default function ThemePreviewPage() {
                     destructive
                     onClick={() => toast.error("Account logged out")}
                   >
-                    <Trash2 className="size-4 mr-2" />
+                    <TrashIcon className="size-4 mr-2" />
                     Log Out
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -609,13 +608,11 @@ export default function ThemePreviewPage() {
                     onClick={toggleLike}
                     className="group flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    <Heart
-                      className={`size-4 transition-transform ${
-                        liked
-                          ? "fill-red-500 text-red-500 animate-pop scale-110"
-                          : "group-hover:scale-110"
-                      }`}
-                    />
+                    {liked ? (
+                      <HeartIconSolid className="size-4 text-red-500 animate-pop scale-110 transition-transform" />
+                    ) : (
+                      <HeartIcon className="size-4 group-hover:scale-110 transition-transform" />
+                    )}
                     <span
                       className={liked ? "font-medium text-foreground" : ""}
                     >
@@ -624,13 +621,13 @@ export default function ThemePreviewPage() {
                   </button>
 
                   <button className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    <MessageCircle className="size-4" />
+                    <ChatBubbleOvalLeftEllipsisIcon className="size-4" />
                     <span>8 comments</span>
                   </button>
                 </div>
 
                 <Button size="icon-sm" variant="ghost">
-                  <Share2 className="size-3.5" />
+                  <ShareIcon className="size-3.5" />
                 </Button>
               </div>
             </Card>
@@ -702,11 +699,11 @@ export default function ThemePreviewPage() {
               </span>
               <ul className="space-y-2 text-xs">
                 <li className="flex items-center gap-2 line-through text-muted-foreground">
-                  <CheckCircle2 className="size-3.5 text-emerald-500 shrink-0" />
+                  <CheckCircleIcon className="size-3.5 text-emerald-500 shrink-0" />
                   Complete onboarding profile
                 </li>
                 <li className="flex items-center gap-2 line-through text-muted-foreground">
-                  <CheckCircle2 className="size-3.5 text-emerald-500 shrink-0" />
+                  <CheckCircleIcon className="size-3.5 text-emerald-500 shrink-0" />
                   Follow 3 people
                 </li>
                 <li className="flex items-center gap-2 font-medium text-foreground">

@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ArrowUp, RefreshCw, CheckCircle2 } from 'lucide-react'
+import { ArrowUpIcon, ArrowPathIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { cn } from '@/lib/utils'
@@ -87,7 +87,7 @@ export function InfiniteScrollSentinel({
       {isError && (
         <div className="w-full rounded-xl border border-destructive/20 bg-destructive/5 p-4 text-center flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 text-sm text-destructive font-medium">
-            <RefreshCw className="size-4 shrink-0" />
+            <ArrowPathIcon className="size-4 shrink-0" />
             <span>Could not load the next batch of posts.</span>
           </div>
           {onRetry && (
@@ -97,7 +97,7 @@ export function InfiniteScrollSentinel({
               onClick={onRetry}
               className="gap-1.5 text-xs font-semibold cursor-pointer"
             >
-              <RefreshCw className="size-3.5" />
+              <ArrowPathIcon className="size-3.5" />
               <span>Retry</span>
             </Button>
           )}
@@ -108,7 +108,7 @@ export function InfiniteScrollSentinel({
       {!hasMore && !isLoading && !isError && (
         <div className="w-full flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/40 p-6 text-center">
           <div className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground mb-2">
-            <CheckCircle2 className="size-5" />
+            <CheckCircleIcon className="size-5" />
           </div>
           <p className="text-sm font-semibold text-foreground">{endMessage}</p>
           <p className="text-xs text-muted-foreground mt-0.5 max-w-xs">
@@ -120,7 +120,7 @@ export function InfiniteScrollSentinel({
             onClick={scrollToTop}
             className="mt-3 gap-1.5 text-xs text-muted-foreground hover:text-foreground cursor-pointer"
           >
-            <ArrowUp className="size-3.5" />
+            <ArrowUpIcon className="size-3.5" />
             <span>Back to top</span>
           </Button>
         </div>

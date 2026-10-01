@@ -3,7 +3,12 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Sparkles, Bell, Send } from 'lucide-react'
+import { BellIcon, PaperAirplaneIcon } from '@heroicons/react/24/outline'
+import {
+  BellIcon as BellIconSolid,
+  PaperAirplaneIcon as PaperAirplaneIconSolid,
+} from '@heroicons/react/24/solid'
+import { Logo } from '@/components/shared/logo'
 import { useNotificationStore } from '@/lib/store/notification-store'
 import { cn } from '@/lib/utils'
 
@@ -26,9 +31,7 @@ export function MobileHeader() {
     <header className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-border bg-background/90 px-4 backdrop-blur-md lg:hidden select-none">
       {/* Brand Logo */}
       <Link href="/feed" className="flex items-center gap-2">
-        <div className="flex size-8 items-center justify-center rounded-lg bg-foreground text-background shadow-xs">
-          <Sparkles className="size-4" />
-        </div>
+        <Logo size={30} />
         <span className="text-lg font-bold tracking-tight text-foreground">
           Wink
         </span>
@@ -46,12 +49,11 @@ export function MobileHeader() {
           )}
           aria-label="Notifications"
         >
-          <Bell
-            className={cn(
-              'size-5 transition-transform duration-150',
-              isNotificationsActive ? 'fill-current stroke-[2.2]' : 'stroke-2'
-            )}
-          />
+          {isNotificationsActive ? (
+            <BellIconSolid className="size-5 transition-transform duration-150" />
+          ) : (
+            <BellIcon className="size-5 transition-transform duration-150 stroke-[1.8]" />
+          )}
           {unreadCount > 0 && (
             <span className="absolute top-1.5 right-1.5 flex size-2 rounded-full bg-destructive ring-2 ring-background" />
           )}
@@ -67,12 +69,11 @@ export function MobileHeader() {
           )}
           aria-label="Direct Messages"
         >
-          <Send
-            className={cn(
-              'size-5 -rotate-12 translate-x-0.5 transition-transform duration-150',
-              isMessagesActive ? 'fill-current stroke-[2.2]' : 'stroke-2'
-            )}
-          />
+          {isMessagesActive ? (
+            <PaperAirplaneIconSolid className="size-5 -rotate-12 translate-x-0.5 transition-transform duration-150" />
+          ) : (
+            <PaperAirplaneIcon className="size-5 -rotate-12 translate-x-0.5 transition-transform duration-150 stroke-[1.8]" />
+          )}
           {unreadMessagesCount > 0 && (
             <span className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-foreground px-1 text-[10px] font-bold text-background ring-2 ring-background">
               {unreadMessagesCount > 9 ? '9+' : unreadMessagesCount}

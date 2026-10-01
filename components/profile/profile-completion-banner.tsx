@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Sparkles, ArrowRight } from 'lucide-react'
+import { SparklesIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
@@ -41,7 +41,7 @@ export function ProfileCompletionBanner({
         <div className="space-y-1.5 max-w-lg">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-foreground text-background">
-              <Sparkles className="size-3" />
+              <SparklesIcon className="size-3" />
               <span>Milestone</span>
             </span>
             <span className="text-sm font-semibold text-foreground">
@@ -70,7 +70,7 @@ export function ProfileCompletionBanner({
           className="self-start sm:self-center shrink-0 rounded-lg text-xs font-semibold gap-1.5 shadow-xs hover:bg-muted"
         >
           <span>Complete Profile</span>
-          <ArrowRight className="size-3.5" />
+          <ArrowRightIcon className="size-3.5" />
         </Button>
       </div>
     </div>

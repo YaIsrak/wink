@@ -2,13 +2,12 @@
 
 import * as React from 'react'
 import {
-  LayoutGrid,
-  Rows3,
-  MessageSquareDashed,
-  Image as ImageIcon,
-  MessageCircle,
-  Bookmark,
-} from 'lucide-react'
+  Squares2X2Icon,
+  Bars3Icon,
+  ChatBubbleLeftIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  BookmarkIcon,
+} from '@heroicons/react/24/outline'
 import { Button } from '@/components/ui/button'
 import { PostCard } from '@/components/posts/post-card'
 import { PostGrid } from '@/components/profile/post-grid'
@@ -142,7 +141,7 @@ export function ProfileTabs({
               aria-label="Feed View"
               className="size-7.5 rounded-md"
             >
-              <Rows3 className="size-4" />
+              <Bars3Icon className="size-4" />
             </Button>
             <Button
               type="button"
@@ -152,7 +151,7 @@ export function ProfileTabs({
               aria-label="Grid View"
               className="size-7.5 rounded-md"
             >
-              <LayoutGrid className="size-4" />
+              <Squares2X2Icon className="size-4" />
             </Button>
           </div>
         )}
@@ -164,7 +163,7 @@ export function ProfileTabs({
           {posts.length === 0 ? (
             <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-10 text-center">
               <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground mb-3">
-                <MessageSquareDashed className="size-6" />
+                <ChatBubbleLeftIcon className="size-6" />
               </div>
               <h3 className="text-base font-semibold text-foreground">
                 No posts yet
@@ -204,7 +203,7 @@ export function ProfileTabs({
       {activeTab === 'replies' && (
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-10 text-center">
           <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground mb-3">
-            <MessageCircle className="size-6" />
+            <ChatBubbleOvalLeftEllipsisIcon className="size-6" />
           </div>
           <h3 className="text-base font-semibold text-foreground">
             No replies yet
@@ -220,7 +219,7 @@ export function ProfileTabs({
       {activeTab === 'saved' && (
         <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/50 p-10 text-center">
           <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground mb-3">
-            <Bookmark className="size-6" />
+            <BookmarkIcon className="size-6" />
           </div>
           <h3 className="text-base font-semibold text-foreground">
             No saved posts

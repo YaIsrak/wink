@@ -52,3 +52,9 @@ Record of meaningful project decisions and the reasoning behind them.
 - Decision: Milestone states are dynamically queried from live database tables (profiles, follows, posts, and messages) rather than maintaining duplicated boolean columns, preventing state drift. Once all four milestones are completed, a permanent dismissal writes a timestamp to `checklistDismissedAt` on the `User` table, syncing dismissal across all devices. View collapsing is persisted client side via Zustand `useUiStore`.
 - Alternatives considered: Pure client side local storage tracking (rejected because dismissal does not sync across mobile and desktop devices and clearing browser data resurrects the widget), dedicated tracking table with audit rows for each step (rejected as unnecessary complexity and synchronization overhead for a portfolio scale application).
 
+## 2026-10-01 — Heroicons & Theme-Adaptive Logo Migration
+
+- Context: Standardizing the visual design language with Heroicons and rendering the custom Wink brand mark using `public/logo-dark.png` and `public/logo-light.png` based on the active theme.
+- Decision: Replaced `lucide-react` with `@heroicons/react/24/outline` and `@heroicons/react/24/solid`. Built a dedicated `<Logo size={...} />` component that renders `logo-dark.png` with `dark:hidden` and `logo-light.png` with `hidden dark:block`. This pure CSS approach relies on the root `.dark` class set before hydration, guaranteeing 0ms flicker/flash on initial SSR/CSR load and seamless instant switching without client state re-render lag.
+- Alternatives considered: React `useEffect` + state checking `useTheme` or `localStorage` to switch `<Image src={isDark ? ... : ...} />` (rejected due to initial render hydration mismatch and noticeable image swap flash).
+

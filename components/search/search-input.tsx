@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Search, X, Loader2 } from 'lucide-react'
+import { MagnifyingGlassIcon, XMarkIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 
 interface SearchInputProps {
@@ -39,7 +39,7 @@ export function SearchInput({
   return (
     <div className={cn('relative flex items-center w-full', className)}>
       <div className="absolute left-3.5 flex items-center pointer-events-none text-muted-foreground">
-        <Search className="size-4.5" />
+        <MagnifyingGlassIcon className="size-4.5" />
       </div>
 
       <input
@@ -58,7 +58,7 @@ export function SearchInput({
 
       <div className="absolute right-3 flex items-center">
         {isLoading ? (
-          <Loader2 className="size-4 animate-spin text-muted-foreground" />
+          <ArrowPathIcon className="size-4 animate-spin text-muted-foreground" />
         ) : value.length > 0 ? (
           <button
             type="button"
@@ -69,7 +69,7 @@ export function SearchInput({
             className="rounded-full p-1 text-muted-foreground hover:text-foreground hover:bg-muted/80 transition-colors"
             aria-label="Clear search input"
           >
-            <X className="size-3.5" />
+            <XMarkIcon className="size-3.5" />
           </button>
         ) : null}
       </div>

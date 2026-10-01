@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Sparkles } from 'lucide-react'
+import { SparklesIcon } from '@heroicons/react/24/outline'
 import {
   Dialog,
   DialogHeader,
@@ -29,7 +29,7 @@ export function CreatePostDialog({ user }: CreatePostDialogProps) {
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeModal()}>
       <DialogHeader>
         <DialogTitle className="flex items-center gap-2">
-          <Sparkles className="size-4 text-primary" />
+          <SparklesIcon className="size-4 text-primary" />
           <span>Create Post</span>
         </DialogTitle>
         <DialogDescription>

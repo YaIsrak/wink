@@ -14,15 +14,14 @@ import {
 import { Dialog } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import {
-  Check,
-  CheckCheck,
-  Clock,
-  MoreHorizontal,
-  Pencil,
-  Trash2,
-  AlertCircle,
-  X,
-} from 'lucide-react';
+  CheckIcon,
+  ClockIcon,
+  EllipsisHorizontalIcon,
+  PencilSquareIcon,
+  TrashIcon,
+  ExclamationCircleIcon,
+} from '@heroicons/react/24/outline';
+import { CheckCheckIcon } from '@/components/shared/icons';
 import type { MessageItem } from '@/types/message';
 
 interface MessageBubbleProps {
@@ -81,7 +80,7 @@ export function MessageBubble({
     if (!isSender) return null;
 
     if (message.clientStatus === 'sending') {
-      return <Clock className="size-3 text-muted-foreground animate-pulse" />;
+      return <ClockIcon className="size-3 text-muted-foreground animate-pulse" />;
     }
 
     if (message.clientStatus === 'failed') {
@@ -90,17 +89,17 @@ export function MessageBubble({
           onClick={() => onRetry?.(message)}
           className="flex items-center gap-0.5 text-[10px] text-destructive hover:underline cursor-pointer"
         >
-          <AlertCircle className="size-3" />
+          <ExclamationCircleIcon className="size-3" />
           <span>Retry</span>
         </button>
       );
     }
 
     if (message.readAt) {
-      return <CheckCheck className="size-3 text-emerald-500" />;
+      return <CheckCheckIcon className="size-3 text-emerald-500" />;
     }
 
-    return <Check className="size-3 text-muted-foreground" />;
+    return <CheckIcon className="size-3 text-muted-foreground" />;
   };
 
   if (message.isDeleted) {
@@ -146,7 +145,7 @@ export function MessageBubble({
                     variant="ghost"
                     className="size-6 rounded-full hover:bg-secondary text-muted-foreground"
                   >
-                    <MoreHorizontal className="size-3.5" />
+                    <EllipsisHorizontalIcon className="size-3.5" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="right" className="rounded-xl w-32 p-1">
@@ -155,7 +154,7 @@ export function MessageBubble({
                       onClick={() => setIsEditing(true)}
                       className="text-xs gap-2 rounded-lg cursor-pointer"
                     >
-                      <Pencil className="size-3.5" />
+                      <PencilSquareIcon className="size-3.5" />
                       <span>Edit</span>
                     </DropdownMenuItem>
                   )}
@@ -163,7 +162,7 @@ export function MessageBubble({
                     onClick={() => onDelete?.(message.id)}
                     className="text-xs gap-2 rounded-lg text-destructive focus:text-destructive cursor-pointer"
                   >
-                    <Trash2 className="size-3.5" />
+                    <TrashIcon className="size-3.5" />
                     <span>Delete</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>

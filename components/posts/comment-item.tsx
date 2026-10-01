@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import Link from 'next/link'
-import { Trash2, Loader2 } from 'lucide-react'
+import { TrashIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import { Avatar } from '@/components/ui/avatar'
 import { formatRelativeTime } from '@/lib/utils'
@@ -109,9 +109,9 @@ export function CommentItem({
           className="p-1.5 text-muted-foreground/70 hover:text-destructive hover:bg-destructive/10 rounded-md transition-colors mt-0.5 shrink-0 cursor-pointer"
         >
           {isDeleting ? (
-            <Loader2 className="size-3.5 animate-spin text-destructive" />
+            <ArrowPathIcon className="size-3.5 animate-spin text-destructive" />
           ) : (
-            <Trash2 className="size-3.5" />
+            <TrashIcon className="size-3.5" />
           )}
         </button>
       )}

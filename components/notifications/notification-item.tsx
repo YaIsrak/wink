@@ -4,7 +4,11 @@ import * as React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { Heart, MessageCircle, UserPlus } from 'lucide-react'
+import {
+  HeartIcon,
+  ChatBubbleLeftIcon,
+  UserPlusIcon,
+} from '@heroicons/react/24/solid'
 import { Avatar } from '@/components/ui/avatar'
 import { formatRelativeTime, cn } from '@/lib/utils'
 import type { NotificationWithDetails } from '@/types/notification'
@@ -46,19 +50,19 @@ export function NotificationItem({
       case 'LIKE':
         return (
           <div className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full bg-destructive text-white ring-2 ring-background">
-            <Heart className="size-3 fill-current" />
+            <HeartIcon className="size-3" />
           </div>
         )
       case 'COMMENT':
         return (
           <div className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full bg-blue-500 text-white ring-2 ring-background">
-            <MessageCircle className="size-3 fill-current" />
+            <ChatBubbleLeftIcon className="size-3" />
           </div>
         )
       case 'FOLLOW':
         return (
           <div className="absolute -bottom-1 -right-1 flex size-5 items-center justify-center rounded-full bg-violet-600 text-white ring-2 ring-background">
-            <UserPlus className="size-3 stroke-[2.5]" />
+            <UserPlusIcon className="size-3" />
           </div>
         )
       default:

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { X } from "lucide-react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 import { cn } from "@/lib/utils";
 
 interface DialogProps {
@@ -50,7 +50,7 @@ export function Dialog({ open, onOpenChange, children, className }: DialogProps)
           onClick={() => onOpenChange(false)}
           className="absolute right-4 top-4 rounded-sm p-1 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
         >
-          <X className="size-4" />
+          <XMarkIcon className="size-4" />
           <span className="sr-only">Close</span>
         </button>
       </div>

@@ -4,7 +4,8 @@ import * as React from 'react';
 import { Avatar } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { cn, formatRelativeTime } from '@/lib/utils';
-import { Camera, Check, CheckCheck, Clock } from 'lucide-react';
+import { CameraIcon, CheckIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { CheckCheckIcon } from '@/components/shared/icons';
 import type { ConversationItem } from '@/types/message';
 
 interface ConversationItemCardProps {
@@ -49,17 +50,17 @@ export function ConversationItemCard({
         {isSender && (
           <span className="shrink-0 text-muted-foreground">
             {lastMessage.clientStatus === 'sending' ? (
-              <Clock className="size-3" />
+              <ClockIcon className="size-3" />
             ) : lastMessage.readAt ? (
-              <CheckCheck className="size-3 text-emerald-500" />
+              <CheckCheckIcon className="size-3 text-emerald-500" />
             ) : (
-              <Check className="size-3 text-muted-foreground" />
+              <CheckIcon className="size-3 text-muted-foreground" />
             )}
           </span>
         )}
         {lastMessage.imageUrl && !lastMessage.content && (
           <span className="flex items-center gap-1 text-xs text-foreground/80 shrink-0">
-            <Camera className="size-3" />
+            <CameraIcon className="size-3" />
             <span>Photo</span>
           </span>
         )}

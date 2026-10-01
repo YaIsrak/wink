@@ -1,7 +1,12 @@
 'use client'
 
 import * as React from 'react'
-import { Image as ImageIcon, X, Loader2, Sparkles } from 'lucide-react'
+import {
+  PhotoIcon as ImageIcon,
+  XMarkIcon,
+  ArrowPathIcon,
+  SparklesIcon,
+} from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
@@ -248,7 +253,7 @@ export function PostComposer({
                 className="absolute top-2 right-2 flex size-7 items-center justify-center rounded-full bg-background/80 text-foreground backdrop-blur-xs hover:bg-background transition-colors cursor-pointer shadow-xs"
                 title="Remove image"
               >
-                <X className="size-4" />
+                <XMarkIcon className="size-4" />
               </button>
             </div>
           )}
@@ -310,12 +315,12 @@ export function PostComposer({
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-1.5 size-3.5 animate-spin" />
+                <ArrowPathIcon className="mr-1.5 size-3.5 animate-spin" />
                 <span>Posting...</span>
               </>
             ) : (
               <>
-                <Sparkles className="mr-1.5 size-3.5" />
+                <SparklesIcon className="mr-1.5 size-3.5" />
                 <span>Post</span>
               </>
             )}

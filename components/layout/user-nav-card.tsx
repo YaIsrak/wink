@@ -3,7 +3,12 @@
 import * as React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { MoreHorizontal, User, Settings, LogOut } from 'lucide-react'
+import {
+  EllipsisHorizontalIcon,
+  UserIcon,
+  Cog6ToothIcon,
+  ArrowRightStartOnRectangleIcon,
+} from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import { Avatar } from '@/components/ui/avatar'
 import {
@@ -72,7 +77,7 @@ export function UserNavCard({ user }: UserNavCardProps) {
             </div>
           </div>
           <div className="flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground group-hover:bg-muted group-hover:text-foreground transition-colors ml-1">
-            <MoreHorizontal className="size-4" />
+            <EllipsisHorizontalIcon className="size-4" />
           </div>
         </button>
       </DropdownMenuTrigger>
@@ -80,13 +85,13 @@ export function UserNavCard({ user }: UserNavCardProps) {
       <DropdownMenuContent side="top" align="left" className="w-[236px] p-1.5 shadow-xl">
         <Link href="/profile">
           <DropdownMenuItem>
-            <User className="mr-2.5 size-4 text-muted-foreground" />
+            <UserIcon className="mr-2.5 size-4 text-muted-foreground" />
             <span>Profile</span>
           </DropdownMenuItem>
         </Link>
         <Link href="/settings">
           <DropdownMenuItem>
-            <Settings className="mr-2.5 size-4 text-muted-foreground" />
+            <Cog6ToothIcon className="mr-2.5 size-4 text-muted-foreground" />
             <span>Settings</span>
           </DropdownMenuItem>
         </Link>
@@ -105,7 +110,7 @@ export function UserNavCard({ user }: UserNavCardProps) {
           onClick={handleLogout}
           className="text-destructive hover:bg-destructive/10 cursor-pointer"
         >
-          <LogOut className="mr-2.5 size-4" />
+          <ArrowRightStartOnRectangleIcon className="mr-2.5 size-4" />
           <span>{isLoggingOut ? 'Signing out...' : 'Log out'}</span>
         </DropdownMenuItem>
       </DropdownMenuContent>

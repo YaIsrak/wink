@@ -1,7 +1,8 @@
 'use client'
 
 import * as React from 'react'
-import { CheckCheck, Bell } from 'lucide-react'
+import { BellIcon } from '@heroicons/react/24/outline'
+import { CheckCheckIcon } from '@/components/shared/icons'
 import { Button } from '@/components/ui/button'
 import { toast } from 'sonner'
 import { NotificationTabs } from './notification-tabs'
@@ -147,7 +148,7 @@ export function NotificationList({
       <div className="flex items-center justify-between px-1">
         <div className="flex items-center gap-2.5">
           <div className="flex size-9 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
-            <Bell className="size-5" />
+            <BellIcon className="size-5" />
           </div>
           <div>
             <h1 className="text-xl font-bold tracking-tight text-foreground">
@@ -169,7 +170,7 @@ export function NotificationList({
           disabled={unreadCount === 0 || isMarkingAll}
           className="gap-1.5 rounded-lg text-xs font-medium cursor-pointer"
         >
-          <CheckCheck className="size-3.5" />
+          <CheckCheckIcon className="size-3.5" />
           <span>Mark all read</span>
         </Button>
       </div>

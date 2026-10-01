@@ -7,7 +7,7 @@ import { getFullUserProfileByUsername } from '@/lib/services/user.service'
 import { getUserPosts } from '@/lib/services/post.service'
 import { ProfileHeader } from '@/components/profile/profile-header'
 import { ProfileTabs } from '@/components/profile/profile-tabs'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 
 interface ProfilePageProps {
   params: Promise<{
@@ -48,7 +48,7 @@ export default async function UserProfilePage({ params }: ProfilePageProps) {
           href="/feed"
           className="inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors p-1 rounded-md hover:bg-muted"
         >
-          <ArrowLeft className="size-4" />
+          <ArrowLeftIcon className="size-4" />
           <span>Back to Feed</span>
         </Link>
       </div>

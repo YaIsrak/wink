@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { Send, Loader2 } from 'lucide-react'
+import { PaperAirplaneIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -190,7 +190,7 @@ export function CommentsSection({
           ))}
           {isLoading && (
             <div className="flex items-center justify-center py-2 text-xs text-muted-foreground gap-2">
-              <Loader2 className="size-3.5 animate-spin" />
+              <ArrowPathIcon className="size-3.5 animate-spin" />
               <span>Loading comments...</span>
             </div>
           )}
@@ -231,9 +231,9 @@ export function CommentsSection({
             className="rounded-full size-8 p-0 shrink-0"
           >
             {isSubmitting ? (
-              <Loader2 className="size-3.5 animate-spin" />
+              <ArrowPathIcon className="size-3.5 animate-spin" />
             ) : (
-              <Send className="size-3.5" />
+              <PaperAirplaneIcon className="size-3.5 -rotate-12 translate-x-0.5" />
             )}
             <span className="sr-only">Send comment</span>
           </Button>

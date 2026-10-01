@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Button } from '@/components/ui/button'
 import { toggleFollowAction } from '@/actions/follow'
 import { toast } from 'sonner'
-import { Check, UserPlus, Loader2 } from 'lucide-react'
+import { CheckIcon, UserPlusIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 import { cn } from '@/lib/utils'
 
 import { usePostStore } from '@/lib/store'
@@ -82,15 +82,15 @@ export function FollowButton({
       )}
     >
       {isPending ? (
-        <Loader2 className="size-3.5 animate-spin" />
+        <ArrowPathIcon className="size-3.5 animate-spin" />
       ) : isFollowing ? (
         <>
-          <Check className="size-3.5" />
+          <CheckIcon className="size-3.5" />
           <span>Following</span>
         </>
       ) : (
         <>
-          <UserPlus className="size-3.5" />
+          <UserPlusIcon className="size-3.5" />
           <span>Follow</span>
         </>
       )}

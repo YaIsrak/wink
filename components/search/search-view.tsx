@@ -33,7 +33,12 @@ import {
   clearRecentSearches,
 } from '@/lib/utils/search-history'
 import { toast } from 'sonner'
-import { ArrowRight, RefreshCw, Users, FileText } from 'lucide-react'
+import {
+  ArrowRightIcon,
+  ArrowPathIcon,
+  UsersIcon,
+  DocumentTextIcon,
+} from '@heroicons/react/24/outline'
 
 interface SearchViewProps {
   initialQuery?: string
@@ -363,7 +368,7 @@ export function SearchView({
                 onClick={() => executeSearch(query, activeTab)}
                 className="gap-2 text-xs"
               >
-                <RefreshCw className="size-3.5" />
+                <ArrowPathIcon className="size-3.5" />
                 <span>Try again</span>
               </Button>
             </div>
@@ -385,7 +390,7 @@ export function SearchView({
                 <div className="space-y-3">
                   <div className="flex items-center justify-between px-1">
                     <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-                      <Users className="size-4 text-primary" />
+                      <UsersIcon className="size-4 text-primary" />
                       <span>Accounts</span>
                     </h3>
                     <Button
@@ -395,7 +400,7 @@ export function SearchView({
                       className="h-7 px-2 text-xs text-primary hover:text-primary gap-1"
                     >
                       <span>View all</span>
-                      <ArrowRight className="size-3.5" />
+                      <ArrowRightIcon className="size-3.5" />
                     </Button>
                   </div>
 
@@ -416,7 +421,7 @@ export function SearchView({
                 <div className="space-y-3">
                   <div className="flex items-center justify-between px-1">
                     <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-                      <FileText className="size-4 text-primary" />
+                      <DocumentTextIcon className="size-4 text-primary" />
                       <span>Posts</span>
                     </h3>
                     <Button
@@ -426,7 +431,7 @@ export function SearchView({
                       className="h-7 px-2 text-xs text-primary hover:text-primary gap-1"
                     >
                       <span>View all</span>
-                      <ArrowRight className="size-3.5" />
+                      <ArrowRightIcon className="size-3.5" />
                     </Button>
                   </div>
 

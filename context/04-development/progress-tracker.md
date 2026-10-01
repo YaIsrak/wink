@@ -294,3 +294,13 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build with zero errors
 - Status: Done
 
+## 2026-10-01 — UI Polish: Heroicons & Adaptive Logo Migration
+- Installed `@heroicons/react` and replaced all `lucide-react` icons across the entire application with equivalent Heroicons (`@heroicons/react/24/outline` and `@heroicons/react/24/solid`)
+- Built theme-aware `<Logo />` component in `components/shared/logo.tsx` using `public/logo-dark.png` (for light theme) and `public/logo-light.png` (for dark theme) with zero hydration flicker (`dark:hidden` / `hidden dark:block`)
+- Created Heroicons-styled `<CheckCheckIcon />` in `components/shared/icons.tsx` matching stroke and viewBox for read receipts and mark-all-read actions
+- Replaced logo placeholders and wordmarks in auth pages (`/login`, `/sign-up`), `/onboarding`, desktop sidebar, mobile header, and `/theme` preview
+- Migrated all icons across UI primitives, navigation, auth, feed, post creation, comments, search, notifications, direct messaging, profile, and theme demo
+- Completely removed `lucide-react` dependency from the project
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`next build`) with zero errors
+- Status: Done
+

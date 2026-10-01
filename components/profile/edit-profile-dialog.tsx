@@ -14,7 +14,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { AvatarUpload } from '@/components/onboarding/avatar-upload'
 import { updateProfileDetailsAction } from '@/actions/profile'
 import { toast } from 'sonner'
-import { Loader2 } from 'lucide-react'
+import { ArrowPathIcon } from '@heroicons/react/24/outline'
 
 interface EditProfileDialogProps {
   open: boolean
@@ -236,7 +236,7 @@ export function EditProfileDialog({
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="size-4 animate-spin mr-1.5" />
+                <ArrowPathIcon className="size-4 animate-spin mr-1.5" />
                 <span>Saving...</span>
               </>
             ) : (
