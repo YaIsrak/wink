@@ -174,8 +174,8 @@ export function FeedView({
         </div>
       </div>
 
-      {/* Top Inline Composer */}
-      <PostComposer user={user} variant="inline" />
+      {/* Top Feed Create Post Trigger */}
+      <PostComposer user={user} variant="trigger" />
 
       {/* Loading Skeletons during tab switch */}
       {isSwitchingTab ? (

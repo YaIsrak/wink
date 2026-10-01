@@ -314,3 +314,10 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`next build`) with zero errors
 - Status: Done
 
+## 2026-10-01 — Feed Post Composer Trigger Modal
+- Replaced the on-screen inline form in `components/posts/feed-view.tsx` with a clickable trigger card matching the visual prompt design
+- Built `PostComposerTrigger` and added `variant="trigger"` support in `components/posts/post-composer.tsx`
+- Clicking the feed card prompt, input placeholder, "Photo" action, or "Post" button opens the global `CreatePostDialog` modal (`useUiStore.setActiveModal('create-post')`), unifying post creation across the sidebar, mobile navigation, checklist, and feed
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`next build`) with zero errors
+- Status: Done
+

@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { createClient } from '@/lib/supabase/client';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
+import * as React from "react";
+import { createClient } from "@/lib/supabase/client";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import {
   PhotoIcon,
   PaperAirplaneIcon,
   XMarkIcon,
   ArrowPathIcon,
-} from '@heroicons/react/24/outline';
-import { toast } from 'sonner';
+} from "@heroicons/react/24/outline";
+import { toast } from "sonner";
 
 interface MessageComposerProps {
   conversationId: string;
@@ -26,10 +26,10 @@ export function MessageComposer({
   currentUserId,
   onSendMessage,
   onTyping,
-  placeholder = 'Write a message...',
+  placeholder = "Write a message...",
   disabled = false,
 }: MessageComposerProps) {
-  const [content, setContent] = React.useState('');
+  const [content, setContent] = React.useState("");
   const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = React.useState<string | null>(null);
   const [isUploading, setIsUploading] = React.useState(false);
@@ -40,13 +40,13 @@ export function MessageComposer({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!file.type.startsWith('image/')) {
-      toast.error('Only image attachments are supported');
+    if (!file.type.startsWith("image/")) {
+      toast.error("Only image attachments are supported");
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image size must be under 5MB');
+      toast.error("Image size must be under 5MB");
       return;
     }
 
@@ -62,7 +62,7 @@ export function MessageComposer({
     setSelectedFile(null);
     setPreviewUrl(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = '';
+      fileInputRef.current.value = "";
     }
   };
 
@@ -76,45 +76,45 @@ export function MessageComposer({
     try {
       if (selectedFile && currentUserId) {
         const supabase = createClient();
-        const fileExt = selectedFile.name.split('.').pop() || 'jpg';
+        const fileExt = selectedFile.name.split(".").pop() || "jpg";
         const fileName = `${currentUserId}/${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
 
         const { error: uploadError } = await supabase.storage
-          .from('messages')
+          .from("messages")
           .upload(fileName, selectedFile, {
-            cacheControl: '3600',
+            cacheControl: "3600",
             upsert: false,
           });
 
         if (uploadError) {
-          throw new Error('Failed to upload image attachment');
+          throw new Error("Failed to upload image attachment");
         }
 
         const { data: publicUrlData } = supabase.storage
-          .from('messages')
+          .from("messages")
           .getPublicUrl(fileName);
 
         uploadedImageUrl = publicUrlData.publicUrl;
       }
 
       const textToSend = trimmed || undefined;
-      setContent('');
+      setContent("");
       removeSelectedFile();
 
       await onSendMessage(textToSend, uploadedImageUrl);
 
       if (textareaRef.current) {
-        textareaRef.current.style.height = 'auto';
+        textareaRef.current.style.height = "auto";
       }
     } catch (err: any) {
-      toast.error(err.message || 'Failed to send message');
+      toast.error(err.message || "Failed to send message");
     } finally {
       setIsUploading(false);
     }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
     }
@@ -141,7 +141,7 @@ export function MessageComposer({
       )}
 
       {/* Bar */}
-      <div className="flex items-end gap-2 bg-muted/40 rounded-2xl p-1.5 border border-border/40 focus-within:border-border transition-colors">
+      <div className="flex items-center gap-2 bg-muted/40 rounded-2xl p-1.5 border border-border/40 focus-within:border-border transition-colors">
         <input
           ref={fileInputRef}
           type="file"
@@ -168,7 +168,7 @@ export function MessageComposer({
           value={content}
           onChange={(e) => {
             setContent(e.target.value);
-            e.target.style.height = 'auto';
+            e.target.style.height = "auto";
             e.target.style.height = `${Math.min(e.target.scrollHeight, 120)}px`;
             if (onTyping && e.target.value.trim()) {
               onTyping();
@@ -178,14 +178,16 @@ export function MessageComposer({
           placeholder={placeholder}
           disabled={disabled || isUploading}
           rows={1}
-          className="min-h-[36px] max-h-[120px] resize-none border-none bg-transparent p-2 text-sm focus-visible:ring-0 leading-relaxed"
+          className="min-h-9 max-h-30 resize-none border-none bg-transparent p-2 text-sm focus-visible:ring-0 leading-relaxed"
         />
 
         <Button
           type="button"
           size="icon"
           onClick={handleSend}
-          disabled={(!content.trim() && !selectedFile) || disabled || isUploading}
+          disabled={
+            (!content.trim() && !selectedFile) || disabled || isUploading
+          }
           className="size-8 rounded-xl shrink-0"
           title="Send"
         >
