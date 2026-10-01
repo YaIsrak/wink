@@ -13,7 +13,7 @@ export function NotificationEmptyState({ filter }: NotificationEmptyStateProps) 
   if (filter === 'unread') {
     return (
       <Card className="flex flex-col items-center justify-center p-12 text-center border-dashed">
-        <div className="flex size-14 items-center justify-center rounded-2xl bg-secondary text-foreground mb-4">
+        <div className="flex size-14 items-center justify-center rounded-2xl bg-muted text-foreground mb-4">
           <CheckCircleIcon className="size-7 stroke-[1.8]" />
         </div>
         <h3 className="text-lg font-semibold tracking-tight text-foreground">

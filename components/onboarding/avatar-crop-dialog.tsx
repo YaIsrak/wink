@@ -103,7 +103,7 @@ export function AvatarCropDialog({
             value={zoom}
             aria-label="Zoom avatar preview"
             onChange={(e) => setZoom(Number(e.target.value))}
-            className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-secondary accent-foreground"
+            className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-muted accent-primary"
           />
           <MagnifyingGlassPlusIcon className="size-4 text-muted-foreground shrink-0" />
         </div>

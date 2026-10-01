@@ -45,7 +45,7 @@ export function ProfileCompletionBanner({
               <span>Milestone</span>
             </span>
             <span className="text-sm font-semibold text-foreground">
-              Profile {completionPercentage}% Complete
+              Profile <span className="text-secondary font-bold">{completionPercentage}%</span> Complete
             </span>
           </div>
 
@@ -56,7 +56,7 @@ export function ProfileCompletionBanner({
           {/* Progress Bar Track */}
           <div className="w-full bg-muted h-2 rounded-full overflow-hidden mt-2 relative">
             <div
-              className="h-full rounded-full bg-foreground transition-all duration-700 ease-out"
+              className="h-full rounded-full bg-primary transition-all duration-700 ease-out"
               style={{ width: `${Math.max(5, completionPercentage)}%` }}
             />
           </div>
@@ -65,9 +65,9 @@ export function ProfileCompletionBanner({
         <Button
           type="button"
           size="sm"
-          variant="outline"
+          variant="default"
           onClick={onEditClick}
-          className="self-start sm:self-center shrink-0 rounded-lg text-xs font-semibold gap-1.5 shadow-xs hover:bg-muted"
+          className="self-start sm:self-center shrink-0 rounded-lg text-xs font-semibold gap-1.5 shadow-xs"
         >
           <span>Complete Profile</span>
           <ArrowRightIcon className="size-3.5" />

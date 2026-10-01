@@ -51,7 +51,7 @@ export function UserSearchResultCard({
               {user.displayName}
             </span>
             {user.isMe ? (
-              <Badge variant="secondary" className="text-[10px] px-1.5 py-0 h-4">
+              <Badge variant="outline" className="text-[10px] px-1.5 py-0 h-4">
                 You
               </Badge>
             ) : null}

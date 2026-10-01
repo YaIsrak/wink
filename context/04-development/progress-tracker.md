@@ -304,3 +304,13 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`next build`) with zero errors
 - Status: Done
 
+## 2026-10-01 — Theme Styling: Primary Lime (#c9f997), Secondary Magenta (#e92ed3), and Mono Background/Foreground
+- Configured `--primary: #c9f997` with high-contrast `--primary-foreground: #000000` across both light and dark themes
+- Reserved primary color for buttons (default action buttons, call-to-actions, mobile create action), active tab bars, active unread counter badges, and focus rings
+- Configured `--secondary: #e92ed3` with `--secondary-foreground: #ffffff` as an electric highlight accent used in small portions for text highlights, milestone percentages, badge highlights, and sparkle icons
+- Set clean `#fefefe` background with `#000000` foreground in light mode, and `#000000` background with `#fefefe` foreground in dark mode
+- Added `::selection` styling with `--primary` background and `--primary-foreground` text
+- Replaced neutral surfaces previously relying on `bg-secondary` with `bg-muted` across avatars, conversation list, message bubbles, empty states, and tab counters to ensure magenta is never overused
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`next build`) with zero errors
+- Status: Done
+

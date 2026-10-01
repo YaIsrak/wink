@@ -154,7 +154,7 @@ export function NewConversationDialog({
                   <button
                     key={user.id}
                     onClick={() => setSelectedUser(user)}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-secondary/60 transition-colors text-left group"
+                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/60 transition-colors text-left group"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <Avatar
@@ -181,7 +181,7 @@ export function NewConversationDialog({
           </div>
         ) : (
           <div className="p-4 flex flex-col gap-4">
-            <div className="flex items-center justify-between bg-secondary/40 p-2.5 rounded-xl border border-border/40">
+            <div className="flex items-center justify-between bg-muted/40 p-2.5 rounded-xl border border-border/40">
               <div className="flex items-center gap-3">
                 <Avatar
                   src={selectedUser.avatarUrl}

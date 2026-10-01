@@ -107,7 +107,7 @@ export function InfiniteScrollSentinel({
       {/* End of feed state */}
       {!hasMore && !isLoading && !isError && (
         <div className="w-full flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/40 p-6 text-center">
-          <div className="flex size-10 items-center justify-center rounded-full bg-secondary text-secondary-foreground mb-2">
+          <div className="flex size-10 items-center justify-center rounded-full bg-muted text-foreground mb-2">
             <CheckCircleIcon className="size-5" />
           </div>
           <p className="text-sm font-semibold text-foreground">{endMessage}</p>

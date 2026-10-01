@@ -34,7 +34,7 @@ export function NavItem({
       className={cn(
         'group relative flex items-center gap-3.5 rounded-xl px-3.5 py-2.5 text-sm font-medium transition-all duration-150',
         isActive
-          ? 'bg-secondary font-semibold text-foreground shadow-xs'
+          ? 'bg-muted font-semibold text-foreground shadow-xs'
           : 'text-muted-foreground hover:bg-muted/60 hover:text-foreground',
         className
       )}

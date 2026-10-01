@@ -94,7 +94,7 @@ export function ConversationList({
             size="icon"
             variant="ghost"
             onClick={onOpenNewMessage}
-            className="size-8 rounded-xl hover:bg-secondary text-foreground"
+            className="size-8 rounded-xl hover:bg-muted text-foreground"
             title="New message"
           >
             <PencilSquareIcon className="size-4" />
@@ -108,7 +108,7 @@ export function ConversationList({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search conversations..."
-            className="pl-9 h-9 text-xs rounded-xl bg-secondary/40 border-border/40 focus-visible:ring-1"
+            className="pl-9 h-9 text-xs rounded-xl bg-muted/40 border-border/40 focus-visible:ring-1"
           />
         </div>
 
@@ -123,7 +123,7 @@ export function ConversationList({
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all shrink-0 ${
                   isActive
                     ? 'bg-foreground text-background shadow-xs'
-                    : 'bg-secondary/60 text-muted-foreground hover:text-foreground hover:bg-secondary'
+                    : 'bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80'
                 }`}
               >
                 <span>{tab.label}</span>
@@ -148,7 +148,7 @@ export function ConversationList({
       <div className="flex-1 overflow-y-auto p-2 space-y-1">
         {filteredConversations.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-48 text-center p-4">
-            <div className="size-10 rounded-full bg-secondary/80 flex items-center justify-center mb-2 text-muted-foreground">
+            <div className="size-10 rounded-full bg-muted flex items-center justify-center mb-2 text-muted-foreground">
               {activeFilter === 'REQUESTS' ? (
                 <InboxIcon className="size-5" />
               ) : (

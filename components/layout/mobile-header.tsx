@@ -44,7 +44,7 @@ export function MobileHeader() {
           className={cn(
             'relative flex size-9 items-center justify-center rounded-lg transition-colors',
             isNotificationsActive
-              ? 'text-foreground bg-secondary/80'
+              ? 'text-foreground bg-muted'
               : 'text-foreground hover:bg-muted/70'
           )}
           aria-label="Notifications"
@@ -64,7 +64,7 @@ export function MobileHeader() {
           className={cn(
             'relative flex size-9 items-center justify-center rounded-lg transition-colors',
             isMessagesActive
-              ? 'text-foreground bg-secondary/80'
+              ? 'text-foreground bg-muted'
               : 'text-foreground hover:bg-muted/70'
           )}
           aria-label="Direct Messages"

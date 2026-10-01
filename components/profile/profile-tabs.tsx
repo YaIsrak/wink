@@ -136,20 +136,20 @@ export function ProfileTabs({
             <Button
               type="button"
               size="icon"
-              variant={viewMode === 'feed' ? 'secondary' : 'ghost'}
+              variant={viewMode === 'feed' ? 'outline' : 'ghost'}
               onClick={() => setViewMode('feed')}
               aria-label="Feed View"
-              className="size-7.5 rounded-md"
+              className={cn("size-7.5 rounded-md", viewMode === 'feed' && "bg-muted text-foreground")}
             >
               <Bars3Icon className="size-4" />
             </Button>
             <Button
               type="button"
               size="icon"
-              variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
+              variant={viewMode === 'grid' ? 'outline' : 'ghost'}
               onClick={() => setViewMode('grid')}
               aria-label="Grid View"
-              className="size-7.5 rounded-md"
+              className={cn("size-7.5 rounded-md", viewMode === 'grid' && "bg-muted text-foreground")}
             >
               <Squares2X2Icon className="size-4" />
             </Button>

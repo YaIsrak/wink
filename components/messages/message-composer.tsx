@@ -133,7 +133,7 @@ export function MessageComposer({
           />
           <button
             onClick={removeSelectedFile}
-            className="absolute -top-1.5 -right-1.5 size-5 bg-background border border-border rounded-full flex items-center justify-center text-foreground hover:bg-secondary cursor-pointer shadow-xs"
+            className="absolute -top-1.5 -right-1.5 size-5 bg-background border border-border rounded-full flex items-center justify-center text-foreground hover:bg-muted cursor-pointer shadow-xs"
           >
             <XMarkIcon className="size-3" />
           </button>
@@ -141,7 +141,7 @@ export function MessageComposer({
       )}
 
       {/* Bar */}
-      <div className="flex items-end gap-2 bg-secondary/40 rounded-2xl p-1.5 border border-border/40 focus-within:border-border transition-colors">
+      <div className="flex items-end gap-2 bg-muted/40 rounded-2xl p-1.5 border border-border/40 focus-within:border-border transition-colors">
         <input
           ref={fileInputRef}
           type="file"
@@ -157,7 +157,7 @@ export function MessageComposer({
           variant="ghost"
           onClick={() => fileInputRef.current?.click()}
           disabled={disabled || isUploading}
-          className="size-8 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary shrink-0"
+          className="size-8 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted shrink-0"
           title="Attach photo"
         >
           <PhotoIcon className="size-4" />

@@ -32,7 +32,7 @@ export function SearchEmptyState({
           We could not find any accounts or posts matching your search.
         </p>
 
-        <div className="flex items-start gap-2.5 mt-5 p-3 rounded-xl bg-secondary/50 border border-border/50 text-left text-xs text-muted-foreground max-w-md">
+        <div className="flex items-start gap-2.5 mt-5 p-3 rounded-xl bg-muted/50 border border-border/50 text-left text-xs text-muted-foreground max-w-md">
           <LightBulbIcon className="size-4 text-amber-500 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <span className="font-semibold text-foreground">Search tips:</span>

@@ -147,7 +147,7 @@ export function NotificationList({
       {/* Top Header Row */}
       <div className="flex items-center justify-between px-1">
         <div className="flex items-center gap-2.5">
-          <div className="flex size-9 items-center justify-center rounded-xl bg-secondary text-secondary-foreground">
+          <div className="flex size-9 items-center justify-center rounded-xl bg-muted text-foreground">
             <BellIcon className="size-5" />
           </div>
           <div>

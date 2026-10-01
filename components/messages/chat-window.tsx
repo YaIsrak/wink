@@ -223,7 +223,7 @@ export function ChatWindow({
       </div>
 
       {/* Privacy Banner */}
-      <div className="px-4 py-2 bg-secondary/30 border-b border-border/20 flex items-center justify-center gap-2 text-[11px] text-muted-foreground select-none">
+      <div className="px-4 py-2 bg-muted/40 border-b border-border/20 flex items-center justify-center gap-2 text-[11px] text-muted-foreground select-none">
         <ShieldCheckIcon className="size-3.5 text-muted-foreground" />
         <span>End to end encrypted direct connection between mutual follows</span>
       </div>
@@ -231,7 +231,7 @@ export function ChatWindow({
       {/* Chat Messages Stream */}
       <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-1">
         <div className="flex justify-center my-4">
-          <span className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wider bg-secondary/40 px-3 py-1 rounded-full border border-border/30 select-none">
+          <span className="text-[11px] font-medium text-muted-foreground/70 uppercase tracking-wider bg-muted/60 px-3 py-1 rounded-full border border-border/30 select-none">
             Today
           </span>
         </div>
@@ -263,7 +263,7 @@ export function ChatWindow({
               size="sm"
               className="size-7"
             />
-            <div className="bg-secondary/70 border border-border/40 rounded-2xl rounded-tl-xs px-3.5 py-2.5 flex items-center gap-1.5 shadow-xs">
+            <div className="bg-muted/70 border border-border/40 rounded-2xl rounded-tl-xs px-3.5 py-2.5 flex items-center gap-1.5 shadow-xs">
               <span className="size-1.5 rounded-full bg-muted-foreground/70 animate-bounce [animation-delay:-0.3s]" />
               <span className="size-1.5 rounded-full bg-muted-foreground/70 animate-bounce [animation-delay:-0.15s]" />
               <span className="size-1.5 rounded-full bg-muted-foreground/70 animate-bounce" />
@@ -304,7 +304,7 @@ export function ChatWindow({
           </div>
         </div>
       ) : conversation.status === 'DECLINED' ? (
-        <div className="p-4 bg-secondary/30 border-t border-border/40 text-center text-xs text-muted-foreground select-none">
+        <div className="p-4 bg-muted/40 border-t border-border/40 text-center text-xs text-muted-foreground select-none">
           This message request was declined.
         </div>
       ) : (

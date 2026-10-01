@@ -62,13 +62,13 @@ export function SearchTabs({
             <span>{tab.label}</span>
 
             {tab.id === 'accounts' && typeof usersCount === 'number' && usersCount > 0 ? (
-              <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground font-normal">
+              <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground font-normal">
                 {usersCount}
               </span>
             ) : null}
 
             {tab.id === 'posts' && typeof postsCount === 'number' && postsCount > 0 ? (
-              <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground font-normal">
+              <span className="rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground font-normal">
                 {postsCount}
               </span>
             ) : null}

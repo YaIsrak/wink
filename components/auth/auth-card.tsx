@@ -39,11 +39,11 @@ export function AuthCard({
       <CardContent className="pt-2">
         {children}
       </CardContent>
-      <CardFooter className="justify-center text-center text-sm text-zinc-500 dark:text-zinc-400">
+      <CardFooter className="justify-center text-center text-sm text-muted-foreground">
         <span>{footerPrompt}</span>{' '}
         <Link
           href={footerHref}
-          className="ml-1 font-semibold text-zinc-900 underline-offset-4 hover:underline dark:text-zinc-100"
+          className="ml-1 font-semibold text-foreground underline-offset-4 hover:underline"
         >
           {footerLinkText}
         </Link>

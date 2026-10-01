@@ -94,7 +94,10 @@ export default function ThemePreviewPage() {
                 Tailwind v4
               </Badge>
               <Badge variant="default" size="sm">
-                Monochrome Minimal
+                Primary Lime
+              </Badge>
+              <Badge variant="secondary" size="sm">
+                Highlight Accent
               </Badge>
             </div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
@@ -467,8 +470,9 @@ export default function ThemePreviewPage() {
               </div>
 
               <div className="border-t border-border pt-4 flex flex-wrap items-center gap-3">
-                <Badge variant="default">Black Capsule</Badge>
-                <Badge variant="secondary">Secondary</Badge>
+                <Badge variant="default">Primary (#c9f997)</Badge>
+                <Badge variant="secondary">Highlight (#e92ed3)</Badge>
+                <Badge variant="highlight">Solid Accent</Badge>
                 <Badge variant="outline">Outline</Badge>
                 <Badge variant="destructive">Alert</Badge>
                 <Badge variant="success">Mutual</Badge>
@@ -595,7 +599,7 @@ export default function ThemePreviewPage() {
 
               <p className="text-sm leading-relaxed">
                 Just completed the onboarding flow! Loving the crisp monochrome
-                aesthetic on Wink ✨
+                aesthetic with <span className="text-highlight font-semibold">electric magenta accents</span> on Wink ✨
               </p>
 
               <div className="h-44 w-full rounded-lg bg-muted flex items-center justify-center text-muted-foreground text-xs border border-border">

@@ -231,7 +231,7 @@ export function PostCard({
                 <span>{formatRelativeTime(createdAt)}</span>
                 {isOptimistic && (
                   <Badge
-                    variant="secondary"
+                    variant="outline"
                     className="h-4 px-1.5 text-[10px] gap-1 font-medium bg-muted text-muted-foreground"
                   >
                     <ArrowPathIcon className="size-2.5 animate-spin" />

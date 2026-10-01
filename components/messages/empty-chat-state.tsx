@@ -11,7 +11,7 @@ interface EmptyChatStateProps {
 export function EmptyChatState({ onStartNewMessage }: EmptyChatStateProps) {
   return (
     <div className="flex flex-col items-center justify-center h-full text-center px-4 py-12 select-none">
-      <div className="size-16 rounded-2xl bg-secondary/60 flex items-center justify-center mb-4 text-muted-foreground border border-border/50">
+      <div className="size-16 rounded-2xl bg-muted flex items-center justify-center mb-4 text-muted-foreground border border-border/50">
         <ChatBubbleLeftRightIcon className="size-8" />
       </div>
       <h3 className="text-lg font-semibold tracking-tight text-foreground">

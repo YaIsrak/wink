@@ -90,7 +90,7 @@ export function NotificationItem({
       className={cn(
         'group relative flex items-start gap-3.5 p-4 rounded-xl transition-colors cursor-pointer select-none border border-transparent',
         isUnread
-          ? 'bg-secondary/40 hover:bg-secondary/70 border-border/40'
+          ? 'bg-muted/60 hover:bg-muted/90 border-border/40'
           : 'hover:bg-muted/50'
       )}
     >

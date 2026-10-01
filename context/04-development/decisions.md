@@ -58,3 +58,9 @@ Record of meaningful project decisions and the reasoning behind them.
 - Decision: Replaced `lucide-react` with `@heroicons/react/24/outline` and `@heroicons/react/24/solid`. Built a dedicated `<Logo size={...} />` component that renders `logo-dark.png` with `dark:hidden` and `logo-light.png` with `hidden dark:block`. This pure CSS approach relies on the root `.dark` class set before hydration, guaranteeing 0ms flicker/flash on initial SSR/CSR load and seamless instant switching without client state re-render lag.
 - Alternatives considered: React `useEffect` + state checking `useTheme` or `localStorage` to switch `<Image src={isDark ? ... : ...} />` (rejected due to initial render hydration mismatch and noticeable image swap flash).
 
+## 2026-10-01 — Theme Tokens: Lime Primary (#c9f997), Magenta Secondary (#e92ed3), and Monochromatic Surfaces
+
+- Context: Updating the application color scheme to feature `#c9f997` (lime) as primary and `#e92ed3` (magenta) as secondary, while keeping `#fefefe` / `#000000` for backgrounds and text.
+- Decision: Set `--primary: #c9f997` with `--primary-foreground: #000000` for high contrast text readability. Constrained primary usage to interactive action buttons (`Button` default variant, mobile create action, active unread counter badges, and focus rings) to avoid visual fatigue. Set `--secondary: #e92ed3` with `--secondary-foreground: #ffffff` exclusively as a sparse highlight accent (text highlights, small milestone percentages, sparkle icons, and highlight badge variants). Migrated general neutral UI surfaces from `bg-secondary` to `bg-muted` to prevent unintentional saturation across chat bubbles, avatars, and lists.
+- Alternatives considered: Applying primary color as large surface cards or headers (rejected to preserve clean readability and comply with user request "Dont use it too much").
+

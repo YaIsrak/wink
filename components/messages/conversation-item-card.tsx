@@ -79,8 +79,8 @@ export function ConversationItemCard({
       className={cn(
         'w-full text-left p-3 rounded-2xl transition-all flex items-center gap-3 group relative select-none border border-transparent',
         isActive
-          ? 'bg-secondary/80 border-border/60 shadow-xs'
-          : 'hover:bg-secondary/40 hover:border-border/30'
+          ? 'bg-muted border-border/60 shadow-xs'
+          : 'hover:bg-muted/50 hover:border-border/30'
       )}
     >
       <div className="relative shrink-0">

@@ -105,7 +105,7 @@ export function MessageBubble({
   if (message.isDeleted) {
     return (
       <div className={cn('flex w-full mb-3', isSender ? 'justify-end' : 'justify-start')}>
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-secondary/30 border border-border/30 text-xs text-muted-foreground italic select-none">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-muted/40 border border-border/30 text-xs text-muted-foreground italic select-none">
           <span>This message was deleted</span>
           <span className="text-[10px] text-muted-foreground/60 not-italic ml-1">
             {formattedTime}
@@ -143,7 +143,7 @@ export function MessageBubble({
                   <Button
                     size="icon"
                     variant="ghost"
-                    className="size-6 rounded-full hover:bg-secondary text-muted-foreground"
+                    className="size-6 rounded-full hover:bg-muted text-muted-foreground"
                   >
                     <EllipsisHorizontalIcon className="size-3.5" />
                   </Button>
@@ -175,8 +175,8 @@ export function MessageBubble({
             className={cn(
               'rounded-2xl text-sm overflow-hidden transition-shadow select-text',
               isSender
-                ? 'bg-primary text-primary-foreground rounded-br-xs shadow-xs'
-                : 'bg-secondary/70 text-foreground border border-border/40 rounded-bl-xs'
+                ? 'bg-primary text-primary-foreground font-medium rounded-br-xs shadow-xs'
+                : 'bg-muted text-foreground border border-border/40 rounded-bl-xs'
             )}
           >
             {/* Image attachment */}
@@ -208,13 +208,13 @@ export function MessageBubble({
                     size="sm"
                     variant="ghost"
                     onClick={() => setIsEditing(false)}
-                    className="h-6 text-[10px] px-2 text-primary-foreground hover:bg-white/20 rounded-md"
+                    className="h-6 text-[10px] px-2 text-foreground hover:bg-muted rounded-md"
                   >
                     Cancel
                   </Button>
                   <Button
                     size="sm"
-                    variant="secondary"
+                    variant="default"
                     onClick={handleSaveEdit}
                     disabled={isSubmittingEdit}
                     className="h-6 text-[10px] px-2 rounded-md"

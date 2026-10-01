@@ -91,7 +91,7 @@ export function MobileBottomNav({ user }: MobileBottomNavProps) {
         <button
           type="button"
           onClick={() => setActiveModal('create-post')}
-          className="flex size-10 items-center justify-center rounded-xl bg-foreground text-background shadow-md transition-transform active:scale-95 cursor-pointer hover:opacity-90"
+          className="flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm transition-transform active:scale-95 cursor-pointer hover:opacity-90"
           aria-label="Create Post"
         >
           <PlusIcon className="size-5 stroke-[2.5]" />

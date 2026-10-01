@@ -148,9 +148,9 @@ export function FeedView({
             )}
           >
             <span>For You</span>
-            <SparklesIcon className="size-3 text-amber-500" />
+            <SparklesIcon className="size-3 text-secondary" />
             {feedFilter === 'all' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground rounded-t-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-t-full" />
             )}
           </button>
 
@@ -168,7 +168,7 @@ export function FeedView({
           >
             <span>Following</span>
             {feedFilter === 'following' && (
-              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-foreground rounded-t-full" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-t-full" />
             )}
           </button>
         </div>

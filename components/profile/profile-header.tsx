@@ -158,7 +158,7 @@ export function ProfileHeader({
                   {isFollowing && (
                     <Button
                       size="sm"
-                      variant="secondary"
+                      variant="outline"
                       onClick={() => router.push('/messages')}
                       className="rounded-lg font-semibold text-xs gap-1.5 shadow-2xs h-9 px-3"
                     >
