@@ -64,3 +64,10 @@ Record of meaningful project decisions and the reasoning behind them.
 - Decision: Set `--primary: #c9f997` with `--primary-foreground: #000000` for high contrast text readability. Constrained primary usage to interactive action buttons (`Button` default variant, mobile create action, active unread counter badges, and focus rings) to avoid visual fatigue. Set `--secondary: #e92ed3` with `--secondary-foreground: #ffffff` exclusively as a sparse highlight accent (text highlights, small milestone percentages, sparkle icons, and highlight badge variants). Migrated general neutral UI surfaces from `bg-secondary` to `bg-muted` to prevent unintentional saturation across chat bubbles, avatars, and lists.
 - Alternatives considered: Applying primary color as large surface cards or headers (rejected to preserve clean readability and comply with user request "Dont use it too much").
 
+## 2026-10-01 — App Router Loading Skeletons and Suspense Streaming Across All Routes
+
+- Context: Server-side async data queries (Supabase auth session, profile fetching, feed queries, conversations, notifications, and search results) caused perceptible route transition delays where the UI froze before displaying the target page.
+- Decision: Implemented Next.js App Router `loading.tsx` files for every route segment (`(main)/feed`, `(main)/notifications`, `(main)/messages`, `(main)/messages/[conversationId]`, `(main)/profile/[username]`, `(main)/profile`, `(main)/search`, `(main)/settings`, `(main)` fallback, `(onboarding)/onboarding`, and root fallback). Next.js automatically wraps each page in a React `<Suspense fallback={<Loading />}>` boundary under `NavigationShell`. The navigation shell remains completely interactive and responsive while the main content area renders high-fidelity skeletons immediately upon link click. In addition, internal dialog spinners and pagination spinners were upgraded to skeleton row placeholders.
+- Alternatives considered: Client-side only loading flags inside components with manual fetch on mount (rejected — ruins SEO, introduces waterfall delays, and doesn't leverage Next.js streaming SSR).
+
+

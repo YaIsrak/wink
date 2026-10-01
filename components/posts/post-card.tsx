@@ -328,7 +328,7 @@ export function PostCard({
                   ? `Photo by ${author.displayName}: ${caption.slice(0, 40)}`
                   : `Photo by ${author.displayName}`
               }
-              className="w-full max-h-[500px] object-cover rounded-lg cursor-pointer transition-transform duration-200 group-hover:scale-[1.01]"
+              className="w-full max-h-125 object-cover rounded-lg cursor-pointer transition-transform duration-200 group-hover:scale-[1.01]"
               onClick={() => setIsImageModalOpen(true)}
               loading="lazy"
             />
@@ -425,7 +425,7 @@ export function PostCard({
                 >
                   {c.author.displayName}
                 </Link>
-                <span className="text-muted-foreground break-words truncate">
+                <span className="text-muted-foreground wrap-break-word truncate">
                   {c.content}
                 </span>
               </div>

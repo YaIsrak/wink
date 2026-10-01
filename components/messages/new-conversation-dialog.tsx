@@ -1,22 +1,28 @@
-'use client';
+"use client";
 
-import * as React from 'react';
-import { useRouter } from 'next/navigation';
-import { Dialog, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Avatar } from '@/components/ui/avatar';
-import { getUserFollowingAction } from '@/actions/follow';
-import { startConversationAction } from '@/actions/conversation';
-import { useMessageStore } from '@/lib/store/message-store';
-import { toast } from 'sonner';
+import * as React from "react";
+import { useRouter } from "next/navigation";
+import {
+  Dialog,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Avatar } from "@/components/ui/avatar";
+import { getUserFollowingAction } from "@/actions/follow";
+import { startConversationAction } from "@/actions/conversation";
+import { useMessageStore } from "@/lib/store/message-store";
+import { toast } from "sonner";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   MagnifyingGlassIcon,
   ArrowPathIcon,
   PaperAirplaneIcon,
-} from '@heroicons/react/24/outline';
-import type { FollowUserItem } from '@/types/profile';
+} from "@heroicons/react/24/outline";
+import type { FollowUserItem } from "@/types/profile";
 
 interface NewConversationDialogProps {
   open: boolean;
@@ -34,9 +40,11 @@ export function NewConversationDialog({
   const router = useRouter();
   const [following, setFollowing] = React.useState<FollowUserItem[]>([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [search, setSearch] = React.useState('');
-  const [selectedUser, setSelectedUser] = React.useState<FollowUserItem | null>(null);
-  const [messageText, setMessageText] = React.useState('');
+  const [search, setSearch] = React.useState("");
+  const [selectedUser, setSelectedUser] = React.useState<FollowUserItem | null>(
+    null,
+  );
+  const [messageText, setMessageText] = React.useState("");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   React.useEffect(() => {
@@ -52,7 +60,7 @@ export function NewConversationDialog({
         }
       })
       .catch((err) => {
-        console.error('Failed to load following list:', err);
+        console.error("Failed to load following list:", err);
       })
       .finally(() => {
         if (isMounted) setIsLoading(false);
@@ -66,7 +74,7 @@ export function NewConversationDialog({
   const filteredFollowing = following.filter(
     (u) =>
       u.displayName.toLowerCase().includes(search.toLowerCase()) ||
-      u.username.toLowerCase().includes(search.toLowerCase())
+      u.username.toLowerCase().includes(search.toLowerCase()),
   );
 
   const handleStartChat = async () => {
@@ -74,7 +82,10 @@ export function NewConversationDialog({
 
     setIsSubmitting(true);
     try {
-      const res = await startConversationAction(selectedUser.id, messageText.trim());
+      const res = await startConversationAction(
+        selectedUser.id,
+        messageText.trim(),
+      );
 
       if (res.error) {
         toast.error(res.error);
@@ -83,13 +94,13 @@ export function NewConversationDialog({
 
       if (res.conversationId) {
         toast.success(
-          res.status === 'PENDING'
-            ? 'Message request sent!'
-            : 'Conversation started!'
+          res.status === "PENDING"
+            ? "Message request sent!"
+            : "Conversation started!",
         );
         onOpenChange(false);
         setSelectedUser(null);
-        setMessageText('');
+        setMessageText("");
 
         if (onConversationCreated) {
           onConversationCreated(res.conversationId);
@@ -98,153 +109,169 @@ export function NewConversationDialog({
         }
       }
     } catch {
-      toast.error('Failed to start conversation. Please try again.');
+      toast.error("Failed to start conversation. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange} className="sm:max-w-[480px] p-0 gap-0 overflow-hidden rounded-2xl">
+    <Dialog
+      open={open}
+      onOpenChange={onOpenChange}
+      className="sm:max-w-120 p-0 gap-0 overflow-hidden rounded-2xl"
+    >
       <DialogHeader className="p-4 border-b border-border/40">
-          <DialogTitle className="text-base font-semibold">
-            {selectedUser ? `Message @${selectedUser.username}` : 'New Message'}
-          </DialogTitle>
-          <DialogDescription className="text-xs text-muted-foreground">
-            {selectedUser
-              ? 'Send an initial message to start chatting.'
-              : 'You can message anyone you follow on Wink.'}
-          </DialogDescription>
-        </DialogHeader>
+        <DialogTitle className="text-base font-semibold">
+          {selectedUser ? `Message @${selectedUser.username}` : "New Message"}
+        </DialogTitle>
+        <DialogDescription className="text-xs text-muted-foreground">
+          {selectedUser
+            ? "Send an initial message to start chatting."
+            : "You can message anyone you follow on Wink."}
+        </DialogDescription>
+      </DialogHeader>
 
-        {!selectedUser ? (
-          <div className="flex flex-col h-[380px]">
-            <div className="p-3 border-b border-border/30">
-              <div className="relative">
-                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
-                <Input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search creators you follow..."
-                  className="pl-9 h-9 text-sm rounded-xl"
-                  autoFocus
-                />
-              </div>
-            </div>
-
-            <div className="flex-1 overflow-y-auto p-2 divide-y divide-border/20">
-              {isLoading ? (
-                <div className="flex items-center justify-center h-full text-muted-foreground">
-                  <ArrowPathIcon className="size-5 animate-spin mr-2" />
-                  <span className="text-xs">Loading people you follow...</span>
-                </div>
-              ) : filteredFollowing.length === 0 ? (
-                <div className="flex flex-col items-center justify-center h-full text-center p-4">
-                  <p className="text-sm font-medium text-foreground">
-                    {search ? 'No matches found' : 'Not following anyone yet'}
-                  </p>
-                  <p className="text-xs text-muted-foreground mt-1">
-                    {search
-                      ? 'Try searching by a different name or handle.'
-                      : 'Follow creators to message them directly.'}
-                  </p>
-                </div>
-              ) : (
-                filteredFollowing.map((user) => (
-                  <button
-                    key={user.id}
-                    onClick={() => setSelectedUser(user)}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/60 transition-colors text-left group"
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <Avatar
-                        src={user.avatarUrl}
-                        fallback={user.displayName[0]}
-                        size="md"
-                      />
-                      <div className="min-w-0">
-                        <div className="text-sm font-medium text-foreground truncate">
-                          {user.displayName}
-                        </div>
-                        <div className="text-xs text-muted-foreground truncate">
-                          @{user.username}
-                        </div>
-                      </div>
-                    </div>
-                    <Button variant="outline" size="sm" className="rounded-lg text-xs h-7 pointer-events-none">
-                      Select
-                    </Button>
-                  </button>
-                ))
-              )}
-            </div>
-          </div>
-        ) : (
-          <div className="p-4 flex flex-col gap-4">
-            <div className="flex items-center justify-between bg-muted/40 p-2.5 rounded-xl border border-border/40">
-              <div className="flex items-center gap-3">
-                <Avatar
-                  src={selectedUser.avatarUrl}
-                  fallback={selectedUser.displayName[0]}
-                  size="sm"
-                />
-                <div>
-                  <div className="text-sm font-semibold text-foreground">
-                    {selectedUser.displayName}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    @{selectedUser.username}
-                  </div>
-                </div>
-              </div>
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-xs text-muted-foreground hover:text-foreground h-7"
-                onClick={() => setSelectedUser(null)}
-              >
-                Change
-              </Button>
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label className="text-xs font-medium text-muted-foreground">
-                Your message
-              </label>
-              <Textarea
-                value={messageText}
-                onChange={(e) => setMessageText(e.target.value)}
-                placeholder="Say hello..."
-                rows={4}
-                className="resize-none rounded-xl text-sm"
+      {!selectedUser ? (
+        <div className="flex flex-col h-95">
+          <div className="p-3 border-b border-border/30">
+            <div className="relative">
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground" />
+              <Input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search creators you follow..."
+                className="pl-9 h-9 text-sm rounded-xl"
                 autoFocus
               />
             </div>
-
-            <div className="flex justify-end gap-2 pt-2">
-              <Button
-                variant="ghost"
-                onClick={() => setSelectedUser(null)}
-                disabled={isSubmitting}
-                className="rounded-xl"
-              >
-                Back
-              </Button>
-              <Button
-                onClick={handleStartChat}
-                disabled={!messageText.trim() || isSubmitting}
-                className="gap-2 rounded-xl"
-              >
-                {isSubmitting ? (
-                  <ArrowPathIcon className="size-4 animate-spin" />
-                ) : (
-                  <PaperAirplaneIcon className="size-4 -rotate-45" />
-                )}
-                <span>Send message</span>
-              </Button>
-            </div>
           </div>
-        )}
+
+          <div className="flex-1 overflow-y-auto p-2 divide-y divide-border/20">
+            {isLoading ? (
+              <div className="space-y-2 p-1 divide-y divide-border/20">
+                {[1, 2, 3, 4].map((i) => (
+                  <div key={i} className="flex items-center gap-3 p-2.5">
+                    <Skeleton className="size-10 rounded-full shrink-0" />
+                    <div className="space-y-1.5 flex-1 min-w-0">
+                      <Skeleton className="h-4 w-28 rounded-md" />
+                      <Skeleton className="h-3 w-16 rounded-md" />
+                    </div>
+                    <Skeleton className="h-7 w-16 rounded-md shrink-0" />
+                  </div>
+                ))}
+              </div>
+            ) : filteredFollowing.length === 0 ? (
+              <div className="flex flex-col items-center justify-center h-full text-center p-4">
+                <p className="text-sm font-medium text-foreground">
+                  {search ? "No matches found" : "Not following anyone yet"}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {search
+                    ? "Try searching by a different name or handle."
+                    : "Follow creators to message them directly."}
+                </p>
+              </div>
+            ) : (
+              filteredFollowing.map((user) => (
+                <button
+                  key={user.id}
+                  onClick={() => setSelectedUser(user)}
+                  className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-muted/60 transition-colors text-left group"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <Avatar
+                      src={user.avatarUrl}
+                      fallback={user.displayName[0]}
+                      size="md"
+                    />
+                    <div className="min-w-0">
+                      <div className="text-sm font-medium text-foreground truncate">
+                        {user.displayName}
+                      </div>
+                      <div className="text-xs text-muted-foreground truncate">
+                        @{user.username}
+                      </div>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-lg text-xs h-7 pointer-events-none"
+                  >
+                    Select
+                  </Button>
+                </button>
+              ))
+            )}
+          </div>
+        </div>
+      ) : (
+        <div className="p-4 flex flex-col gap-4">
+          <div className="flex items-center justify-between bg-muted/40 p-2.5 rounded-xl border border-border/40">
+            <div className="flex items-center gap-3">
+              <Avatar
+                src={selectedUser.avatarUrl}
+                fallback={selectedUser.displayName[0]}
+                size="sm"
+              />
+              <div>
+                <div className="text-sm font-semibold text-foreground">
+                  {selectedUser.displayName}
+                </div>
+                <div className="text-xs text-muted-foreground">
+                  @{selectedUser.username}
+                </div>
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="text-xs text-muted-foreground hover:text-foreground h-7"
+              onClick={() => setSelectedUser(null)}
+            >
+              Change
+            </Button>
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-muted-foreground">
+              Your message
+            </label>
+            <Textarea
+              value={messageText}
+              onChange={(e) => setMessageText(e.target.value)}
+              placeholder="Say hello..."
+              rows={4}
+              className="resize-none rounded-xl text-sm"
+              autoFocus
+            />
+          </div>
+
+          <div className="flex justify-end gap-2 pt-2">
+            <Button
+              variant="ghost"
+              onClick={() => setSelectedUser(null)}
+              disabled={isSubmitting}
+              className="rounded-xl"
+            >
+              Back
+            </Button>
+            <Button
+              onClick={handleStartChat}
+              disabled={!messageText.trim() || isSubmitting}
+              className="gap-2 rounded-xl"
+            >
+              {isSubmitting ? (
+                <ArrowPathIcon className="size-4 animate-spin" />
+              ) : (
+                <PaperAirplaneIcon className="size-4 -rotate-45" />
+              )}
+              <span>Send message</span>
+            </Button>
+          </div>
+        </div>
+      )}
     </Dialog>
   );
 }

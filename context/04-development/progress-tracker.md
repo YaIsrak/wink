@@ -321,3 +321,22 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`next build`) with zero errors
 - Status: Done
 
+## 2026-10-01 — Performance & UX: Skeletons & Suspense Boundaries Across All Routes
+- Built instant App Router `loading.tsx` skeletons across every data-fetching page and route segment:
+  - `app/(main)/feed/loading.tsx`: Tabs, post composer trigger card, and 3 full post cards with author avatar, caption lines, media box, and action buttons
+  - `app/(main)/notifications/loading.tsx`: Header badge and title, filter pills, and 6 notification item cards
+  - `app/(main)/messages/loading.tsx`: Desktop split pane with sidebar conversation skeletons and chat preview placeholder
+  - `app/(main)/messages/[conversationId]/loading.tsx`: Active conversation skeleton with header, alternating incoming/outgoing chat bubbles, and composer bar
+  - `app/(main)/profile/[username]/loading.tsx` & `app/(main)/profile/loading.tsx`: Profile header with large avatar, stats row, edit/follow buttons, and post grid placeholders
+  - `app/(main)/search/loading.tsx`: Search bar input, filter tabs, and 5 suggested creator item cards
+  - `app/(main)/settings/loading.tsx`: Settings card with theme and account rows
+  - `app/(main)/loading.tsx`: General fallback loading state for the main navigation shell
+  - `app/(onboarding)/onboarding/loading.tsx`: Onboarding header and centered profile setup form card
+  - `app/loading.tsx`: Root route fallback with animated pulsing Wink logo
+- Upgraded internal component loading states:
+  - Replaced spinner in `components/messages/new-conversation-dialog.tsx` with an avatar and detail skeleton list for following users
+  - Replaced pagination spinner in `components/posts/comments-section.tsx` with a comment row skeleton
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`npm run build`) with zero errors
+- Status: Done
+
+
