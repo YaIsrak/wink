@@ -2,10 +2,23 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { LandingPageView } from "@/components/landing/landing-page-view";
 
-export const metadata = {
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
   title: "Wink — Social media without the noise",
   description:
-    "A social media web app where real humans post photos, like genuine moments, and message mutual follows in real time.",
+    "A clean social media web app where real humans post photos, like genuine moments, and message mutual follows in real time. Zero algorithms, zero ads.",
+  openGraph: {
+    title: "Wink — Social media without the noise",
+    description:
+      "A clean social media web app where real humans post photos, like genuine moments, and message mutual follows in real time.",
+    url: "/",
+  },
+  twitter: {
+    title: "Wink — Social media without the noise",
+    description:
+      "A clean social media web app where real humans post photos, like genuine moments, and message mutual follows in real time.",
+  },
 };
 
 export default async function Home() {

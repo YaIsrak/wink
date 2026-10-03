@@ -4,9 +4,15 @@ import { createClient } from '@/lib/supabase/server';
 import { getUserConversations } from '@/lib/services/conversation.service';
 import { MessagesShell } from '@/components/messages/messages-shell';
 
-export const metadata = {
-  title: 'Messages | Wink',
-  description: 'Private direct messages with creators you follow.',
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Direct Messages',
+  description: 'Private, realtime direct messages with mutual follows on Wink.',
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default async function MessagesPage() {

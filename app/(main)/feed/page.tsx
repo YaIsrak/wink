@@ -5,7 +5,13 @@ import { getUserProfileById } from '@/lib/services/auth.service'
 import { getFeedPosts } from '@/lib/services/post.service'
 import { getSuggestedUsers } from '@/lib/services/follow.service'
 import { getChecklistProgress } from '@/lib/services/checklist.service'
+import type { Metadata } from 'next'
 import { FeedView } from '@/components/posts/feed-view'
+
+export const metadata: Metadata = {
+  title: 'Home Feed',
+  description: 'Your real-time chronological and discover feed on Wink.',
+}
 
 export default async function FeedPage() {
   const supabase = await createClient()

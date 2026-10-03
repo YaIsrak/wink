@@ -7,9 +7,11 @@ import {
 } from '@/lib/services/notification.service'
 import { NotificationList } from '@/components/notifications/notification-list'
 
-export const metadata = {
-  title: 'Notifications | Wink',
-  description: 'View your activity stream, likes, comments, and new followers on Wink',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Notifications',
+  description: 'View your activity stream, likes, comments, and new followers on Wink.',
 }
 
 export default async function NotificationsPage() {

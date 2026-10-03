@@ -6,7 +6,17 @@ import { getUserProfileById } from '@/lib/services/auth.service'
 import { SignOutButton } from '@/components/auth/sign-out-button'
 import { ThemeToggle } from '@/components/shared/theme-toggle'
 import { Logo } from '@/components/shared/logo'
+import type { Metadata } from 'next'
 import { OnboardingForm } from '@/components/onboarding/onboarding-form'
+
+export const metadata: Metadata = {
+  title: 'Complete Profile',
+  description: 'Set up your avatar, bio, and display name to start exploring Wink.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default async function OnboardingPage() {
   const supabase = await createClient()

@@ -1,6 +1,12 @@
+import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import { getUserProfileById } from '@/lib/services/auth.service'
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  description: 'View your profile and posts on Wink.',
+}
 
 export default async function ProfilePage() {
   const supabase = await createClient()

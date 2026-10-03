@@ -7,12 +7,58 @@ import { getFullUserProfileByUsername } from '@/lib/services/user.service'
 import { getUserPosts } from '@/lib/services/post.service'
 import { ProfileHeader } from '@/components/profile/profile-header'
 import { ProfileTabs } from '@/components/profile/profile-tabs'
+import type { Metadata } from 'next'
+import { prisma } from '@/lib/db'
 import { ArrowLeftIcon } from '@heroicons/react/24/outline'
 
 interface ProfilePageProps {
   params: Promise<{
     username: string
   }>
+}
+
+export async function generateMetadata({
+  params,
+}: ProfilePageProps): Promise<Metadata> {
+  const { username } = await params
+
+  const user = await prisma.user.findUnique({
+    where: { username },
+    select: {
+      displayName: true,
+      username: true,
+      bio: true,
+    },
+  })
+
+  if (!user) {
+    return {
+      title: 'User Not Found',
+      description: 'The requested profile could not be found on Wink.',
+    }
+  }
+
+  const title = `${user.displayName} (@${user.username})`
+  const description =
+    user.bio && user.bio.trim().length > 0
+      ? user.bio
+      : `Check out ${user.displayName}'s profile and posts on Wink.`
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title} | Wink`,
+      description,
+      url: `/profile/${user.username}`,
+      type: 'profile',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | Wink`,
+      description,
+    },
+  }
 }
 
 export default async function UserProfilePage({ params }: ProfilePageProps) {

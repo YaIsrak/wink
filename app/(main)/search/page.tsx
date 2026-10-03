@@ -17,9 +17,11 @@ interface SearchPageProps {
   }>
 }
 
-export const metadata = {
-  title: 'Search | Wink',
-  description: 'Search creators, accounts, and posts across Wink',
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Search',
+  description: 'Search creators, accounts, and posts across Wink.',
 }
 
 export default async function SearchPage({ searchParams }: SearchPageProps) {

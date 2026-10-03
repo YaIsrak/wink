@@ -354,5 +354,15 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`npm run build`) with zero errors
 - Status: Done
 
+## 2026-10-03 — Comprehensive SEO Metadata, Dynamic Profile OG Images & Robots/Sitemap
+- Configured root SEO metadata in `app/layout.tsx` with dynamic `metadataBase`, title template `%s | Wink`, openGraph, twitter summary card, canonical URLs, and crawler directives
+- Built static root OpenGraph image generator `app/opengraph-image.tsx` using Next.js `ImageResponse` with pure OLED black surface, electric lime (`#c9f997`) and magenta (`#e92ed3`) ambient gradients, and feature tags
+- Built dynamic OpenGraph image generator `app/(main)/profile/[username]/opengraph-image.tsx` using `ImageResponse` with real-time Prisma queries for user avatar, display name, handle, bio, and live follower/following/post metrics
+- Added static and dynamic metadata across all application pages (`/`, `/login`, `/sign-up`, `/feed`, `/explore`, `/search`, `/notifications`, `/messages`, `/messages/[conversationId]`, `/profile`, `/profile/[username]`, `/settings`, `/onboarding`, `/theme`)
+- Generated automated crawler indexation rules via `app/robots.ts` and dynamic sitemap routes via `app/sitemap.ts`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`npm run build`) with zero errors and zero Satori warnings
+- Status: Done
+
+
 
 

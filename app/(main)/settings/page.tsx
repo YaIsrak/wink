@@ -2,6 +2,16 @@ import * as React from 'react'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { ThemeToggle } from '@/components/shared/theme-toggle'
 import { SignOutButton } from '@/components/auth/sign-out-button'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Settings',
+  description: 'Manage your Wink account preferences, theme, and profile settings.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default function SettingsPage() {
   return (
