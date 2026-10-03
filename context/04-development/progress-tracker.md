@@ -339,4 +339,20 @@ finished. Not a planning document — see `build-plan.md` for that.
 - Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`npm run build`) with zero errors
 - Status: Done
 
+## 2026-10-03 — Premium Landing Page & Authenticated Route Redirect
+- Deliberated and ratified architecture build specification in `docs/specs/0013-landing-page-and-auth-redirect.md`
+- Updated route protection in `lib/supabase/middleware.ts` to allow unauthenticated visitor access to `/` while redirecting active member sessions to `/feed`
+- Updated server component `app/page.tsx` with async Supabase session evaluation, redirecting authenticated members directly to `/feed` with zero layout shift
+- Created static mock fixtures in `lib/data/landing-fixtures.ts` for preview post data, cycling headline phrases, bento cards, and platform metrics
+- Built `components/landing/landing-navbar.tsx` with fixed viewport positioning, hide-on-scroll-down and reveal-on-scroll-up behavior, brand logo, theme toggle, and auth navigation links
+- Built `components/landing/mock-post-card.tsx` with pure CSS gradient visuals, interactive optimistic like trigger, and preview comment thread
+- Built `components/landing/hero-section.tsx` with ambient electric lime (`#c9f997`) and magenta (`#e92ed3`) mesh gradients, animated cycling typography, and action triggers
+- Built `components/landing/bento-grid.tsx` showcasing mutuals only DMs, zero algorithmic sludge, live websocket reactivity, and OLED neon aesthetic
+- Built `components/landing/landing-footer.tsx` with pre-footer CTA banner and quick navigation links
+- Assembled top-level `components/landing/landing-page-view.tsx`
+- Registered all new landing components in `context/02-ui/ui-registry.md`
+- Verified TypeScript compilation (`npx tsc --noEmit`) and full Next.js Turbopack production build (`npm run build`) with zero errors
+- Status: Done
+
+
 

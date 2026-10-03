@@ -38,7 +38,7 @@ export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname
   const isAuthRoute = pathname === '/login' || pathname === '/sign-up'
   const isPublicRoute =
-    isAuthRoute || pathname === '/theme' || pathname.startsWith('/api/')
+    isAuthRoute || pathname === '/' || pathname === '/theme' || pathname.startsWith('/api/')
 
   // Helper to construct redirect response preserving refreshed session cookies
   const createRedirectWithCookies = (destination: string) => {
@@ -51,19 +51,14 @@ export async function updateSession(request: NextRequest) {
     return redirectResponse
   }
 
-  // 1. Authenticated users visiting auth routes get redirected to the feed
-  if (user && isAuthRoute) {
+  // 1. Authenticated users visiting auth routes or root route get redirected to the feed
+  if (user && (isAuthRoute || pathname === '/')) {
     return createRedirectWithCookies('/feed')
   }
 
   // 2. Unauthenticated visitors accessing protected routes get redirected to login
   if (!user && !isPublicRoute) {
     return createRedirectWithCookies('/login')
-  }
-
-  // 3. Authenticated users visiting root route get redirected to the feed
-  if (user && pathname === '/') {
-    return createRedirectWithCookies('/feed')
   }
 
   return supabaseResponse

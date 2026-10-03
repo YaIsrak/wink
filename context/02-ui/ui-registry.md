@@ -59,6 +59,12 @@ component.** Update it whenever a new reusable component is added.
 | `ChatWindow`      | `components/messages/chat-window.tsx` | Complete chat view with presence header, message stream, and request decision card | container |
 | `MessagesShell`   | `components/messages/messages-shell.tsx` | Responsive layout coordinator for desktop two-pane and mobile navigation | container wrapper |
 | `GettingStartedChecklist` | `components/feed/getting-started-checklist.tsx` | Gamified onboarding checklist with dynamic milestone checks, action triggers, and dismissal | container card (`rounded-xl`) |
+| `LandingNavbar` | `components/landing/landing-navbar.tsx` | Fixed landing navigation bar with hide-on-scroll behavior, logo, and auth triggers | fixed header |
+| `HeroSection` | `components/landing/hero-section.tsx` | Landing hero section with animated cycling copy, electric mesh gradients, and CTA buttons | container section |
+| `MockPostCard` | `components/landing/mock-post-card.tsx` | Interactive mock post preview card with pure CSS graphics and engagement triggers | card (`rounded-2xl`) |
+| `BentoGrid` | `components/landing/bento-grid.tsx` | Bento feature showcase highlighting anti-algorithmic promises and design tokens | container section |
+| `LandingFooter` | `components/landing/landing-footer.tsx` | Pre-footer CTA banner with human copy and footer navigation links | container footer |
+| `LandingPageView` | `components/landing/landing-page-view.tsx` | Top-level public landing page coordinator view | full page |
 
 
 ## Process before creating a new component

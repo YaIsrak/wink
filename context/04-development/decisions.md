@@ -70,4 +70,11 @@ Record of meaningful project decisions and the reasoning behind them.
 - Decision: Implemented Next.js App Router `loading.tsx` files for every route segment (`(main)/feed`, `(main)/notifications`, `(main)/messages`, `(main)/messages/[conversationId]`, `(main)/profile/[username]`, `(main)/profile`, `(main)/search`, `(main)/settings`, `(main)` fallback, `(onboarding)/onboarding`, and root fallback). Next.js automatically wraps each page in a React `<Suspense fallback={<Loading />}>` boundary under `NavigationShell`. The navigation shell remains completely interactive and responsive while the main content area renders high-fidelity skeletons immediately upon link click. In addition, internal dialog spinners and pagination spinners were upgraded to skeleton row placeholders.
 - Alternatives considered: Client-side only loading flags inside components with manual fetch on mount (rejected — ruins SEO, introduces waterfall delays, and doesn't leverage Next.js streaming SSR).
 
+## 2026-10-03 (Spec 0013: Premium Landing Page & Authenticated Redirect)
+
+- Context: Unauthenticated visitors were previously bounced straight to `/login` when opening the root `/` URL, leaving no promotional or educational surface to discover Wink. Meanwhile, signed in users need immediate access to `/feed` without marketing delays.
+- Decision: Configured `lib/supabase/middleware.ts` to recognize `/` as a public route for unauthenticated visitors while automatically redirecting active Supabase sessions to `/feed`. Reinforced this in server component `app/page.tsx` for zero flash navigation. Built a self contained landing experience with pure CSS electric mesh gradients, keyframe typography cycler, interactive mock preview cards, and bento grid using local typed fixtures, eliminating database queries and external image network dependencies on page load.
+- Alternatives considered: Client side session evaluation inside a root layout wrapper (rejected due to jarring visual page flash for logged in members), separate marketing static subdomain (rejected due to unnecessary operational complexity and cross domain session friction).
+
+
 
